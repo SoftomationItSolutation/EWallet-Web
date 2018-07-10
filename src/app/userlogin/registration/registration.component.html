@@ -1,0 +1,128 @@
+<div class="container-fluid">
+  <mat-card id="page-container">
+      <!-- (selectionChange) = "stepperSelectionChange($event)" -->
+    <mat-horizontal-stepper linear="true" #stepper >
+      <mat-step [stepControl]="emailForm" [editable]="isEmailEditable">
+        <form [formGroup]="emailForm">
+          <ng-template matStepLabel>Fill Your Registration Details</ng-template>
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                  <mat-form-field style="display: block; width: 50%;">
+                    <input matInput placeholder="Login Id" formControlName="LoginId" required >
+                    <mat-error *ngIf = "emailForm.get('LoginId').hasError('required')">
+                      Login Id must be entered.
+                    </mat-error>
+                    <mat-error *ngIf = "emailForm.get('LoginId').hasError('pattern')">
+                      {{errors.LoginId}}
+                    </mat-error>
+                  </mat-form-field>
+              </div>  
+            </div>
+            <div class="row">
+              <div class="col">
+                  <mat-form-field style="display: block; width: 50%;">
+                    <input matInput placeholder="Mobile No" formControlName="mobile" required >
+                    <mat-error *ngIf = "emailForm.get('mobile').hasError('required')">
+                      Mobile Number must be entered.
+                    </mat-error>
+                    <mat-error *ngIf = "emailForm.get('mobile').hasError('pattern')">
+                      {{errors.mobile}}
+                    </mat-error>
+                  </mat-form-field>
+              </div>  
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field style="display: block; width: 50%">
+                  <input matInput placeholder="Password" type="password" formControlName="userPass" required [type]="hide ? 'password' : 'text'">
+                  <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                  <mat-error *ngIf = "emailForm.get('userPass').hasError('pattern')">
+                    {{errors.password}}
+                  </mat-error>
+                  <mat-error *ngIf = "emailForm.get('userPass').hasError('required')">
+                    Password must be entered
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <mat-error *ngIf="UserError_flag">
+                {{UserError_Message}}
+            </mat-error>
+            <div class="row">
+              <div class="col">
+                <div style="margin-top: 2%">
+                  <button mat-raised-button color="primary" type="submit" (click)='SignUp();'>Next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+      
+      <mat-step [stepControl]="otpForm" editable="true">
+        <form [formGroup]="otpForm">
+          <ng-template matStepLabel>Verify OTP</ng-template>
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <div style="width: 30%;">
+                    <mat-form-field style="display: block;">
+                        <input matInput placeholder="OTP" formControlName="userOTP" required (change)="onOTPChange($event)">
+                        <mat-error *ngIf = "otpForm.get('userOTP').hasError('required')">
+                          OTP must be entered
+                        </mat-error>
+                        <mat-error *ngIf = "otpForm.get('userOTP').hasError('pattern')">
+                            {{errors.userOTP}}
+                        </mat-error>
+                      </mat-form-field>
+                </div>
+                <div style="width: 10%;" *ngIf="btnResendOTP">
+                    <button mat-raised-button color="ThemePalette" (click)="ResendOTP()">Resend OTP</button>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-error *ngIf = "errors.flag=='true'">
+                  {{errors.message}}
+                </mat-error>
+                <mat-error *ngIf="UserError_flag">
+                    {{UserError_Message}}
+                </mat-error>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div style="margin-top: 2%">
+                  <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+                  <button mat-raised-button color="primary" (click)="ValidateOTP()" style="margin-left: 2%;">Next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <div class="container">
+          <div class="row">
+            <div class="col"> 
+              {{passChangeMsg}}. Please login with new credentials
+            </div>    
+          </div>
+
+          <div class="row">
+            <div class="col"> 
+              <div>
+                <button mat-raised-button color="primary" matStepperPrevious [routerLink]="['/login']" style="margin-top: 2%;">Login</button>
+              </div>
+            </div>    
+          </div>
+        </div>
+        
+      </mat-step>
+      
+    </mat-horizontal-stepper>
+  </mat-card>
+</div>

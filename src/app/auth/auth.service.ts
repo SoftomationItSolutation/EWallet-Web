@@ -24,7 +24,10 @@ export class AuthService {
       this.router.navigate(['/dashborad']);
     }
   }
-
+  Alogin(pagename){
+    this.loggedIn.next(true);
+    this.router.navigate(['/'+pagename]);
+}
   logout() {                           
     this.loggedIn.next(false);
     this.router.navigate(['/']);

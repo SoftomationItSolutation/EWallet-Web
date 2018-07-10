@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../auth/auth.service';
+import { UserLogin, ILoginData } from '../../../models/user.model';
+import { UserLoginService } from '../../../services/user-login.service';
 
 @Component({
   selector: 'app-login',
@@ -10,14 +12,17 @@ import { AuthService } from '../../auth/auth.service';
 export class LoginComponent implements OnInit {
   hide = true;
   form: FormGroup;
+  loginReposnse: ILoginData;
+  loginInput: UserLogin;
   private formSubmitAttempt: boolean;
-
-  constructor(private fb: FormBuilder,private authService: AuthService) {}
+  UserError_flag=false;
+  UserError_Message='';
+  constructor(private fb: FormBuilder,private authService: AuthService, private loginService: UserLoginService) {}
 
   ngOnInit() {
     this.form = this.fb.group({     
-      userName: ['', Validators.required],
-      password: ['', Validators.required]
+      LoginId: ['', Validators.required],
+      Password: ['', Validators.required]
     });
   }
 
@@ -29,10 +34,30 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    
     if (this.form.valid) {
-      this.authService.login(this.form.value); 
+      this.loginInput = this.form.value;
+        this.loginService.loginUser(this.loginInput).subscribe(
+          data => {
+            this.loginReposnse= JSON.parse(data.json());
+            if(this.loginReposnse.flag.toLowerCase()=='true')
+            {
+              this.formSubmitAttempt = true;  
+              this.authService.Alogin('dashborad');
+              this.UserError_flag=false;
+            }
+            else
+            {
+              this.UserError_flag=true;
+              this.UserError_Message=this.loginReposnse.Message;
+            }
+          },
+          err => console.error(err.message),
+          () => {
+        }
+        );
     }
-    this.formSubmitAttempt = true;             
+             
   }
 
 }

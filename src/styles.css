@@ -30,3 +30,11 @@ body {
 .mat-fab.mat-primary, .mat-flat-button.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
     background-color: #FF6F00;
 }
+
+.mat-step-header .mat-step-icon {
+  background-color: #FF6F00;
+  color: #fff;
+}
+.mat-input-element {
+  caret-color: #FF6F00;
+}

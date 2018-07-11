@@ -1,7 +1,12 @@
-#page-container
-{
-    top: 12.5%;
-    left: 17.5%;
-    width: 65%;
-    height: 75%;
-}
+mat-card {
+    max-width: 400px;
+    margin: 2em auto;
+    text-align: center;
+  }
+  .signin-content {
+    padding: 60px 1rem;
+  }
+  .full-width-input {
+    width: 100%;
+  }
+  

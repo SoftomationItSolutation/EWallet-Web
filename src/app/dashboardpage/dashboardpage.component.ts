@@ -9,8 +9,8 @@ import { MatDialog } from '../../../node_modules/@angular/material';
 export class DashboardpageComponent implements OnInit 
 {
   headerData: dashHeaderCountIF[] = [];
-  projectCount: number;
-  bankCount: number;
+  accountbalance: number;
+  rewardbalance: number;
   filesCount: number;
   completedCount: number;
   pendingCount: number;
@@ -23,7 +23,8 @@ export class DashboardpageComponent implements OnInit
 
   ngOnInit() 
   {
-
+    this.accountbalance=5500;
+    this.rewardbalance=10000;
   }
 
 

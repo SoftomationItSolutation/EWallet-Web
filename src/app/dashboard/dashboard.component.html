@@ -1,10 +1,234 @@
-<mat-toolbar color="primary">
-  <span>
-    <img src="assets/logo.png" class="angular-logo" style="height: 65px;width:80px">
-  </span>
-  <span class="fill-remaining-space"></span>
-  <button mat-button>Menu Option 01</button>
-  <button mat-button>Menu Option 02</button>
-  <!-- <button mat-button routerLink="login">Login</button> -->
-  <button mat-button (click)="onLogout()">Logout</button>
-</mat-toolbar>
+<div id="sidenavpage">
+  <mat-drawer-container style="height: 100%; width: 100%;" hasBackdrop="false">
+    <mat-drawer mode="side" opened="true">
+      <div [class]="showNavText == false ? 'sidenavcontainer' : (showNavText == true ? 'sidenavcontainer1' : 'sidenavcontainer')">
+      
+      <!-- Menu Button -->
+      <div class="navitemcontainer">
+        <div class="selectedpointer" style="background-color: transparent"> 
+        </div>
+        <button (click)="onMenuBtnClick()" mat-icon-button>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <h4 *ngIf="showNavText" class="navtext">Navigation</h4>
+      </div>
+      
+      <!-- Dashboard -->
+      <div class="navitemcontainer" (click)="selectedPageId = 1; otherPageId = 1; selectedPage = 1;" style="margin-bottom: 10px;" >
+        <div class="selectedpointer" *ngIf="selectedPage == 1" style="background-color: green">
+        </div>
+        <div class="selectedpointer" *ngIf="selectedPage != 1" style="background-color: black">
+        </div>
+        <a mat-icon-button>
+          <mat-icon matTooltip="Dashboard" matTooltipPosition="after" class="navicon">dashboard</mat-icon>
+        </a>
+        <h4 *ngIf="showNavText" class="navtext">Dashboard</h4>  
+      </div>
+
+      <!-- Project -->
+      <div class="menuitem" (click)="selectedPageId = 2">
+
+        <div class="selectedpointer" *ngIf="selectedPage == 2" style="background-color: green">
+        </div>
+        <div class="selectedpointer" *ngIf="selectedPage != 2" style="background-color: black">
+        </div>
+        
+        <div style="display: flex; flex-direction: column">
+          <div class="navitemcontainer" (click)="openCloseNav(2); ">
+            <a mat-icon-button>
+              <mat-icon class="navicon" matTooltip="Wallet" matTooltipPosition="after">layers</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="navtext">Wallet</h4>  
+          </div>
+  
+          <!-- <div class="navsubitemcontainer" (click)="otherPageId = 2; selectedPage = 2;" *ngIf = "showProjectSubMenu " [routerLink]="['/homepage/addprojectpage']">
+            <a mat-icon-button>
+              <mat-icon class="subnavicon">add_circle</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="subnavtext">Add Project</h4>  
+          </div>
+
+          <div class="navsubitemcontainer" (click)="otherPageId = 2; selectedPage = 2;" *ngIf = "showProjectSubMenu " [routerLink]="['/homepage/projectlistpage']">
+            <a mat-icon-button>
+              <mat-icon class="subnavicon">format_list_bulleted</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="subnavtext">Project List</h4>  
+          </div> -->
+        </div>
+      </div>
+
+      <!-- Applicants -->
+      <div class="menuitem" (click)="selectedPageId = 3">
+
+        <div class="selectedpointer" *ngIf="selectedPage == 3" style="background-color: green">
+        </div>
+        <div class="selectedpointer" *ngIf="selectedPage != 3" style="background-color: black">
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <div class="navitemcontainer" (click)="openCloseNav(3);">
+            <a mat-icon-button>
+              <mat-icon class="navicon" matTooltip="Add Money" matTooltipPosition="after">account_circle</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="navtext">Add Money</h4>  
+          </div>
+  
+         
+        </div>
+      </div>
+
+      <!-- Banks -->
+      <div class="menuitem" (click)="selectedPageId = 4">
+
+        <div class="selectedpointer" *ngIf="selectedPage == 4" style="background-color: green">
+        </div>
+        <div class="selectedpointer" *ngIf="selectedPage != 4" style="background-color: black">
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <div class="navitemcontainer" (click)="openCloseNav(4);">
+            <a mat-icon-button>
+              <mat-icon class="navicon" matTooltip="Banks" matTooltipPosition="after">account_balance</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="navtext">Banks</h4>  
+          </div>
+  
+          <!-- Banks Details -->
+          <div class="navsubitemcontainer" (click)="showBankDetails = !showBankDetails" *ngIf = "showBankSubMenu ">
+            <a mat-icon-button>
+              <mat-icon class="subnavicon" *ngIf="!showBankDetails">chevron_right</mat-icon>
+              <mat-icon class="subnavicon" *ngIf="showBankDetails">expand_more</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="subnavtext">Bank Details</h4>  
+          </div>
+
+          <!-- Add Banks -->
+          <div class="navsubitemcontainer" *ngIf="showBankDetails && showBankSubMenu" (click)="otherPageId = 2; selectedPage = 4;" [routerLink]="['/homepage/addbankpage']">
+            <a mat-icon-button>
+              <mat-icon class="subnavicon" *ngIf="showBankDetails && showBankSubMenu" style="font-size: 18px">add_circle</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="subnavtext" style="font-size: 13px; margin-top: 0%; padding: 0%;">Add Banks</h4>  
+          </div>
+
+          <!-- Banks List -->
+          <div class="navsubitemcontainer" *ngIf="showBankDetails && showBankSubMenu" (click)="otherPageId = 2; selectedPage = 4;" [routerLink]="['/homepage/banklistpage']">
+            <a mat-icon-button>
+              <mat-icon class="subnavicon" *ngIf="showBankDetails && showBankSubMenu" style="font-size: 18px">format_list_bulleted</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="subnavtext" style="font-size: 13px; margin-top: 0%; padding: 0%;">Banks List</h4>  
+          </div>
+
+          <!-- Staff Details -->
+          <div class="navsubitemcontainer" (click)="showStaffDetails = !showStaffDetails" *ngIf = "showBankSubMenu ">
+            <a mat-icon-button>
+              <mat-icon class="subnavicon" *ngIf="!showStaffDetails">chevron_right</mat-icon>
+              <mat-icon class="subnavicon" *ngIf="showStaffDetails">expand_more</mat-icon>            
+            </a>
+            <h4 *ngIf="showNavText" class="subnavtext">Staff Details</h4>  
+          </div>
+
+          <!-- Add Banks Staff -->
+          <div class="navsubitemcontainer" *ngIf="showStaffDetails && showBankSubMenu" (click)="otherPageId = 2; selectedPage = 4;" [routerLink]="['/homepage/addbankstaffpage']">
+            <a mat-icon-button>
+              <mat-icon class="subnavicon" *ngIf="showStaffDetails && showBankSubMenu" style="font-size: 18px">add_circle</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="subnavtext" style="font-size: 13px; margin-top: 0%; padding: 0%;">Add Bank Staff</h4>  
+          </div>
+
+          <!-- Banks Staff List -->
+          <div class="navsubitemcontainer" *ngIf="showStaffDetails && showBankSubMenu" (click)="otherPageId = 2; selectedPage = 4;" [routerLink]="['/homepage/bankstafflistpage']">
+            <a mat-icon-button>
+              <mat-icon class="subnavicon" *ngIf="showStaffDetails && showBankSubMenu" style="font-size: 18px">format_list_bulleted</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="subnavtext" style="font-size: 13px; margin-top: 0%; padding: 0%;">Bank Staff List</h4>  
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Settings -->
+      <div class="menuitem" (click)="selectedPageId = 5">
+
+        <div class="selectedpointer" *ngIf="selectedPage == 5" style="background-color: green">
+        </div>
+        <div class="selectedpointer" *ngIf="selectedPage != 5" style="background-color: black">
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <div class="navitemcontainer" (click)="openCloseNav(5);">
+            <a mat-icon-button>
+              <mat-icon class="navicon" matTooltip="Settings" matTooltipPosition="after">settings</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="navtext">Settings</h4>  
+          </div>
+  
+          <div class="navsubitemcontainer" (click)="otherPageId = 2; selectedPage = 5;" *ngIf = "showSettingSubMenu " [routerLink]="['/homepage/addadminstaffpage']">
+            <a mat-icon-button>
+              <mat-icon class="subnavicon">add_circle</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="subnavtext">Add Admin Staff</h4>  
+          </div>
+
+          <div class="navsubitemcontainer" (click)="otherPageId = 2; selectedPage = 5;" *ngIf = "showSettingSubMenu " [routerLink]="['/homepage/adminstafflistpage']">
+            <a mat-icon-button>
+              <mat-icon class="subnavicon">format_list_bulleted</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="subnavtext">Admin Staff List</h4>  
+          </div>
+          
+          <div class="navsubitemcontainer" (click)="otherPageId = 2; selectedPage = 5;" *ngIf = "showSettingSubMenu " [routerLink]="['/homepage/notificationpage']">
+            <a mat-icon-button>
+              <mat-icon class="subnavicon">notifications</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="subnavtext">Notification</h4>  
+          </div>
+        </div>
+      </div>
+      </div>
+    </mat-drawer>
+
+
+       
+    
+       
+
+    <mat-drawer-content id="pagecontent" style="height: 100%; width: 95.6%; ">
+      <div id="homepageheader" style="width: 100%;">
+        <div style="width: 30%;">
+           
+
+        </div>
+        
+        <div style="width: 70%;">
+            <div style="display: flex;flex-direction: row;width: 50%;float: left;">
+                <mat-form-field id="searchbox">
+                    <mat-label>
+                      <mat-icon>search</mat-icon> 
+                      Search
+                    </mat-label>
+                    <input matInput>
+                  </mat-form-field>
+                  </div>
+          <div style="display: flex;flex-direction: row;justify-content: flex-end;width: 50%;">
+            <mat-icon id="notificationicon" style="margin-top: 2.5%; margin-right: 1%">notifications</mat-icon>
+            <h4 style="margin-top: 3%; margin-bottom: 0%; margin-right: 1%;">{{userName}}</h4>
+            <button mat-raised-button color="warn" style="margin-right: 2%;" id="Logoutbtn" (click) = "logoutUser()">Logout</button>
+          </div>
+        </div>
+      </div>
+      <div class="maincontainer" *ngIf ="otherPageId==2">
+        <router-outlet></router-outlet>
+      </div>
+      <div class="maincontainer" *ngIf="otherPageId==1">
+        <app-dashboardpage></app-dashboardpage>
+      </div>
+      <!--<div class="maincontainer" *ngIf="selectedPageId==3">
+        <app-applicantspage></app-applicantspage>
+      </div>
+      <div class="maincontainer" *ngIf="selectedPageId==4">
+        <app-bankspage></app-bankspage>
+      </div>
+      <div class="maincontainer" *ngIf="selectedPageId==5">
+        <app-settingspage></app-settingspage>
+      </div> -->
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
+

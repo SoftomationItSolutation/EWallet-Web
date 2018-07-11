@@ -1,0 +1,147 @@
+
+/* Whole Page */
+#sidenavpage{
+    height: 100%;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+/* Side Navigation Bar */
+.sidenavcontainer{
+    height: 100%;
+    /* display: flex; */
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    background-color: #000000;
+    color: #FFFFFF;
+    transition: 0.5s;
+    padding-right: 15px;
+}
+
+.sidenavcontainer1{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    background-color: #000000;
+    color: #FFFFFF;
+    transition: 0.5s;
+    padding-right: 55px;
+}
+
+.menuitem{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    /* margin-bottom: 10%; */
+    margin-bottom: 10px;
+}
+
+/* Side Navigation Bar Item Container */
+.navitemcontainer{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+.navsubitemcontainer{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    margin-left: 25%;
+    width: 100%;
+}
+
+/* Side Navigation Bar Text */
+.navtext{
+    margin: 0%;
+    padding-top: 0%;
+    padding-bottom: 0%;
+    align-self: center;
+    margin-top: 3px;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+.subnavtext{
+    margin: 0%;
+    padding-top: 0%;
+    padding-bottom: 0%;
+    align-self: center;
+    margin-top: 3px;
+    font-size: 15px;
+    font-weight: normal;
+
+}
+
+/* Side Navigation Bar Icon */
+.navicon{
+    font-size: 30px;
+    /* height: 35px;
+    width: 35px;
+    line-height: 35px; */
+}
+
+.subnavicon{
+    font-size: 20px; 
+}
+
+/* Side Navigation Bar Icon Button */
+mat-icon-button {
+    line-height: 0px;
+    height: 0px;
+    width: 0px;
+}
+
+/* Side Navigation Bar Pointer */
+.selectedpointer{
+    width: 5px;
+    background-color: black;
+    padding-left: 0%;
+    margin-left: 0%;
+}
+
+/* Home Page Header (Side Nav Content) */
+#homepageheader{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #FFFFFF;
+    
+}
+
+/* Header Searchbox */
+#searchbox{
+    justify-content: center;
+    width: 100%;
+    /* border: 1px gray solid; */
+}
+
+/* Header Notification Icon */
+#homepageheader #notificationicon{
+    justify-content: flex-end;
+    margin-top: 1%;
+    float: right;
+    margin-left: 0%;
+}
+
+/* Header Login Logout Button */
+#Logoutbtn{
+    height: 10%;
+    margin-top: 1%;
+    margin-left: 1%;
+}
+
+/* Pages Container */
+.maincontainer{
+    height: 92.3%;
+    overflow: hidden;
+    background-color: #FFFFFF;
+}
+
+#pagecontent
+{
+    margin-left: 4.3% !important;
+}

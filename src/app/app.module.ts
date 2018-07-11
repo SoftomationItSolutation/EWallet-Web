@@ -11,6 +11,7 @@ import { RegistrationComponent } from './userlogin/registration/registration.com
 import { ForgetPasswordComponent } from './userlogin/forget-password/forget-password.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpModule } from '../../node_modules/@angular/http';
+import { DashboardpageComponent } from './dashboardpage/dashboardpage.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { HttpModule } from '../../node_modules/@angular/http';
     PageNotFoundComponent,
     RegistrationComponent,
     ForgetPasswordComponent,
-    DashboardComponent
+    DashboardComponent,
+    DashboardpageComponent
   ],
   imports: [
     HttpModule,

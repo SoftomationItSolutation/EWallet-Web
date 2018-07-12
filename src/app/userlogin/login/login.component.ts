@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../auth/auth.service';
 import { UserLogin, ILoginData } from '../../../models/user.model';
 import { UserLoginService } from '../../../services/user-login.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +18,14 @@ export class LoginComponent implements OnInit {
   private formSubmitAttempt: boolean;
   UserError_flag=false;
   UserError_Message='';
-  constructor(private fb: FormBuilder,private authService: AuthService, private loginService: UserLoginService) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService, 
+    private loginService: UserLoginService,
+    private spinner: NgxSpinnerService) {}
 
   ngOnInit() {
+    
     this.form = this.fb.group({     
       LoginId: ['', Validators.required],
       Password: ['', Validators.required]
@@ -36,6 +42,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     
     if (this.form.valid) {
+      this.spinner.show();
       this.loginInput = this.form.value;
         this.loginService.loginUser(this.loginInput).subscribe(
           data => {
@@ -51,9 +58,11 @@ export class LoginComponent implements OnInit {
               this.UserError_flag=true;
               this.UserError_Message=this.loginReposnse.Message;
             }
+            this.spinner.hide();
           },
           err => console.error(err.message),
           () => {
+            this.spinner.hide();
         }
         );
     }

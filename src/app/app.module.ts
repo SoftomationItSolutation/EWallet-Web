@@ -12,7 +12,7 @@ import { ForgetPasswordComponent } from './userlogin/forget-password/forget-pass
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpModule } from '../../node_modules/@angular/http';
 import { DashboardpageComponent } from './dashboardpage/dashboardpage.component';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -25,6 +25,7 @@ import { DashboardpageComponent } from './dashboardpage/dashboardpage.component'
     DashboardpageComponent
   ],
   imports: [
+    NgxSpinnerModule,
     HttpModule,
     BrowserModule,
     AppRoutingModule,

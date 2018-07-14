@@ -8,7 +8,7 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./nav-header.component.css']
 })
 export class NavHeaderComponent implements OnInit {
-
+  NotiCount=0;
   userName: string; 
   showNavText: boolean = false;
   selectedPageId = 1;
@@ -36,6 +36,7 @@ export class NavHeaderComponent implements OnInit {
   }
 
   ngOnInit(){
+    this.NotiCount=50;
      this.loginstatus=this.authService.loggedInStatus;
      this.userName='Hemant Pundir'
   }

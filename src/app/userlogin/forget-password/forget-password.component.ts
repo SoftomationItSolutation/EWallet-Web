@@ -45,7 +45,7 @@ export class ForgetPasswordComponent implements OnInit {
 
   ngOnInit() 
   {
-   
+    this.loginService.LoadComonent='forget'
     this.emailForm = new FormGroup({
       LoginId: new FormControl('', [
         Validators.required,

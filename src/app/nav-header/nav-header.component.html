@@ -1,0 +1,154 @@
+<div id="sidenavpage">
+  <mat-drawer-container style="height: 100%; width: 100%;" hasBackdrop="false">
+    <mat-drawer mode="side" opened="true" *ngIf="loginstatus">
+      <div [class]="showNavText == false ? 'sidenavcontainer' : (showNavText == true ? 'sidenavcontainer1' : 'sidenavcontainer')">
+      
+      <!-- Menu Button -->
+      <div class="navitemcontainer">
+        <div class="selectedpointer" style="background-color: transparent"> 
+        </div>
+        <button (click)="onMenuBtnClick()" mat-icon-button>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <h4 *ngIf="showNavText" class="navtext">Navigation</h4>
+      </div>
+      
+      <!-- Dashboard -->
+      <div class="navitemcontainer" (click)="selectedPageId = 1; otherPageId = 1; selectedPage = 1;" style="margin-bottom: 10px;" >
+        <div class="selectedpointer" *ngIf="selectedPage == 1" style="background-color: #ff9328">
+        </div>
+        <a mat-icon-button>
+          <mat-icon matTooltip="Dashboard" matTooltipPosition="after" class="navicon">dashboard</mat-icon>
+        </a>
+        <h4 *ngIf="showNavText" class="navtext">Dashboard</h4>  
+      </div>
+
+      <!-- Project -->
+      <div class="menuitem" (click)="selectedPageId = 2">
+
+        <div class="selectedpointer" *ngIf="selectedPage == 2" style="background-color: #ff9328">
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <div class="navitemcontainer" (click)="openCloseNav(2); ">
+            <a mat-icon-button>
+              <mat-icon class="navicon" matTooltip="Wallet" matTooltipPosition="after">layers</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="navtext">Wallet</h4>  
+          </div>
+  
+         
+        </div>
+      </div>
+
+      <!-- Applicants -->
+      <div class="menuitem" (click)="selectedPageId = 3">
+
+        <div class="selectedpointer" *ngIf="selectedPage == 3" style="background-color: #ff9328">
+        </div>
+        
+        <div style="display: flex; flex-direction: column">
+          <div class="navitemcontainer" (click)="openCloseNav(3);">
+            <a mat-icon-button>
+              <mat-icon class="navicon" matTooltip="Add Money" matTooltipPosition="after">account_circle</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="navtext">Add Money</h4>  
+          </div>
+  
+         
+        </div>
+      </div>
+
+      <!-- Banks -->
+      <div class="menuitem" (click)="selectedPageId = 4">
+
+        <div class="selectedpointer" *ngIf="selectedPage == 4" style="background-color: #ff9328">
+        </div>
+       
+        <div style="display: flex; flex-direction: column">
+          <div class="navitemcontainer" (click)="openCloseNav(4);">
+            <a mat-icon-button>
+              <mat-icon class="navicon" matTooltip="Banks" matTooltipPosition="after">account_balance</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="navtext">Banks</h4>  
+          </div>
+  
+          <!-- Banks Details -->
+          <div class="navsubitemcontainer" (click)="showBankDetails = !showBankDetails" *ngIf = "showBankSubMenu ">
+            <a mat-icon-button>
+              <mat-icon class="subnavicon" *ngIf="!showBankDetails">chevron_right</mat-icon>
+              <mat-icon class="subnavicon" *ngIf="showBankDetails">expand_more</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="subnavtext">Bank Details</h4>  
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings -->
+      <div class="menuitem" (click)="selectedPageId = 5">
+
+        <div class="selectedpointer" *ngIf="selectedPage == 5" style="background-color: #ff9328">
+        </div>
+        
+        <div style="display: flex; flex-direction: column">
+          <div class="navitemcontainer" (click)="openCloseNav(5);">
+            <a mat-icon-button>
+              <mat-icon class="navicon" matTooltip="Settings" matTooltipPosition="after">settings</mat-icon>
+            </a>
+            <h4 *ngIf="showNavText" class="navtext">Settings</h4>  
+          </div>
+        </div>
+      </div>
+      </div>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div>
+          <mat-toolbar color="primary">
+             <div class="container">
+               <div class="row">
+                 <div class="col-sm-4">
+                    <span><img src="assets/logo.png" class="angular-logo" style="height: 65px;width:80px"></span>
+                 </div>
+                 <div class="col-sm-4">
+
+                 </div>
+                 <div class="col-sm-4">
+                   
+                    <div style="display: flex;flex-direction: row;justify-content: flex-end;" *ngIf="loginstatus">
+                    <button mat-icon-button [matMenuTriggerFor]="menu" style="margin-top: 8px;">
+                        <mat-icon>settings</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                          <mat-icon>account_circle</mat-icon>
+                          <span>{{userName}}</span>
+                        </button>
+                        <button mat-menu-item disabled>
+                          <mat-icon matBadge="11">notifications</mat-icon>
+                          <a (click)="otherPageId = 2; selectedPage = 5;" style="text-decoration: none;" [routerLink]="['/homepage/notificationpage']">Notifications</a>
+                        </button>
+                        <button mat-menu-item >
+                            <mat-icon><img src="assets/logout.png" class='logout'/></mat-icon>
+                            <a (click) = "logoutUser()" style="text-decoration: none;">Logout</a>
+                        </button> 
+                      </mat-menu>
+                     
+                  </div>
+                <div style="display: flex;flex-direction: row;justify-content: flex-end;" *ngIf="!loginstatus">
+                    <a mat-raised-button color="link" [routerLink]="['/registration']" *ngIf="route=='login'">Don't have account ?</a>
+                    <a mat-raised-button color="link" [routerLink]="['/login']" *ngIf="(route =='registration'|| route =='forget')">Already have account? Login</a>
+                </div>
+                 </div>
+               </div>
+             </div>
+              
+            </mat-toolbar>
+      </div>
+      <div class="maincontainer">
+        <router-outlet></router-outlet>
+      </div>
+      
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
+
+

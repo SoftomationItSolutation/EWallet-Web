@@ -1,6 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
-import { Router } from '../../../node_modules/@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogConfig} from '@angular/material';
+// import {DataSource} from '@angular/cdk/table';
+// import { Http, Response} from '@angular/http';
+// import { dbService } from '../../services/db.service';
+// import { CookieService } from 'ngx-cookie-service';
+// import { ModelObject } from '../../models/model-object';
+// import { ProgressdialogComponent } from '../../dialogs/progressdialog/progressdialog.component';
+// import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,158 +14,123 @@ import { Router } from '../../../node_modules/@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  userName: string; 
-  showNavText: boolean = false;
-  selectedPageId = 1;
-  selectedPage = 1;
-  otherPageId = 1;
-  showProjectSubMenu: boolean = false;
-  showApplicantSubMenu: boolean = false;
-  showBankDetails: boolean = false;
-  showStaffDetails: boolean = false;
-  showBankSubMenu: boolean = false;
-  showSettingSubMenu: boolean = false;
-  navOpenFlag: boolean = false;
-  isAdmin = false;
-  constructor(public router:Router,private authService: AuthService) { }
-
-  ngOnInit() {
-    
-    this.isAdmin = true;
-    this.userName = 'Admin';
+  headerData: dashHeaderCountIF[] = [];
+  accountbalance: number;
+  rewardbalance: number;
+  filesCount: number;
+  completedCount: number;
+  pendingCount: number;
+  RejectedCount: number;
+  constructor(public progressDialog: MatDialog) { 
   }
 
-  onMenuBtnClick(){
-    this.showNavText = !this.showNavText; 
-    if(this.showNavText == false)
-    {
-      this.showProjectSubMenu = false;
-      this.showApplicantSubMenu = false;
-      this.showBankSubMenu = false;
-      this.showSettingSubMenu = false;
-    }
-  }
-
-  logoutUser(){
-    this.authService.logout();   
-  }
-
-  mouseEnter(e)
+  ngOnInit() 
   {
-    console.log(e);
+    this.accountbalance=5500;
+    this.rewardbalance=10000;
   }
 
-  mouseLeave(e)
-  {
-    console.log(e);
-  }
+  // headerData: dashHeaderCountIF[] = [];
+  // projectCount: number;
+  // bankCount: number;
+  // filesCount: number;
+  // completedCount: number;
+  // pendingCount: number;
+  // RejectedCount: number;
+  // isAdmin: boolean = false;
+  // constructor(private spinner: NgxSpinnerService, private objDbServ: dbService,private objCook: CookieService, public modelObject: ModelObject, public progressDialog: MatDialog) 
+  // { 
+  //   if(this.objCook.get('isUserAdmin')=='true')
+  //   this.isAdmin =true;
 
-  openCloseNav(id: number)
-  {
-    this.selectedPageId = id;
-    if(this.showNavText == false)
-    {
-      this.showNavText = true;
-      if(this.selectedPageId == 2)
-      {
-        if(this.showProjectSubMenu == true)
-        {
-          this.showProjectSubMenu = false;
-        }
-        else
-        {
-          this.showProjectSubMenu = true;
-        }
-      }
-      if(this.selectedPageId == 3)
-      {
-        if(this.showApplicantSubMenu == true)
-        {
-          this.showApplicantSubMenu = false;
-        }
-        else
-        {
-          this.showApplicantSubMenu = true;
-        }
-      }
-      if(this.selectedPageId == 4)
-      {
-        if(this.showBankSubMenu == true)
-        {
-          this.showBankSubMenu = false;
-          this.showBankDetails = false;
-          this.showStaffDetails = false;
-        }
-        else
-        {
-          this.showBankSubMenu = true;
-        }
-      }
-      if(this.selectedPageId == 5)
-      {
-        if(this.showSettingSubMenu == true)
-        {
-          this.showSettingSubMenu = false;
-        }
-        else
-        {
-          this.showSettingSubMenu = true;
-        }
-      }
-    }
-    else
-    {
-      if(this.selectedPageId == 2)
-      {
-        if(this.showProjectSubMenu == true)
-        {
-          this.showProjectSubMenu = false;
-        }
-        else
-        {
-          this.showProjectSubMenu = true;
-        }
-      }
-      if(this.selectedPageId == 3)
-      {
-        if(this.showApplicantSubMenu == true)
-        {
-          this.showApplicantSubMenu = false;
-        }
-        else
-        {
-          this.showApplicantSubMenu = true;
-        }
-      }
-      if(this.selectedPageId == 4)
-      {
-        if(this.showBankSubMenu == true)
-        {
-          this.showBankSubMenu = false;
-        }
-        else
-        {
-          this.showBankSubMenu = true;
-        }
-      }
-      if(this.selectedPageId == 5)
-      {
-        if(this.showSettingSubMenu == true)
-        {
-          this.showSettingSubMenu = false;
-        }
-        else
-        {
-          this.showSettingSubMenu = true;
-        }
-      }
-    }
-  }
+  //   const dashHeaderProjectObj = 
+  //   {
+  //     Action: 'SelectProjectsCount'
+  //   };
+  //   this.objDbServ.Dashboardheadermaster(dashHeaderProjectObj)
+  //   .subscribe
+  //   (
+  //     (resp: Response) =>
+  //     {
+  //       this.headerData = JSON.parse(resp.json());;
+  //     }, 
+  //     err => {console.log("Dashboard Header Error:" + err);},
+  //     () => 
+  //     {
+  //       this.projectCount = this.headerData[0].Column1;
+  //       this.modelObject.projectHeaderLoaded = true;
+  //     }
+  //   );
 
-  openCloseSubNav()
-  {
+  //   const dashHeaderBankObj = 
+  //   {
+  //     Action: 'SelectBankCount'
+  //   };
+  //   this.objDbServ.Dashboardheadermaster(dashHeaderBankObj)
+  //   .subscribe
+  //   (
+  //     (resp: Response) =>
+  //     {
+  //       this.headerData = JSON.parse(resp.json());;
+  //     }, 
+  //     err => {console.log("Dashboard Header Error:" + err);},
+  //     () => 
+  //     {
+  //       this.bankCount = this.headerData[0].Column1;
+  //       this.modelObject.bankHeaderLoaded = true;
+  //     }
+  //   );
 
-  }
+  //   const dashHeaderFilesObj = 
+  //   {
+  //     Action: 'SelectApplicationcount'
+  //   };
+  //   this.objDbServ.Dashboardheadermaster(dashHeaderFilesObj)
+  //   .subscribe
+  //   (
+  //     (resp: Response) =>
+  //     {
+  //       this.headerData = JSON.parse(resp.json());;
+  //     }, 
+  //     err => {console.log("Dashboard Header Error:" + err);},
+  //     () => 
+  //     {
+  //       this.filesCount = this.headerData[0].Column1;
+  //       this.modelObject.fileHeaderLoaded = true;
+  //       // this.modelObject.checkDashboardLoading();
+  //     }
+  //   );
 
+  //   const footerObj = 
+  //   {
+  //     Action: 'SelectStatusCount'
+  //   };
+  //   this.objDbServ.Applicantentrymaster(footerObj)
+  //   .subscribe
+  //   (
+  //     (resp: Response) =>
+  //     {
+  //       const data = JSON.parse(resp.json());
+  //       this.completedCount = data[0].cnt;
+  //       this.RejectedCount = data[1].cnt;
+  //       this.pendingCount = data[2].cnt;
+  //     }, 
+  //     err => {console.log("Footer Error:" + err);},
+  //     () => 
+  //     {
+       
+  //       this.modelObject.footerLoaded = true;
+  //       this.spinner.hide();
+  //     }
+  //   );
+  // }
 
+  // ngOnInit() 
+  // {
+  //   this.spinner.show();
+  // }*/
+}
+export interface dashHeaderCountIF
+{
+  Column1: number;
 }

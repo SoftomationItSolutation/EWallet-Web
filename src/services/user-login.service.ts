@@ -5,7 +5,7 @@ import { Http, Headers, Response } from '@angular/http';
   providedIn: 'root'
 })
 export class UserLoginService {
-
+  public LoadComonent='';
   //apiurl='http://localhost:63720/api/user/';
   apiurl='http://api.softomation.in/api/user/';
   constructor(private objHttp: Http) { }

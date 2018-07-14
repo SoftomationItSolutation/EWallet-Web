@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     private spinner: NgxSpinnerService) {}
 
   ngOnInit() {
-    
+    this.loginService.LoadComonent='login'
     this.form = this.fb.group({     
       LoginId: ['', Validators.required],
       Password: ['', Validators.required]

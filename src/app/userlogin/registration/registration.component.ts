@@ -43,7 +43,8 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() 
   {
-    this.btnResendOTP=true;
+    this.loginService.LoadComonent='registration';
+    this.btnResendOTP=false;
 
     this.emailForm = new FormGroup({
       LoginId: new FormControl('', [

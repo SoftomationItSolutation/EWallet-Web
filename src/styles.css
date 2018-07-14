@@ -9,16 +9,18 @@ body {
   
 
 .mat-toolbar.mat-primary{
-    background: #FF6F00
+    background: #FFC928
 }
 .mat-fab.mat-primary, .mat-flat-button.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
-    background-color: #FF6F00;
+    background-color: #FFC928;
 }
 
 .mat-step-header .mat-step-icon {
-  background-color: #FF6F00;
+  background-color: #FFC928;
   color: #fff;
 }
 .mat-input-element {
-  caret-color: #FF6F00;
+  caret-color: #FFC928;
 }
+.top-buffer { margin-top:20px; }
+.logout{position: absolute;height: 20px;width: 20px;}

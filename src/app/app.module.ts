@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {  MatIconModule, MatRippleModule,MatSidenavModule,  MatMenuModule,   MatButtonModule,    MatCardModule,  MatFormFieldModule,  MatInputModule,  MatTabsModule,  MatTableModule,  MatPaginatorModule,   MatSortModule,  MatSelectModule,  MatDialogModule,  MatTreeModule,  MatProgressSpinnerModule,  MatListModule,  MatTooltipModule,  MatGridListModule,  MatCheckboxModule,MatStepperModule, MatToolbarModule} from '@angular/material';
+import {  MatIconModule, MatRippleModule,MatSidenavModule,  MatMenuModule,   MatButtonModule,    MatCardModule,  MatFormFieldModule,  MatInputModule,  MatTabsModule,  MatTableModule,  MatPaginatorModule,   MatSortModule,  MatSelectModule,  MatDialogModule,  MatTreeModule,  MatProgressSpinnerModule,  MatListModule,  MatTooltipModule,  MatGridListModule,  MatCheckboxModule,MatStepperModule, MatToolbarModule, MatBadgeModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './userlogin/login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -11,8 +11,8 @@ import { RegistrationComponent } from './userlogin/registration/registration.com
 import { ForgetPasswordComponent } from './userlogin/forget-password/forget-password.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpModule } from '../../node_modules/@angular/http';
-import { DashboardpageComponent } from './dashboardpage/dashboardpage.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NavHeaderComponent } from './nav-header/nav-header.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     RegistrationComponent,
     ForgetPasswordComponent,
     DashboardComponent,
-    DashboardpageComponent
+    NavHeaderComponent
   ],
   imports: [
     NgxSpinnerModule,
@@ -32,6 +32,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatBadgeModule,
     MatIconModule, 
     MatRippleModule,
     MatSidenavModule,  

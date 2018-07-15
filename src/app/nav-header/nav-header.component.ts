@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AuthService } from '../auth/auth.service';
-import { ILoginData } from '../../models/user.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DatabaseService } from '../services/database.service';
+import { ILoginData } from '../models/user.model';
 @Component({
   selector: 'app-nav-header',
   templateUrl: './nav-header.component.html',
@@ -39,7 +39,7 @@ constructor(
       if(location.path() != ''){
         this.route = location.path().replace('/','');
       } else {
-        this.authService.logout();
+        // this.authService.ClearData();
         this.route = 'login'
       }
     });

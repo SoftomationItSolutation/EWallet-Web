@@ -2,14 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogConfig} from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DatabaseService } from '../services/database.service';
-import { ILoginData } from '../../models/user.model';
 import { AuthService } from '../auth/auth.service';
-// import {DataSource} from '@angular/cdk/table';
-// import { Http, Response} from '@angular/http';
-// import { dbService } from '../../services/db.service';
-// import { CookieService } from 'ngx-cookie-service';
-// import { ModelObject } from '../../models/model-object';
-// import { ProgressdialogComponent } from '../../dialogs/progressdialog/progressdialog.component';
+import { ILoginData } from '../models/user.model';
+import { DataTableDataSource } from '../models/transcation.model';
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -25,6 +22,10 @@ export class DashboardComponent implements OnInit {
   RewardBalance_flag=false;
   RewardBalance_Message='';
   TranscationData=[];
+//   @ViewChild(MatPaginator) paginator: MatPaginator;
+//   @ViewChild(MatSort) sort: MatSort;
+//   dataSource;
+//  // displayedColumns = ['id', 'firstName','lastName','email'];
   constructor(private spinner: NgxSpinnerService,private dbService: DatabaseService,private authService: AuthService) { 
   }
 
@@ -62,6 +63,7 @@ export class DashboardComponent implements OnInit {
     this.dbService.TranscationDetails({UserId:this.UserDetails.UserId,TranscationSource:flag}).subscribe(
       data => {
         this.TranscationData=JSON.parse(data.json());
+        //this.dataSource = new DataTableDataSource(this.TranscationData,this.paginator, this.sort);
         this.spinner.hide();
       },
       err => console.error(err.message),

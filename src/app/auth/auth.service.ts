@@ -53,4 +53,9 @@ export class AuthService {
     this.loggedIn.next(false);
     this.router.navigate(['/']);
   }
+  ClearData() {
+    this.sessionData.clear("userdetsils");
+    this.setLoggedIn(false);                           
+    this.loggedIn.next(false);
+  }
 }

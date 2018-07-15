@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { UserLoginService } from '../../services/user-login.service';
 import { ConfirmValidParentMatcher, errorMessages, regExps } from '../../CustomValidation/CustomValidation';
-import { IGenerateUser, UserResponse, otpFormDataIF } from '../../../models/user.model';
+import { IGenerateUser, UserResponse, otpFormDataIF } from '../../models/user.model';
 
 @Component({
   selector: 'app-registration',

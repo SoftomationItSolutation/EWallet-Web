@@ -1,19 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogConfig} from '@angular/material';
+import {MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogConfig, MatTabChangeEvent} from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DatabaseService } from '../services/database.service';
 import { AuthService } from '../auth/auth.service';
 import { ILoginData } from '../models/user.model';
-import { DataTableDataSource } from '../models/transcation.model';
-
-
-// import {DataSource} from '@angular/cdk/table';
-// import { Http, Response} from '@angular/http';
-// import { dbService } from '../../services/db.service';
-// import { CookieService } from 'ngx-cookie-service';
-// import { ModelObject } from '../../models/model-object';
-// import { ProgressdialogComponent } from '../../dialogs/progressdialog/progressdialog.component';
-// import { NgxSpinnerService } from 'ngx-spinner';
+import { TranscationDetailsSource, ITranscationDetails } from '../models/transcation.model';
+import {DataSource} from '@angular/cdk/table';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,11 +21,16 @@ export class DashboardComponent implements OnInit {
   RewardBalance_flag=false;
   RewardBalance_Message='';
   TranscationData=[];
-//   @ViewChild(MatPaginator) paginator: MatPaginator;
-//   @ViewChild(MatSort) sort: MatSort;
-//   dataSource;
-//  // displayedColumns = ['id', 'firstName','lastName','email'];
-  constructor(private spinner: NgxSpinnerService,private dbService: DatabaseService,private authService: AuthService) { 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  TrancationdataSource;
+
+  dataSource: MatTableDataSource<ITranscationDetails>;
+  displayedColumns = ['TranscationId', 'TranscationDetail','PartnerLoginId','Ldate','LTime','Amount'];
+ 
+ constructor(
+   private spinner: NgxSpinnerService,
+   private dbService: DatabaseService,
+   private authService: AuthService) { 
   }
 
   ngOnInit() 
@@ -42,7 +39,6 @@ export class DashboardComponent implements OnInit {
     this.GetAvailabeBalance();
     this.GetTranscationDetails('all');
     this.rewardbalance=10000;
-    this.spinner.hide();
   }
   GetAvailabeBalance(){
     this.spinner.show();
@@ -70,8 +66,9 @@ export class DashboardComponent implements OnInit {
     this.spinner.show();
     this.dbService.TranscationDetails({UserId:this.UserDetails.UserId,TranscationSource:flag}).subscribe(
       data => {
-        this.TranscationData=JSON.parse(data.json());
-        //this.dataSource = new DataTableDataSource(this.TranscationData,this.paginator, this.sort);
+        this.TranscationData = JSON.parse(data.json());
+        this.dataSource = new MatTableDataSource(this.TranscationData);
+        this.dataSource.paginator = this.paginator;
         this.spinner.hide();
       },
       err => console.error(err.message),
@@ -82,5 +79,18 @@ export class DashboardComponent implements OnInit {
   
     
   }
-  
+
+  onLinkClick(event: MatTabChangeEvent) {
+    if(event.index==0)
+      this.GetTranscationDetails('all');
+    else if(event.index==1)
+      this.GetTranscationDetails('recive');
+    else if(event.index==2)
+      this.GetTranscationDetails('send');
+    else if(event.index==3)
+      this.GetTranscationDetails('add');
+    // console.log('event => ', event);
+    // console.log('index => ', event.index);
+    // console.log('tab => ', event.tab);
+  }
 }

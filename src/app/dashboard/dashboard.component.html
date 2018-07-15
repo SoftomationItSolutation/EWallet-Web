@@ -40,22 +40,147 @@
    </div>
   </div>
   <div id="dashcontent" class="row justify-content-center align-content-center mt-2 ">
-      <mat-tab-group>
+      <mat-tab-group (selectedTabChange)="onLinkClick($event)">
           <mat-tab label="All Transaction">
-            <h1>Some tab content</h1>
-            <p>...</p>
+            <mat-table #table [dataSource]="dataSource" aria-label="Elements">
+              <!-- Id Column -->
+              <ng-container matColumnDef="TranscationId">
+                <mat-header-cell *matHeaderCellDef>TranscationId</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.TranscationId}}</mat-cell>
+              </ng-container>
+          
+              <!-- Name Column -->
+              <ng-container matColumnDef="TranscationDetail">
+                <mat-header-cell *matHeaderCellDef>Transcation Source</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.TranscationDetail}}</mat-cell>
+              </ng-container>
+      
+              
+                <ng-container matColumnDef="PartnerLoginId">
+                    <mat-header-cell *matHeaderCellDef>Partner Login Id</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.PartnerLoginId}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Ldate">
+                  <mat-header-cell *matHeaderCellDef>Ldate</mat-header-cell>
+                  <mat-cell *matCellDef="let row">{{row.Ldate}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="LTime">
+                <mat-header-cell *matHeaderCellDef>LTime</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.LTime}}</mat-cell>
+            </ng-container>
+                <ng-container matColumnDef="Amount">
+                  <mat-header-cell *matHeaderCellDef >Amount</mat-header-cell>
+                  <mat-cell *matCellDef="let row">{{row.Amount | currency :'&#8377;'}}</mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+           
           </mat-tab>
           <mat-tab label="Earning">
-            <h1>Some more tab content</h1>
-            <p>...</p>
+              <mat-table #table [dataSource]="dataSource" aria-label="Elements">
+                  <!-- Id Column -->
+                  <ng-container matColumnDef="TranscationId">
+                    <mat-header-cell *matHeaderCellDef>TranscationId</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.TranscationId}}</mat-cell>
+                  </ng-container>
+              
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="TranscationDetail">
+                    <mat-header-cell *matHeaderCellDef>Transcation Source</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.TranscationDetail}}</mat-cell>
+                  </ng-container>
+          
+                  
+                    <ng-container matColumnDef="PartnerLoginId">
+                        <mat-header-cell *matHeaderCellDef>Partner Login Id</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.PartnerLoginId}}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="Ldate">
+                      <mat-header-cell *matHeaderCellDef>Ldate</mat-header-cell>
+                      <mat-cell *matCellDef="let row">{{row.Ldate}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="LTime">
+                    <mat-header-cell *matHeaderCellDef>LTime</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.LTime}}</mat-cell>
+                </ng-container>
+                    <ng-container matColumnDef="Amount">
+                      <mat-header-cell *matHeaderCellDef >Amount</mat-header-cell>
+                      <mat-cell *matCellDef="let row">{{row.Amount | currency :'&#8377;'}}</mat-cell>
+                  </ng-container>
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
           </mat-tab>
           <mat-tab label="Expense">
-              <h1>Some more tab content</h1>
-              <p>...</p>
+              <mat-table #table [dataSource]="dataSource" aria-label="Elements">
+                  <!-- Id Column -->
+                  <ng-container matColumnDef="TranscationId">
+                    <mat-header-cell *matHeaderCellDef>TranscationId</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.TranscationId}}</mat-cell>
+                  </ng-container>
+              
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="TranscationDetail">
+                    <mat-header-cell *matHeaderCellDef>Transcation Source</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.TranscationDetail}}</mat-cell>
+                  </ng-container>
+          
+                  
+                    <ng-container matColumnDef="PartnerLoginId">
+                        <mat-header-cell *matHeaderCellDef>Partner Login Id</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.PartnerLoginId}}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="Ldate">
+                      <mat-header-cell *matHeaderCellDef>Ldate</mat-header-cell>
+                      <mat-cell *matCellDef="let row">{{row.Ldate}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="LTime">
+                    <mat-header-cell *matHeaderCellDef>LTime</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.LTime}}</mat-cell>
+                </ng-container>
+                    <ng-container matColumnDef="Amount">
+                      <mat-header-cell *matHeaderCellDef >Amount</mat-header-cell>
+                      <mat-cell *matCellDef="let row">{{row.Amount | currency :'&#8377;'}}</mat-cell>
+                  </ng-container>
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
             </mat-tab>
-            <mat-tab label="Receive Request">
-                <h1>Some more tab content</h1>
-                <p>...</p>
+            <mat-tab label="Add Money">
+                <mat-table #table [dataSource]="dataSource" aria-label="Elements">
+                    <!-- Id Column -->
+                    <ng-container matColumnDef="TranscationId">
+                      <mat-header-cell *matHeaderCellDef>TranscationId</mat-header-cell>
+                      <mat-cell *matCellDef="let row">{{row.TranscationId}}</mat-cell>
+                    </ng-container>
+                
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="TranscationDetail">
+                      <mat-header-cell *matHeaderCellDef>Transcation Source</mat-header-cell>
+                      <mat-cell *matCellDef="let row">{{row.TranscationDetail}}</mat-cell>
+                    </ng-container>
+            
+                    
+                      <ng-container matColumnDef="PartnerLoginId">
+                          <mat-header-cell *matHeaderCellDef>Partner Login Id</mat-header-cell>
+                          <mat-cell *matCellDef="let row">{{row.PartnerLoginId}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="Ldate">
+                        <mat-header-cell *matHeaderCellDef>Ldate</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.Ldate}}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="LTime">
+                      <mat-header-cell *matHeaderCellDef>LTime</mat-header-cell>
+                      <mat-cell *matCellDef="let row">{{row.LTime}}</mat-cell>
+                  </ng-container>
+                      <ng-container matColumnDef="Amount">
+                        <mat-header-cell *matHeaderCellDef >Amount</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.Amount | currency :'&#8377;'}}</mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                  </mat-table>
               </mat-tab>
         </mat-tab-group>
   </div>

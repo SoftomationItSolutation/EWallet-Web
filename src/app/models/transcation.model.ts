@@ -3,6 +3,26 @@ import { MatPaginator, MatSort } from "../../../node_modules/@angular/material";
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { map } from "../../../node_modules/rxjs/operators";
 
+export interface ITranscationDetailsCol{
+  PartnerUserId : Number;
+  UserId : Number;
+  TranscationSourceId: Number;
+  UserLoginId :string;
+  EmailId :string;
+  MobileNo :string;
+  TranscationId :string;
+  TranscationSource :string;
+  TranscationDetail :string;
+  PartnerLoginId :string;
+  PartnerEmailId :string;
+  PartnerMobileNo :string;
+  Ldate :string;
+  LTime :string;
+  flag :string;
+  Message:string;
+  AvailableBalance:Number;
+  Amount:Number;
+}
 
 export interface ITranscationDetails{
     PartnerUserId : Number;
@@ -29,8 +49,8 @@ export interface ITranscationDetails{
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
-  export class DataTableDataSource extends DataSource<ITranscationDetails>  {
-    constructor(private apiService, private paginator: MatPaginator, private sort: MatSort) {
+  export class TranscationDetailsSource extends DataSource<ITranscationDetails>  {
+    constructor(private apiService, private paginator: MatPaginator) {
       super();
     }
     data: ITranscationDetails[] =  this.apiService;
@@ -44,7 +64,7 @@ export interface ITranscationDetails{
       this.paginator.length = this.data.length;
   
       return merge(...dataMutations).pipe(map(() => {
-        return this.getPagedData(this.getSortedData([...this.data]));
+        return this.getPagedData([...this.data]);
       }));
     }
   
@@ -54,24 +74,5 @@ export interface ITranscationDetails{
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
       return data.splice(startIndex, this.paginator.pageSize);
     }
-
-    private getSortedData(data: ITranscationDetails[]) {
-        return data;
-    //   if (!this.sort.active || this.sort.direction === '') {
-    //     return data;
-    //   }
-  
-    //   return data.sort((a, b) => {
-    //     const isAsc = this.sort.direction === 'asc';
-    //     switch (this.sort.active) {
-    //       case 'firstName': return compare(a.firstName, b.firstName, isAsc);
-    //       case 'lastName': return compare(a.lastName, b.lastName, isAsc);
-    //       case 'email': return compare(a.email, b.email, isAsc);
-    //       case 'id': return compare(+a.id, +b.id, isAsc);
-    //       default: return 0;
-    //     }
-    //   });
-     }
-    
   }
 

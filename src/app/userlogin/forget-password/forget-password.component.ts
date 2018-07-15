@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { UserLoginService } from '../../../services/user-login.service';
-import { ConfirmValidParentMatcher, errorMessages, regExps } from '../../../CustomValidation/CustomValidation';
+import { UserLoginService } from '../../services/user-login.service';
+import { ConfirmValidParentMatcher, errorMessages, regExps } from '../../CustomValidation/CustomValidation';
 import { IForgetPassword, UserResponse, otpFormDataIF } from '../../../models/user.model';
 
 

@@ -1,13 +1,14 @@
 import {Injectable, EventEmitter, OnInit} from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserLoginService {
   public LoadComonent='';
-  //apiurl='http://localhost:63720/api/user/';
-  apiurl='http://api.softomation.in/api/user/';
+  apiurl: string = environment.api_Url;
+ 
   constructor(private objHttp: Http) { }
 
 

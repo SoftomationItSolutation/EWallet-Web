@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../auth/auth.service';
 import { UserLogin, ILoginData } from '../../../models/user.model';
-import { UserLoginService } from '../../../services/user-login.service';
+import { UserLoginService } from '../../services/user-login.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({

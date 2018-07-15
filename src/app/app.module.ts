@@ -10,7 +10,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RegistrationComponent } from './userlogin/registration/registration.component';
 import { ForgetPasswordComponent } from './userlogin/forget-password/forget-password.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HttpModule } from '../../node_modules/@angular/http';
+import { HttpModule } from '@angular/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 

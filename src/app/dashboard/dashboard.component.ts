@@ -7,6 +7,13 @@ import { ILoginData } from '../models/user.model';
 import { DataTableDataSource } from '../models/transcation.model';
 
 
+// import {DataSource} from '@angular/cdk/table';
+// import { Http, Response} from '@angular/http';
+// import { dbService } from '../../services/db.service';
+// import { CookieService } from 'ngx-cookie-service';
+// import { ModelObject } from '../../models/model-object';
+// import { ProgressdialogComponent } from '../../dialogs/progressdialog/progressdialog.component';
+// import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,6 +42,7 @@ export class DashboardComponent implements OnInit {
     this.GetAvailabeBalance();
     this.GetTranscationDetails('all');
     this.rewardbalance=10000;
+    this.spinner.hide();
   }
   GetAvailabeBalance(){
     this.spinner.show();
@@ -71,6 +79,8 @@ export class DashboardComponent implements OnInit {
         this.spinner.hide();
     }
     );
+  
+    
   }
   
 }

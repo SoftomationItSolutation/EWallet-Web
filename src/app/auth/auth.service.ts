@@ -41,7 +41,7 @@ export class AuthService {
     this.sessionData.clear("userdetsils");
   }
   Alogin(pagename:string,data:any){
-    this.sessionData.store("userdetsils",data)
+    this.sessionData.store("userdetsils", data)
     this.setLoggedIn(true);
     this.loggedIn.next(true);
     this.router.navigate(['/'+pagename]);
@@ -57,5 +57,6 @@ export class AuthService {
     this.sessionData.clear("userdetsils");
     this.setLoggedIn(false);                           
     this.loggedIn.next(false);
+   
   }
 }

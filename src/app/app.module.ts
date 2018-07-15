@@ -13,7 +13,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpModule } from '@angular/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
-import {Ng2Webstorage} from 'ngx-webstorage';
+import { AddMoneyComponent } from './add-money/add-money.component';
+import { Ng2Webstorage } from '../../node_modules/ngx-webstorage';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import {Ng2Webstorage} from 'ngx-webstorage';
     RegistrationComponent,
     ForgetPasswordComponent,
     DashboardComponent,
-    NavHeaderComponent
+    NavHeaderComponent,
+    AddMoneyComponent
   ],
   imports: [
     NgxSpinnerModule,

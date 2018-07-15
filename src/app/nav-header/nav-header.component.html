@@ -35,12 +35,17 @@
             </a>
             <h4 *ngIf="showNavText" class="navtext">Wallet</h4>  
           </div>
+  
+         
         </div>
       </div>
+
       <!-- Applicants -->
       <div class="menuitem" (click)="selectedPageId = 3">
+
         <div class="selectedpointer" *ngIf="selectedPage == 3" style="background-color: #ff9328">
         </div>
+        
         <div style="display: flex; flex-direction: column">
           <div class="navitemcontainer" (click)="openCloseNav(3);">
             <a mat-icon-button>
@@ -48,8 +53,11 @@
             </a>
             <h4 *ngIf="showNavText" class="navtext">Add Money</h4>  
           </div>
+  
+         
         </div>
       </div>
+
       <!-- Banks -->
       <div class="menuitem" (click)="selectedPageId = 4">
 
@@ -97,7 +105,6 @@
           <mat-toolbar color="primary">
              <div class="container">
                <div class="row">
-                  <ngx-spinner size="medium" type="ball-clip-rotate"></ngx-spinner>
                  <div class="col-sm-4">
                     <span><img src="assets/logo.png" class="angular-logo" style="height: 65px;width:80px"></span>
                  </div>
@@ -107,7 +114,6 @@
                  <div class="col-sm-4">
                    
                     <div style="display: flex;flex-direction: row;justify-content: flex-end;" *ngIf="loginstatus">
-                   
                     <button mat-icon-button [matMenuTriggerFor]="menu" style="margin-top: 8px;">
                         <mat-icon>settings</mat-icon>
                       </button>
@@ -117,7 +123,7 @@
                           <span>{{userName}}</span>
                         </button>
                         <button mat-menu-item disabled>
-                          <mat-icon matBadge={{NotiCount}} matBadgeColor="warn">notifications</mat-icon>
+                          <mat-icon matBadge={{NotificationCount}} matBadgeColor="warn">notifications</mat-icon>
                           <a (click)="otherPageId = 2; selectedPage = 5;" style="text-decoration: none;" [routerLink]="['/homepage/notificationpage']">Notifications</a>
                         </button>
                         <button mat-menu-item >

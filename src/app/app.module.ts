@@ -13,6 +13,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpModule } from '@angular/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
+import { AddMoneyComponent } from './add-money/add-money.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NavHeaderComponent } from './nav-header/nav-header.component';
     RegistrationComponent,
     ForgetPasswordComponent,
     DashboardComponent,
-    NavHeaderComponent
+    NavHeaderComponent,
+    AddMoneyComponent
   ],
   imports: [
     NgxSpinnerModule,

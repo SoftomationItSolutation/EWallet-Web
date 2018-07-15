@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
     this.GetTranscationDetails('all');
     this.accountbalance=5500;
     this.rewardbalance=10000;
-    this.spinner.show();
+    this.spinner.hide();
   }
   GetAvailabeBalance(){
 

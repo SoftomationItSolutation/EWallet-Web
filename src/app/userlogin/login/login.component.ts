@@ -5,6 +5,7 @@ import { UserLogin, ILoginData } from '../../../models/user.model';
 import { UserLoginService } from '../../services/user-login.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -25,6 +26,8 @@ export class LoginComponent implements OnInit {
     private spinner: NgxSpinnerService) {}
 
   ngOnInit() {
+    this.authService.setLoggedIn(false);
+    this.authService.removeUserDetails();
     this.loginService.LoadComonent='login'
     this.form = this.fb.group({     
       LoginId: ['', Validators.required],
@@ -40,7 +43,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    
     if (this.form.valid) {
       this.spinner.show();
       this.loginInput = this.form.value;
@@ -50,7 +52,7 @@ export class LoginComponent implements OnInit {
             if(this.loginReposnse.flag.toLowerCase()=='true')
             {
               this.formSubmitAttempt = true;  
-              this.authService.Alogin('dashborad');
+              this.authService.Alogin('dashborad',data.json());
               this.UserError_flag=false;
             }
             else

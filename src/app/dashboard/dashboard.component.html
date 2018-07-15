@@ -11,12 +11,13 @@
         <mat-card class="headercard" style="background-color: #2196F3; ">
           <mat-card-header>
             <mat-card-title style="font-size: 20px">Account Balance</mat-card-title>
-            <mat-card-subtitle style="font-size: 12px; color: #FFFFFF;">{{accountbalance}}</mat-card-subtitle>
+            <mat-card-subtitle style="font-size: 12px; color: #FFFFFF;">{{accountbalance | currency :'&#8377;'}}</mat-card-subtitle>
             <mat-icon>account_balance</mat-icon>
           </mat-card-header>
           <mat-card-actions>
             <button mat-button><mat-icon>input</mat-icon></button>
           </mat-card-actions>
+          <mat-error *ngIf="AvailableBalance_flag">{{AvailableBalance_Message}}</mat-error>
         </mat-card>
        </div>
        <div class="col-sm-2" style="height: 10px;">
@@ -26,18 +27,36 @@
         <mat-card class="headercard" style="background-color: #4CAF50;">
           <mat-card-header>
             <mat-card-title style="font-size: 20px">Reward Balance</mat-card-title>
-            <mat-card-subtitle style="font-size: 12px; color: #FFFFFF;">{{rewardbalance}}</mat-card-subtitle>
+            <mat-card-subtitle style="font-size: 12px; color: #FFFFFF;">{{rewardbalance | currency :'&#8377;'}}</mat-card-subtitle>
             <mat-icon>account_balance</mat-icon>
           </mat-card-header>
           <mat-card-actions>
             <button mat-button><mat-icon>filter_list</mat-icon></button>
           </mat-card-actions>
-        
+          <mat-error *ngIf="RewardBalance_flag">&#8377;{{RewardBalance_Message}}</mat-error>
         </mat-card>
        </div>
      </div>
    </div>
   </div>
   <div id="dashcontent" class="row justify-content-center align-content-center mt-2 ">
+      <mat-tab-group>
+          <mat-tab label="All Transaction">
+            <h1>Some tab content</h1>
+            <p>...</p>
+          </mat-tab>
+          <mat-tab label="Earning">
+            <h1>Some more tab content</h1>
+            <p>...</p>
+          </mat-tab>
+          <mat-tab label="Expense">
+              <h1>Some more tab content</h1>
+              <p>...</p>
+            </mat-tab>
+            <mat-tab label="Receive Request">
+                <h1>Some more tab content</h1>
+                <p>...</p>
+              </mat-tab>
+        </mat-tab-group>
   </div>
 </div>

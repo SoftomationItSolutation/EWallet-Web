@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { User } from './user';
+import { SessionStorageService } from '../../../node_modules/ngx-webstorage';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,9 @@ export class AuthService {
   setLoggedIn(value:boolean){
     this.loggedInStatus=value;
     if(value)
-    localStorage.setItem('loggedIn','true');
+      localStorage.setItem('loggedIn','true');
     else 
-    localStorage.setItem('loggedIn','false');
+      localStorage.setItem('loggedIn','false');
   }
   get isLoggedId(){
     return JSON.parse(localStorage.getItem('loggedIn') || 'false');
@@ -25,7 +26,7 @@ export class AuthService {
     return this.loggedIn.asObservable(); 
   }
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private sessionData:SessionStorageService) {}
 
   login(user: User){
     if (user.userName !== '' && user.password !== '' ) { 
@@ -33,14 +34,21 @@ export class AuthService {
       this.router.navigate(['/dashborad']);
     }
   }
-
-  Alogin(pagename){
+  getUserDetails(){
+    return this.sessionData.retrieve("userdetsils");
+  } 
+  removeUserDetails(){
+    this.sessionData.clear("userdetsils");
+  }
+  Alogin(pagename:string,data:any){
+    this.sessionData.store("userdetsils",data)
     this.setLoggedIn(true);
     this.loggedIn.next(true);
     this.router.navigate(['/'+pagename]);
   }
 
   logout() {
+    this.sessionData.clear("userdetsils");
     this.setLoggedIn(false);                           
     this.loggedIn.next(false);
     this.router.navigate(['/']);

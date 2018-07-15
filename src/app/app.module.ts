@@ -13,6 +13,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpModule } from '@angular/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
+import {Ng2Webstorage} from 'ngx-webstorage';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NavHeaderComponent } from './nav-header/nav-header.component';
   ],
   imports: [
     NgxSpinnerModule,
+    Ng2Webstorage,
     HttpModule,
     BrowserModule,
     AppRoutingModule,

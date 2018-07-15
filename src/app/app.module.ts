@@ -14,7 +14,6 @@ import { HttpModule } from '@angular/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { AddMoneyComponent } from './add-money/add-money.component';
-
 @NgModule({
   declarations: [
     AppComponent,

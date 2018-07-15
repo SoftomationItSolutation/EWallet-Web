@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit {
   }
 
   GetTranscationDetails(flag:string){
+  
     
   }
   

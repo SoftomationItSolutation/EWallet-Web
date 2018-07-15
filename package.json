@@ -25,6 +25,7 @@
     "bootstrap": "^3.3.7",
     "core-js": "^2.5.4",
     "ngx-spinner": "^6.0.0",
+    "ngx-webstorage": "^2.0.1",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },

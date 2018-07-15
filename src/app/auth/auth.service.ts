@@ -9,6 +9,7 @@ import { User } from './user';
 export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false); 
   public loggedInStatus=JSON.parse(localStorage.getItem('loggedIn') || 'false')
+  public NotificationCount:number;
   
   setLoggedIn(value:boolean){
     this.loggedInStatus=value;

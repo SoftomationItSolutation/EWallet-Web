@@ -16,13 +16,16 @@ export class NavHeaderComponent implements OnInit {
   route: string;
   showHearder;
   constructor(location: Location, router: Router,private authService: AuthService) {
+    if(this.authService.loggedInStatus){
+      this.loginstatus=true;
+    }
     this.authService.MasterCompDisplay.subscribe(
       (visibility: boolean)  => {
         this.loginstatus = visibility;
         console.log(this.loginstatus);
       }
     );
-    console.log(this.loginstatus);
+   
     router.events.subscribe((val) => {
       if(location.path() != ''){
         this.route = location.path().replace('/','');

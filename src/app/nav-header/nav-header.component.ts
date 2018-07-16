@@ -19,7 +19,7 @@ export class NavHeaderComponent implements OnInit {
   showHearder;
   notiCount:number;
   UserDetails: ILoginData;
-
+  userId='0';
   constructor(location: Location, router: Router,private authService: AuthService,private dbService: DatabaseService) {
     this.UserDetails= JSON.parse(this.authService.getUserDetails());
     this.NotificationDetails();
@@ -44,6 +44,10 @@ export class NavHeaderComponent implements OnInit {
   }
 
   NotificationDetails(){
+    if(this.UserDetails==null)
+      return;
+    this.userId=this.UserDetails.UserId || '0';
+    if(this.userId !='0'){
     this.dbService.NotificationDetails({UserId:this.UserDetails.UserId}).subscribe(
       data => {
         if(JSON.parse(data.json()).flag.toLowerCase()=='true')
@@ -57,10 +61,12 @@ export class NavHeaderComponent implements OnInit {
     }
     );
   }
+}
   ngOnInit(){
     this.UserDetails= JSON.parse(this.authService.getUserDetails());
     this.NotificationDetails();
-     this.userName=this.UserDetails.UserName;
+    if(this.UserDetails != null)
+      this.userName=this.UserDetails.UserName;
   }
   onMenuBtnClick(){
     this.showNavText = !this.showNavText; 

@@ -101,7 +101,7 @@
                         </mat-error>
                         <mat-card-actions>
                             <button mat-raised-button form="RequestMoneyForm" *ngIf="RequestMoneyForm.valid" style="background-color: #1f38d9; color: #FFFFFF;" (click)="RequestMoneyReward();">Request</button>
-                            <button mat-raised-button disabled *ngIf="!RequestMoneyForm.valid">ADD</button>
+                            <button mat-raised-button disabled *ngIf="!RequestMoneyForm.valid">Request</button>
                         </mat-card-actions>
                         <mat-error *ngIf="RequestUserError_flag">
                             {{RequestUserError_Message}}

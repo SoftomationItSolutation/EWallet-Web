@@ -22,6 +22,7 @@ export class WalletManagementComponent implements OnInit {
   AddAmount='';
   PromoCode='';
   MobileNo='';
+  Remark='';
   RewardsValidate: IRewardsValidate;
   TransferTo: IPatnerData;
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
@@ -84,7 +85,10 @@ export class WalletManagementComponent implements OnInit {
           ]),
           mobile: new FormControl('', [
             Validators.pattern(regExps.mobile)
-          ])
+          ]),
+          Remark: new FormControl('', [
+            Validators.required
+          ]),
           });
   }
 
@@ -230,6 +234,76 @@ export class WalletManagementComponent implements OnInit {
     else{
       this.SendUserError_flag=true;
       this.SendUserError_Message= "Patner user not validate." 
+    }
+  }
+
+  ValidateMobilenoRequest(event){
+    this.RequestValidateCode=false;
+    this.RequestUserError_flag=false;
+    this.RequestUserError_Message=''
+    if((event.target.value.length)==10){
+      this.spinner.show();
+        this.userService.ValidateProfile({LoginId:this.RequestMoneyForm.value.mobile}).subscribe(
+          data => {
+            this.TransferTo=JSON.parse(data.json());
+            if(this.TransferTo.flag.toLowerCase() != 'true')
+            {
+              this.RequestValidateCode=true;
+              this.RequestUserError_Message= this.TransferTo.Message;
+            }
+            this.spinner.hide();
+          },
+          err => console.error(err.message),
+          () => {
+            this.spinner.hide();
+        }
+        );
+    }
+    else{
+      this.RequestValidateCode=false;
+      this.RequestUserError_Message= '';
+    }
+  }
+
+  RequestMoneyReward(){
+    this.RequestValidateCode=false;
+    this.RequestUserError_flag=false;
+    this.RequestUserError_Message=''
+    if((this.TransferTo.UserId || 0)!=0){
+      if(this.RequestMoneyForm.valid){
+        this.spinner.show();
+        const obj={
+          RequesterId:this.UserDetails.UserId,
+          RequestToId:this.TransferTo.UserId,
+          Amount:this.RequestMoneyForm.value.AddAmount,
+          MsgDescription:this.RequestMoneyForm.value.Remark,
+        }
+        this.dbService.TranscationManagementRequestMoney(obj).subscribe(
+          data => {
+            if(JSON.parse(data.json()).flag.toLowerCase() =='true')
+            {
+              this.AddAmount='';
+              this.MobileNo='';
+              this.Remark='';
+              this.RequestUserError_flag=true;
+              this.RequestUserError_Message= "Request generated successfully";
+            }
+            else{
+              this.RequestUserError_flag=true;
+              this.RequestUserError_Message= JSON.parse(data.json()).Message 
+            }
+            this.spinner.hide();
+          },
+          err => console.error(err.message),
+          () => {
+            this.spinner.hide();
+        }
+        );
+    }
+    }
+    else{
+      this.RequestUserError_flag=true;
+      this.RequestUserError_Message= "Patner user not validate." 
     }
   }
 }

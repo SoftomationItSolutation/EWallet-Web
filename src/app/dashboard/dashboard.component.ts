@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
     this.UserDetails= JSON.parse(this.authService.getUserDetails());
     this.GetAvailabeBalance();
     this.GetTranscationDetails('all');
-    this.rewardbalance=10000;
+    
   }
   
   GetAvailabeBalance(){
@@ -47,6 +47,7 @@ export class DashboardComponent implements OnInit {
         if(JSON.parse(data.json()).flag.toLowerCase()=='true')
         {
           this.accountbalance=JSON.parse(data.json()).AvailableBalance;
+          this.rewardbalance=JSON.parse(data.json()).RewardBalance;
         }
         else
         {

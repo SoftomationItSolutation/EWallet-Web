@@ -6,7 +6,10 @@ export const regExps: { [key: string]: RegExp } = {
     LoginId: /^([a-zA-Z0-9_-]){6,}$/,
     mobile: /^([0|\+[0-9]{1,5})?([7-9][0-9]{9})$/,
     userOTP:/^[0-9]{6,}$/,
-    email: /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
+    email: /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
+    RewardCode: /^([a-zA-Z0-9_-]){8,8}$/,
+    RewardAmount:/^(\d{1,5}|\d{0,5}\.\d{0,2})$/,
+    RewardDays:/^(\d{1,2}|\d{0,2})$/
  };
 
  export class ConfirmValidParentMatcher implements ErrorStateMatcher {
@@ -24,4 +27,7 @@ export const errorMessages: { [key: string]: string } = {
     mobile: 'Please enter valid mobile number',
     userOTP:'OTP must be 6 numeric characters',
     LoginId: 'Login id must be must be 6 characters or longer, contain alpha or numeric.',
+    RewardCode: 'Enter a valid code.',
+    RewardAmount:'Enter a valid amount.',
+    RewardDays:'Enter a valid days.'
 };

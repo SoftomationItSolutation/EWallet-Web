@@ -20,4 +20,12 @@ export class DatabaseService {
   TranscationDetails(objBalance: {}) {
     return this.objHttp.post(this.apiurl+'GetTranscationDetails', objBalance);
   }
+  AddReword(objRewardAdd: {}) {
+    return this.objHttp.post(this.apiurl+'RewardManagementInsertUpdate', objRewardAdd);
+  }
+
+  GetRewardManagement(objRewardAdd: {}) {
+    return this.objHttp.post(this.apiurl+'GetRewardManagement', objRewardAdd);
+  }
+  
 }

@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
   TrancationdataSource;
 
   dataSource: MatTableDataSource<ITranscationDetails>;
-  displayedColumns = ['TranscationId', 'TranscationDetail','PartnerLoginId','Ldate','LTime','Amount'];
+  displayedColumns = ['PartnerLoginId','TranscationId', 'TranscationDetail','Amount','Ldate'];
  
  constructor(
    private spinner: NgxSpinnerService,
@@ -33,13 +33,13 @@ export class DashboardComponent implements OnInit {
    private authService: AuthService) { 
   }
 
-  ngOnInit() 
-  {
+  ngOnInit(){
     this.UserDetails= JSON.parse(this.authService.getUserDetails());
     this.GetAvailabeBalance();
     this.GetTranscationDetails('all');
     this.rewardbalance=10000;
   }
+  
   GetAvailabeBalance(){
     this.spinner.show();
     this.dbService.AvailableBalance({UserId:this.UserDetails.UserId}).subscribe(

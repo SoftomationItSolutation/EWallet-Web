@@ -1,0 +1,61 @@
+<div id="rewardcontainer">
+    <ngx-spinner size="medium" type="ball-clip-rotate"></ngx-spinner>
+    <mat-card id="addrewardcard" class=".mat-elevation-z0">
+      <mat-card-header>
+          <mat-card-title style="font-size: 20px">Reward Managemnt</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="RewardForm" id="RewardForm" style="display: contents">
+          <mat-form-field>
+            <input matInput placeholder="Reward Amount"  formControlName="RewardAmount" required>
+            <mat-error *ngIf = "RewardForm.get('RewardAmount').hasError('required')">
+                Reward Amount must be entered
+              </mat-error>
+              <mat-error *ngIf = "RewardForm.get('RewardAmount').hasError('pattern')">
+                  {{errors.RewardAmount}}
+              </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Valid Till(no of days)" name="RewardDays" formControlName="RewardDays" required>
+            <mat-error *ngIf = "RewardForm.get('RewardDays').hasError('required')">
+                Valid till must be entered.
+              </mat-error>
+              <mat-error *ngIf = "RewardForm.get('RewardDays').hasError('pattern')">
+                  {{errors.RewardDays}}
+              </mat-error>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button form="RewardForm" *ngIf="RewardForm.valid" style="background-color: #1f38d9; color: #FFFFFF;" (click)="saveReward();">ADD</button>
+        <button mat-raised-button disabled *ngIf="!RewardForm.valid">ADD</button>
+      </mat-card-actions>
+      <mat-error *ngIf="UserError_flag">
+          {{UserError_Message}}
+        </mat-error>
+    </mat-card>
+</div>
+<div id="dashcontent" class="row justify-content-center align-content-center mt-2 ">
+    <mat-table #table [dataSource]="dataSource" aria-label="Elements">
+        <ng-container matColumnDef="RewardCode">
+          <mat-header-cell *matHeaderCellDef>Reward Code</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.RewardCode}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="ValidFrom">
+          <mat-header-cell *matHeaderCellDef>Valid From</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{row.ValidFrom}}   
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="ValidTill">
+            <mat-header-cell *matHeaderCellDef>Valid Till</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.ValidTill}}</mat-cell>
+          </ng-container>
+        <ng-container matColumnDef="RewardAmount">
+            <mat-header-cell *matHeaderCellDef >Reward Amount</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.RewardAmount | currency :'&#8377;'}}</mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+</div>

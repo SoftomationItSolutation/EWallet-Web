@@ -1,0 +1,47 @@
+/* Main Container */
+#rewardcontainer{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-content: center;
+}
+
+/* Card */
+#addrewardcard{
+    align-self: center;
+    justify-self: center;
+    width: 50%;
+    margin-bottom: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border: 1px solid gray;
+}
+
+
+
+mat-card-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+::ng-deep .mat-card-header-text {
+    margin: 0px !important;
+}
+
+mat-card-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+mat-card-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+mat-card-actions button{
+    width: 100%;
+}

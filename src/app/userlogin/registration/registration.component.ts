@@ -15,8 +15,6 @@ export class RegistrationComponent implements OnInit {
   hide = true;
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
   errors = errorMessages;
- 
-  
   otpForm: FormGroup;
   passForm: FormGroup;
   

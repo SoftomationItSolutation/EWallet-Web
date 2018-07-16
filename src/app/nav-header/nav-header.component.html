@@ -14,49 +14,35 @@
       </div>
       
       <!-- Dashboard -->
-      <div class="navitemcontainer" (click)="selectedPageId = 1; otherPageId = 1; selectedPage = 1;" style="margin-bottom: 10px;" >
-        <div class="selectedpointer" *ngIf="selectedPage == 1" style="background-color: #ff9328">
+      <div class="navitemcontainer" style="margin-bottom: 10px;" >
+        <div class="selectedpointer" *ngIf="route == 'dashboard'" style="background-color: #ff9328">
         </div>
-        <a mat-icon-button>
+        <a mat-icon-button [routerLink]="['/dashborad']">
           <mat-icon matTooltip="Dashboard" matTooltipPosition="after" class="navicon">dashboard</mat-icon>
         </a>
         <h4 *ngIf="showNavText" class="navtext">Dashboard</h4>  
       </div>
 
-      <!-- Project -->
-      <div class="menuitem" (click)="selectedPageId = 2">
+      <!-- Wallet -->
+      <div class="menuitem">
 
-        <div class="selectedpointer" *ngIf="selectedPage == 2" style="background-color: #ff9328">
+        <div class="selectedpointer" *ngIf="route == 'dashboard'" style="background-color: #ff9328">
         </div>
-        <div style="display: flex; flex-direction: column">
-          <div class="navitemcontainer" (click)="openCloseNav(2); ">
-            <a mat-icon-button>
-              <mat-icon class="navicon" matTooltip="Wallet" matTooltipPosition="after">layers</mat-icon>
-            </a>
-            <h4 *ngIf="showNavText" class="navtext">Wallet</h4>  
-          </div>
-  
-         
-        </div>
+        <a mat-icon-button [routerLink]="['/wallet']">
+          <mat-icon matTooltip="Wallet" matTooltipPosition="after" class="navicon">account_balance_wallet</mat-icon>
+        </a>
+        <h4 *ngIf="showNavText" class="navtext">Wallet</h4> 
       </div>
 
-      <!-- Applicants -->
-      <div class="menuitem" (click)="selectedPageId = 3">
-
-        <div class="selectedpointer" *ngIf="selectedPage == 3" style="background-color: #ff9328">
-        </div>
-        
-        <div style="display: flex; flex-direction: column">
-          <div class="navitemcontainer" (click)="openCloseNav(3);">
-            <a mat-icon-button>
-              <mat-icon class="navicon" matTooltip="Add Money" matTooltipPosition="after">account_circle</mat-icon>
-            </a>
-            <h4 *ngIf="showNavText" class="navtext">Add Money</h4>  
+       <!-- Reward -->
+       <div class="menuitem">
+          <div class="selectedpointer" *ngIf="route == 'reward'" style="background-color: #ff9328">
           </div>
-  
-         
+          <a mat-icon-button [routerLink]="['/reward']">
+            <mat-icon matTooltip="Reward" matTooltipPosition="after" class="navicon">account_balance</mat-icon>
+          </a>
+          <h4 *ngIf="showNavText" class="navtext">Reward</h4> 
         </div>
-      </div>
 
       <!-- Banks -->
       <div class="menuitem" (click)="selectedPageId = 4">

@@ -12,17 +12,21 @@ import { AuthService } from '../auth/auth.service';
 export class NavHeaderComponent implements OnInit {
   userName: string; 
   showNavText: boolean = false;
-  selectedPageId = 1;
-  selectedPage = 1;
-  otherPageId = 1;
   loginstatus=false;
   route: string;
-  constructor(location: Location, router: Router,private authService: AuthService,) {
+  showHearder;
+  constructor(location: Location, router: Router,private authService: AuthService) {
+    this.authService.MasterCompDisplay.subscribe(
+      (visibility: boolean)  => {
+        this.loginstatus = visibility;
+        console.log(this.loginstatus);
+      }
+    );
+    console.log(this.loginstatus);
     router.events.subscribe((val) => {
       if(location.path() != ''){
         this.route = location.path().replace('/','');
       } else {
-        // this.authService.ClearData();
         this.route = 'login'
       }
     });
@@ -30,13 +34,14 @@ export class NavHeaderComponent implements OnInit {
 
   ngOnInit(){
     this.authService.NotificationCount=50;
-     this.loginstatus=this.authService.loggedInStatus;
      this.userName='Hemant Pundir'
   }
   onMenuBtnClick(){
     this.showNavText = !this.showNavText; 
    
   }
-
+  logoutUser(){
+    this.authService.logout();
+  }
 
 }

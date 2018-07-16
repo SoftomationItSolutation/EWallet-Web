@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { User } from './user';
@@ -8,7 +8,7 @@ import { SessionStorageService } from '../../../node_modules/ngx-webstorage';
   providedIn: 'root'
 })
 export class AuthService {
-  private loggedIn = new BehaviorSubject<boolean>(false); 
+  MasterCompDisplay = new EventEmitter<boolean>();
   public loggedInStatus=JSON.parse(localStorage.getItem('loggedIn') || 'false')
   public NotificationCount:number;
   
@@ -19,21 +19,10 @@ export class AuthService {
     else 
       localStorage.setItem('loggedIn','false');
   }
-  get isLoggedId(){
-    return JSON.parse(localStorage.getItem('loggedIn') || 'false');
-  }
-  get isLoggedIn() {
-    return this.loggedIn.asObservable(); 
-  }
-
+  
   constructor(private router: Router,private sessionData:SessionStorageService) {}
 
-  login(user: User){
-    if (user.userName !== '' && user.password !== '' ) { 
-      this.loggedIn.next(true);
-      this.router.navigate(['/dashborad']);
-    }
-  }
+  
   getUserDetails(){
     return this.sessionData.retrieve("userdetsils");
   } 
@@ -41,22 +30,20 @@ export class AuthService {
     this.sessionData.clear("userdetsils");
   }
   Alogin(pagename:string,data:any){
+    this.MasterCompDisplay.emit(true);
     this.sessionData.store("userdetsils", data)
     this.setLoggedIn(true);
-    this.loggedIn.next(true);
     this.router.navigate(['/'+pagename]);
   }
 
   logout() {
+    this.MasterCompDisplay.emit(false);
     this.sessionData.clear("userdetsils");
     this.setLoggedIn(false);                           
-    this.loggedIn.next(false);
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
   ClearData() {
     this.sessionData.clear("userdetsils");
     this.setLoggedIn(false);                           
-    this.loggedIn.next(false);
-   
   }
 }

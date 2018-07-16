@@ -15,6 +15,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { AddMoneyComponent } from './add-money/add-money.component';
 import { Ng2Webstorage } from '../../node_modules/ngx-webstorage';
+import { RewardManagementComponent } from './adminpages/reward-management/reward-management.component';
+import { WalletManagementComponent } from './wallet-management/wallet-management.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { Ng2Webstorage } from '../../node_modules/ngx-webstorage';
     ForgetPasswordComponent,
     DashboardComponent,
     NavHeaderComponent,
-    AddMoneyComponent
+    AddMoneyComponent,
+    RewardManagementComponent,
+    WalletManagementComponent,
   ],
   imports: [
     NgxSpinnerModule,

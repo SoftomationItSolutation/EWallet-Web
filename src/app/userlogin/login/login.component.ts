@@ -22,9 +22,12 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService, 
     private loginService: UserLoginService,
-    private spinner: NgxSpinnerService) {}
+    private spinner: NgxSpinnerService) {
+      console.log('login const');
+    }
 
   ngOnInit() {
+    console.log('login init');
     this.loginService.LoadComonent='login'
     this.form = this.fb.group({     
       LoginId: ['', Validators.required],

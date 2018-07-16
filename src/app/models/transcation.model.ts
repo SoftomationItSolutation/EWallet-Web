@@ -23,7 +23,12 @@ export interface ITranscationDetailsCol{
   AvailableBalance:Number;
   Amount:Number;
 }
-
+export interface IRewardsDetails{
+  RewardCode :string;
+  ValidFrom :string;
+  ValidTill :string;
+  RewardAmount:Number;
+}
 export interface ITranscationDetails{
     PartnerUserId : Number;
     UserId : Number;

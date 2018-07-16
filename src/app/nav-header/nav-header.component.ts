@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AuthService } from '../auth/auth.service';
+import { DatabaseService } from '../services/database.service';
+import { ILoginData } from '../models/user.model';
 
 
 @Component({
@@ -15,14 +17,19 @@ export class NavHeaderComponent implements OnInit {
   loginstatus=false;
   route: string;
   showHearder;
-  constructor(location: Location, router: Router,private authService: AuthService) {
+  notiCount:number;
+  UserDetails: ILoginData;
+
+  constructor(location: Location, router: Router,private authService: AuthService,private dbService: DatabaseService) {
+    this.UserDetails= JSON.parse(this.authService.getUserDetails());
+    this.NotificationDetails();
     if(this.authService.loggedInStatus){
       this.loginstatus=true;
+      
     }
     this.authService.MasterCompDisplay.subscribe(
       (visibility: boolean)  => {
         this.loginstatus = visibility;
-        console.log(this.loginstatus);
       }
     );
    
@@ -33,11 +40,27 @@ export class NavHeaderComponent implements OnInit {
         this.route = 'login'
       }
     });
+    
   }
 
+  NotificationDetails(){
+    this.dbService.NotificationDetails({UserId:this.UserDetails.UserId}).subscribe(
+      data => {
+        if(JSON.parse(data.json()).flag.toLowerCase()=='true')
+        {
+          this.notiCount=JSON.parse(data.json()).NotificationCount;
+          this.authService.NotificationCount=this.notiCount;
+        }
+      },
+      err => console.error(err.message),
+      () => {
+    }
+    );
+  }
   ngOnInit(){
-    this.authService.NotificationCount=50;
-     this.userName='Hemant Pundir'
+    this.UserDetails= JSON.parse(this.authService.getUserDetails());
+    this.NotificationDetails();
+     this.userName=this.UserDetails.UserName;
   }
   onMenuBtnClick(){
     this.showNavText = !this.showNavText; 

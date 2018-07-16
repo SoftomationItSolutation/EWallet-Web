@@ -43,47 +43,6 @@
           </a>
           <h4 *ngIf="showNavText" class="navtext">Reward</h4> 
         </div>
-
-      <!-- Banks -->
-      <div class="menuitem" (click)="selectedPageId = 4">
-
-        <div class="selectedpointer" *ngIf="selectedPage == 4" style="background-color: #ff9328">
-        </div>
-       
-        <div style="display: flex; flex-direction: column">
-          <div class="navitemcontainer" (click)="openCloseNav(4);">
-            <a mat-icon-button>
-              <mat-icon class="navicon" matTooltip="Banks" matTooltipPosition="after">account_balance</mat-icon>
-            </a>
-            <h4 *ngIf="showNavText" class="navtext">Banks</h4>  
-          </div>
-  
-          <!-- Banks Details -->
-          <div class="navsubitemcontainer" (click)="showBankDetails = !showBankDetails" *ngIf = "showBankSubMenu ">
-            <a mat-icon-button>
-              <mat-icon class="subnavicon" *ngIf="!showBankDetails">chevron_right</mat-icon>
-              <mat-icon class="subnavicon" *ngIf="showBankDetails">expand_more</mat-icon>
-            </a>
-            <h4 *ngIf="showNavText" class="subnavtext">Bank Details</h4>  
-          </div>
-        </div>
-      </div>
-
-      <!-- Settings -->
-      <div class="menuitem" (click)="selectedPageId = 5">
-
-        <div class="selectedpointer" *ngIf="selectedPage == 5" style="background-color: #ff9328">
-        </div>
-        
-        <div style="display: flex; flex-direction: column">
-          <div class="navitemcontainer" (click)="openCloseNav(5);">
-            <a mat-icon-button>
-              <mat-icon class="navicon" matTooltip="Settings" matTooltipPosition="after">settings</mat-icon>
-            </a>
-            <h4 *ngIf="showNavText" class="navtext">Settings</h4>  
-          </div>
-        </div>
-      </div>
       </div>
     </mat-drawer>
     <mat-drawer-content>
@@ -98,7 +57,6 @@
 
                  </div>
                  <div class="col-sm-4">
-                   
                     <div style="display: flex;flex-direction: row;justify-content: flex-end;" *ngIf="loginstatus">
                     <button mat-icon-button [matMenuTriggerFor]="menu" style="margin-top: 8px;">
                         <mat-icon>settings</mat-icon>
@@ -108,8 +66,9 @@
                           <mat-icon>account_circle</mat-icon>
                           <span>{{userName}}</span>
                         </button>
-                        <button mat-menu-item disabled>
-                          <mat-icon matBadge={{NotificationCount}} matBadgeColor="warn">notifications</mat-icon>
+                        <button mat-menu-item>
+                          
+                          <mat-icon matBadge={{notiCount}} matBadgeColor="warn">notifications</mat-icon>
                           <a (click)="otherPageId = 2; selectedPage = 5;" style="text-decoration: none;" [routerLink]="['/homepage/notificationpage']">Notifications</a>
                         </button>
                         <button mat-menu-item >

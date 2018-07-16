@@ -8,8 +8,10 @@ export const regExps: { [key: string]: RegExp } = {
     userOTP:/^[0-9]{6,}$/,
     email: /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
     RewardCode: /^([a-zA-Z0-9_-]){8,8}$/,
-    RewardAmount:/^(\d{1,5}|\d{0,5}\.\d{0,2})$/,
-    RewardDays:/^(\d{1,2}|\d{0,2})$/
+    RewardAmount:/^(\d{1,5}|\d{1,5}\.\d{0,2})$/,
+    RewardDays:/^(\d{1,2}|\d{1,2})$/,
+    AddAmount:/^(\d{1,5}|\d{1,5}\.\d{0,2})$/,
+    PromoCode: /^([a-zA-Z0-9_-]){8,8}$/,
  };
 
  export class ConfirmValidParentMatcher implements ErrorStateMatcher {
@@ -29,5 +31,7 @@ export const errorMessages: { [key: string]: string } = {
     LoginId: 'Login id must be must be 6 characters or longer, contain alpha or numeric.',
     RewardCode: 'Enter a valid code.',
     RewardAmount:'Enter a valid amount.',
-    RewardDays:'Enter a valid days.'
+    RewardDays:'Enter a valid days.',
+    AddAmount:'Enter a valid amount.',
+    PromoCode: 'Enter a valid promo code.',
 };

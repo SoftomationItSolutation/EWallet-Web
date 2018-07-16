@@ -23,7 +23,17 @@ export interface ILoginData{
   Name:string;
   UserName:string;
   UserId:string;
-  }
+}
+
+export interface IPatnerData{
+  flag: string;
+  Message:string;
+  EmailId:string;
+  MobileNo:string;
+  Name:string;
+  UserName:string;
+  UserId:string;
+}
 export interface ChnagePasswordRequest {
     userOTP: string;
     userPass: string;

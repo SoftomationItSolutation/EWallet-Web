@@ -35,5 +35,8 @@ export class UserLoginService {
   ValidateOTP(objValidate: {}) {
     return this.objHttp.post(this.apiurl+'ValidateOTP', objValidate);
   }
-  
+
+  ValidateProfile(objValidateProfile: {}) {
+    return this.objHttp.post(this.apiurl+'GetProfileByLogin', objValidateProfile);
+  }
 }

@@ -29,6 +29,12 @@ export interface IRewardsDetails{
   ValidTill :string;
   RewardAmount:Number;
 }
+export interface IRewardsValidate{
+  flag :string;
+  Message :string;
+  RewardId :Number;
+  RewardAmount:Number;
+}
 export interface ITranscationDetails{
     PartnerUserId : Number;
     UserId : Number;

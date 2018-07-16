@@ -27,5 +27,14 @@ export class DatabaseService {
   GetRewardManagement(objRewardAdd: {}) {
     return this.objHttp.post(this.apiurl+'GetRewardManagement', objRewardAdd);
   }
+
+  ValidateRewardCode(objRewardCode: {}) {
+    return this.objHttp.post(this.apiurl+'ValidateRewardCode', objRewardCode);
+  }
+
+  TranscationManagement(objTranscation: {}) {
+    return this.objHttp.post(this.apiurl+'TranscationManagement', objTranscation);
+  }
+  
   
 }

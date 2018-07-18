@@ -4,6 +4,8 @@ import { AuthService } from '../../auth/auth.service';
 import { UserLogin, ILoginData } from '../../models/user.model';
 import { UserLoginService } from '../../services/user-login.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { MatDialog } from '../../../../node_modules/@angular/material';
+import { ErrorboxComponent } from '../../errorbox/errorbox.component';
 
 @Component({
   selector: 'app-login',
@@ -12,23 +14,24 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  form: FormGroup;
+  LoginForm: FormGroup;
   loginReposnse: ILoginData;
   loginInput: UserLogin;
   private formSubmitAttempt: boolean;
-  UserError_flag=false;
-  UserError_Message='';
+  
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService, 
     private loginService: UserLoginService,
-    private spinner: NgxSpinnerService) {
+    private spinner: NgxSpinnerService,
+    public dialog: MatDialog) {
       this.authService.MasterCompDisplay.emit(false);
     }
 
   ngOnInit() {
     this.loginService.LoadComonent='login'
-    this.form = this.fb.group({     
+    this.LoginForm = this.fb.group({     
       LoginId: ['', Validators.required],
       Password: ['', Validators.required]
     });
@@ -36,16 +39,15 @@ export class LoginComponent implements OnInit {
 
   isFieldInvalid(field: string) { 
     return (
-      (!this.form.get(field).valid && this.form.get(field).touched) ||
-      (this.form.get(field).untouched && this.formSubmitAttempt)
+      (!this.LoginForm.get(field).valid && this.LoginForm.get(field).touched) ||
+      (this.LoginForm.get(field).untouched && this.formSubmitAttempt)
     );
   }
 
-  onSubmit() {
-    
-    if (this.form.valid) {
+  onLogin() {
+    if (this.LoginForm.valid) {
       this.spinner.show();
-      this.loginInput = this.form.value;
+      this.loginInput = this.LoginForm.value;
         this.loginService.loginUser(this.loginInput).subscribe(
           data => {
             this.loginReposnse= JSON.parse(data.json());
@@ -53,12 +55,11 @@ export class LoginComponent implements OnInit {
             {
               this.formSubmitAttempt = true;  
               this.authService.Alogin('dashborad',data.json());
-              this.UserError_flag=false;
+              this.authService.MasterCompDisplay.emit(true);
             }
             else
             {
-              this.UserError_flag=true;
-              this.UserError_Message=this.loginReposnse.Message;
+              this.openDialog('Error in login!',this.loginReposnse.Message)
             }
             this.spinner.hide();
           },
@@ -71,4 +72,12 @@ export class LoginComponent implements OnInit {
              
   }
 
+  openDialog(title,message): void {
+    const dialogRef = this.dialog.open(ErrorboxComponent, {
+      width: '250px',
+      data: {title: title, message: message}
+    });
+    
+  }
+  
 }

@@ -20,6 +20,7 @@ import { WalletManagementComponent } from './wallet-management/wallet-management
 import { LayoutModule } from '@angular/cdk/layout';
 import { BlankpageComponent } from './blankpage/blankpage.component';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import { ErrorboxComponent } from './errorbox/errorbox.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
     RewardManagementComponent,
     WalletManagementComponent,
     BlankpageComponent,
-    NotificationSheet
+    NotificationSheet,
+    ErrorboxComponent
   ],
   imports: [
     NgxSpinnerModule,
@@ -72,7 +74,7 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
     MatBottomSheetModule
     
   ],
-  entryComponents: [NotificationSheet],
+  entryComponents: [NotificationSheet,ErrorboxComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

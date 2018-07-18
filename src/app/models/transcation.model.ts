@@ -35,6 +35,10 @@ export interface IRewardsValidate{
   RewardId :Number;
   RewardAmount:Number;
 }
+export interface DialogData {
+  title: string;
+  message: string;
+}
 export interface ITranscationDetails{
     PartnerUserId : Number;
     UserId : Number;

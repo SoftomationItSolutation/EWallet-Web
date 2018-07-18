@@ -3,63 +3,80 @@
         <div class="row">
             <div class="col-md-10 offset-md-1 col-sm-12 col-xl-4 offset-xl-4 formmargin">
                 <div class="row">
-                <div class="col-md-12 text-center mb-4">
-                    <a [routerLink]="['']"><img src="../../assets/logo-2.PNG" class="logoimg" /></a>
-                </div>
-                <div class="col-md-12 mb-4">
-                <p class="text-white text-center font">Flipprr</p>
-                <p class="text-white text-center font-p">Login in to your account !</p>
+                    <div class="col-md-12 text-center mb-4">
+                        <a [routerLink]="['']"><img src="../../assets/logo-2.PNG" class="logoimg" /></a>
                     </div>
-                <div class="col-md-12">
-                    <span class="input input--nao">
-					<input class="input__field input__field--nao" type="text" id="input-1" />
-					<label class="input__label input__label--nao" for="input-1">
-						<span class="input__label-content input__label-content--nao">Username</span>
-					</label>
-					<svg class="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
-						<path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
-					</svg>
-				</span>
-                </div>
-                <div class="col-md-12">
-                    <span class="input input--nao">
-					<input class="input__field input__field--nao" type="password" id="password" />
-					<label class="input__label input__label--nao" for="password">
-						<span class="input__label-content input__label-content--nao">Username</span>
-					</label>
-					<svg class="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
-						<path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
-					</svg>
-                    </span>
-                </div>
-                <div class="col-md-12">
-                    <span class="input input--nao">
-                            <label class="checkboxcontainer">Remember me
-                                    <input type="checkbox">
-                                    <span class="checkmark"></span>
-                            </label>
-                        </span>
-                </div>
-                 
-                <div class="col-md-12">
-                
-                    <span class="input input--nao">
-                            <a href="../dashboard/dashboard.html"><button class="btn btn-primary btn-block loginbtn border-0"><i class=""></i> Login</button></a>
-                    </span>
-                    <hr/>
-                </div>
-                <div class="col-md-12">
+                    <div class="col-md-12 mb-4">
+                        <!-- <p class="text-white text-center font">Flipprr</p> -->
+                        <p class="text-white text-center font-p">Login in to your account !</p>
+                    </div>
+                    <div class="col-md-12">
+                        <mat-card>
+                            <mat-card-content>
+                                <form [formGroup]="LoginForm" (ngSubmit)="onLogin()">
+                                    <div class="col-md-12">
+                                        <mat-form-field class="input input--nao">
+                                            <input matInput formControlName="LoginId" placeholder="Mobile / Login Id" required class="input__field input__field--nao" type="mytype" id="input-1">
+                                            <!-- <label class="input__label input__label--nao" for="input-1">
+                                                <span class="input__label-content input__label-content--nao">Mobile / Login Id</span>
+                                            </label> 
+                                            <svg class="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+                                                <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+                                            </svg>-->
+                                            <mat-error *ngIf="isFieldInvalid('LoginId')">
+                                                Please inform your login details
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <mat-form-field class="input input--nao">
+                                            <input class="input__field input__field--nao" id="password" placeholder="Password" matInput type="password" [type]="hide ? 'password' : 'text'" formControlName="Password" required>
+                                            <!-- <label class="input__label input__label--nao" for="password">
+                                                <span class="input__label-content input__label-content--nao">Password</span>
+                                            </label>
+                                            <svg class="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+                                                <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+                                            </svg> -->
+                                            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                                            <mat-error *ngIf="isFieldInvalid('Password')">
+                                                Please inform your password
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <!-- <div class="col-md-12">
+                                        <span class="input input--nao">
+                                            <label class="checkboxcontainer">Remember me
+                                                <input type="checkbox">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </span>
+                                    </div> -->
+                                    <div class="col-md-12">
+                                        <span class="input input--nao">
+                                            <a>
+                                                <button mat-raised-button lass="btn btn-primary btn-block loginbtn border-0">
+                                                    <i class=""></i> Login
+                                                </button>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </form>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                    <div class="col-md-12">
                         <p>Forget Password ?<a [routerLink]="['/forget']" class="text-white" >click here</a></p>
                         <hr />
-                </div>
-                <div class="col-md-12">
-                    <p class="seperatetxt">flipprr.com <a [routerLink]="['/registration']" class="text-white" >Sign up</a></p>
+                    </div>
+                    <div class="col-md-12">
+                        <p class="seperatetxt">flipprr.com <a [routerLink]="['/registration']" class="text-white" >Sign up</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="line-spin-fade-rotating"></ngx-spinner>
 <script>
 
     (function (window) {

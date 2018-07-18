@@ -9,13 +9,14 @@ import { RegistrationComponent } from './userlogin/registration/registration.com
 import { AddMoneyComponent } from './add-money/add-money.component';
 import { RewardManagementComponent } from './adminpages/reward-management/reward-management.component';
 import { WalletManagementComponent } from './wallet-management/wallet-management.component';
+import { BlankpageComponent } from './blankpage/blankpage.component';
 
 const appRoutes: Routes = [ 
   { path: 'dashborad', component: DashboardComponent }, 
-  { path: '', component: LoginComponent }, 
+  { path: '', component: BlankpageComponent }, 
   { path: 'forget', component: ForgetPasswordComponent}, 
   { path: 'registration', component: RegistrationComponent}, 
-  { path: 'login', redirectTo: '', pathMatch: 'full' }, 
+  { path: 'login', component: LoginComponent }, 
   { path: 'AddMoney', component:  AddMoneyComponent},
   { path: 'reward', component:  RewardManagementComponent},
   { path: 'wallet', component:  WalletManagementComponent},

@@ -1,3 +1,58 @@
-<div class="app-container" style="height: 100%;width: 100%">
-    <app-nav-header></app-nav-header>
-  </div>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer fixedInViewport="true" mode="side" opened="true" class="sidenav"  *ngIf="loginstatus">
+      <div [class]="showNavText == false ? 'leftPart' : (showNavText == true ? 'leftPart1' : 'leftPart')">
+          <mat-toolbar style="background-color: #000;">
+              <img src="../../assets/images/logo-icon.png"/>
+              <img *ngIf="showNavText" src="../../assets/images/logo-text.png"/>
+          </mat-toolbar>
+          <div [class]="showNavText == false ? 'sidenavcontainer' : (showNavText == true ? 'sidenavcontainer1' : 'sidenavcontainer')">
+              <!-- Dashboard -->
+              <div class="navitemcontainer" style="margin-bottom: 10px;" >
+                <div class="selectedpointer" *ngIf="route == 'dashboard'" style="background-color: #ff9328">
+                </div>
+                <a mat-icon-button [routerLink]="['/dashborad']">
+                  <mat-icon matTooltip="Dashboard" matTooltipPosition="after" class="navicon">dashboard</mat-icon>
+                </a>
+                <h4 *ngIf="showNavText" class="navtext" matTooltip="Dashboard">Dashboard</h4>  
+              </div>
+        
+              <!-- Wallet -->
+              <div class="menuitem">
+        
+                <div class="selectedpointer" *ngIf="route == 'wallet'" style="background-color: #ff9328">
+                </div>
+                <a mat-icon-button [routerLink]="['/wallet']">
+                  <mat-icon matTooltip="Wallet" matTooltipPosition="after" class="navicon">account_balance_wallet</mat-icon>
+                </a>
+                <h4 *ngIf="showNavText" class="navtext" matTooltip="Wallet">Wallet</h4> 
+              </div>
+        
+               <!-- Reward -->
+               <div class="menuitem">
+                  <div class="selectedpointer" *ngIf="route == 'reward'" style="background-color: #ff9328">
+                  </div>
+                  <a mat-icon-button [routerLink]="['/reward']">
+                    <mat-icon matTooltip="Reward" matTooltipPosition="after" class="navicon">account_balance</mat-icon>
+                  </a>
+                  <h4 *ngIf="showNavText" class="navtext" matTooltip="Reward">Reward</h4> 
+                </div>
+          </div>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content [ngStyle]="{'margin-left': '200px', 'margin-right': '0px'}" id="sidecontain">
+      <div [class]="showNavText == false ? 'rightpart' : (showNavText == true ? 'rightpart1' : 'rightpart')">
+        <mat-toolbar color="primary" *ngIf="loginstatus">
+          <mat-toolbar-row>
+              <button (click)="onMenuBtnClick()" mat-icon-button style="color: #edac43;">
+                <mat-icon >menu</mat-icon>
+              </button>
+              <span class="example-spacer"></span>
+              <mat-icon mat-raised-button (click)="openBottomSheet()">email</mat-icon> <b class="caret"></b>
+              <mat-icon class="example-icon">notifications</mat-icon>
+              <mat-icon class="example-icon">settings</mat-icon>
+          </mat-toolbar-row>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

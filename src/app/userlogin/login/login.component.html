@@ -1,47 +1,167 @@
-<div class="signin-content">
-  <mat-card>
-    <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <p>Please login to continue</p>
-        <mat-form-field class="full-width-input">
-          <input matInput placeholder="Login Id / Mobile No." formControlName="LoginId" required>
-          <mat-error *ngIf="isFieldInvalid('LoginId')">
-            Please inform your user name
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="full-width-input">
-          <input matInput type="password" [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="Password" required>
-          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-          <mat-error *ngIf="isFieldInvalid('Password')">
-            Please inform your password
-          </mat-error>
-        </mat-form-field>
-       
-        <button mat-raised-button color="primary">Login</button>
-        <mat-error *ngIf="UserError_flag">
-          {{UserError_Message}}
-        </mat-error>
-      </form>
-      <div class="row">
-        <div class="col-md-8">
-          <br>
+<div class="wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1 col-sm-12 col-xl-4 offset-xl-4 formmargin">
+                <div class="row">
+                <div class="col-md-12 text-center mb-4">
+                    <a [routerLink]="['']"><img src="../../assets/logo-2.PNG" class="logoimg" /></a>
+                </div>
+                <div class="col-md-12 mb-4">
+                <p class="text-white text-center font">Flipprr</p>
+                <p class="text-white text-center font-p">Login in to your account !</p>
+                    </div>
+                <div class="col-md-12">
+                    <span class="input input--nao">
+					<input class="input__field input__field--nao" type="text" id="input-1" />
+					<label class="input__label input__label--nao" for="input-1">
+						<span class="input__label-content input__label-content--nao">Username</span>
+					</label>
+					<svg class="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+						<path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+					</svg>
+				</span>
+                </div>
+                <div class="col-md-12">
+                    <span class="input input--nao">
+					<input class="input__field input__field--nao" type="password" id="password" />
+					<label class="input__label input__label--nao" for="password">
+						<span class="input__label-content input__label-content--nao">Username</span>
+					</label>
+					<svg class="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+						<path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+					</svg>
+                    </span>
+                </div>
+                <div class="col-md-12">
+                    <span class="input input--nao">
+                            <label class="checkboxcontainer">Remember me
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                            </label>
+                        </span>
+                </div>
+                 
+                <div class="col-md-12">
+                
+                    <span class="input input--nao">
+                            <a href="../dashboard/dashboard.html"><button class="btn btn-primary btn-block loginbtn border-0"><i class=""></i> Login</button></a>
+                    </span>
+                    <hr/>
+                </div>
+                <div class="col-md-12">
+                        <p>Forget Password ?<a [routerLink]="['/forget']" class="text-white" >click here</a></p>
+                        <hr />
+                </div>
+                <div class="col-md-12">
+                    <p class="seperatetxt">flipprr.com <a [routerLink]="['/registration']" class="text-white" >Sign up</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-     
-      <div class="row">
-        <div class="col-md-3">
-         <a mat-raised-button color="link" [routerLink]="['/forget']" >Forget Password ?</a>
-        </div>
-        
-        
-      </div>
-
-    </mat-card-content>
-  </mat-card>
-  <ngx-spinner
-  bdColor="rgba(51,51,51,0.8)"
-  size="medium"
-  color="#fff"
-  type="line-spin-fade-rotating">
-</ngx-spinner>
+    </div>
 </div>
+<script>
+
+    (function (window) {
+
+        'use strict';
+
+        // class helper functions from bonzo https://github.com/ded/bonzo
+
+        function classReg(className) {
+            return new RegExp("(^|\\s+)" + className + "(\\s+|$)");
+        }
+
+        // classList support for class management
+        // altho to be fair, the api sucks because it won't accept multiple classes at once
+        var hasClass, addClass, removeClass;
+
+        if ('classList' in document.documentElement) {
+            hasClass = function (elem, c) {
+                return elem.classList.contains(c);
+            };
+            addClass = function (elem, c) {
+                elem.classList.add(c);
+            };
+            removeClass = function (elem, c) {
+                elem.classList.remove(c);
+            };
+        }
+        else {
+            hasClass = function (elem, c) {
+                return classReg(c).test(elem.className);
+            };
+            addClass = function (elem, c) {
+                if (!hasClass(elem, c)) {
+                    elem.className = elem.className + ' ' + c;
+                }
+            };
+            removeClass = function (elem, c) {
+                elem.className = elem.className.replace(classReg(c), ' ');
+            };
+        }
+
+        function toggleClass(elem, c) {
+            var fn = hasClass(elem, c) ? removeClass : addClass;
+            fn(elem, c);
+        }
+
+        var classie = {
+            // full names
+            hasClass: hasClass,
+            addClass: addClass,
+            removeClass: removeClass,
+            toggleClass: toggleClass,
+            // short names
+            has: hasClass,
+            add: addClass,
+            remove: removeClass,
+            toggle: toggleClass
+        };
+
+        // transport
+        if (typeof define === 'function' && define.amd) {
+            // AMD
+            define(classie);
+        } else {
+            // browser global
+            window.classie = classie;
+        }
+
+    })(window);
+
+</script>
+<script>
+    (function () {
+        if (!String.prototype.trim) {
+            (function () {
+                // Make sure we trim BOM and NBSP
+                var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+                String.prototype.trim = function () {
+                    return this.replace(rtrim, '');
+                };
+            })();
+        }
+
+        [].slice.call(document.querySelectorAll('input.input__field')).forEach(function (inputEl) {
+            // in case the input is already filled..
+            if (inputEl.value.trim() !== '') {
+                classie.add(inputEl.parentNode, 'input--filled');
+            }
+
+            // events:
+            inputEl.addEventListener('focus', onInputFocus);
+            inputEl.addEventListener('blur', onInputBlur);
+        });
+
+        function onInputFocus(ev) {
+            classie.add(ev.target.parentNode, 'input--filled');
+        }
+
+        function onInputBlur(ev) {
+            if (ev.target.value.trim() === '') {
+                classie.remove(ev.target.parentNode, 'input--filled');
+            }
+        }
+    })();
+</script>

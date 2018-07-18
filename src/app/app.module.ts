@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
+import { AppComponent, NotificationSheet } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {  MatIconModule, MatRippleModule,MatSidenavModule,  MatMenuModule,   MatButtonModule,    MatCardModule,  MatFormFieldModule,  MatInputModule,  MatTabsModule,  MatTableModule,  MatPaginatorModule,   MatSortModule,  MatSelectModule,  MatDialogModule,  MatTreeModule,  MatProgressSpinnerModule,  MatListModule,  MatTooltipModule,  MatGridListModule,  MatCheckboxModule,MatStepperModule, MatToolbarModule, MatBadgeModule} from '@angular/material';
@@ -17,9 +17,9 @@ import { AddMoneyComponent } from './add-money/add-money.component';
 import { Ng2Webstorage } from '../../node_modules/ngx-webstorage';
 import { RewardManagementComponent } from './adminpages/reward-management/reward-management.component';
 import { WalletManagementComponent } from './wallet-management/wallet-management.component';
-import { MyNavComponent } from './my-nav/my-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-
+import { BlankpageComponent } from './blankpage/blankpage.component';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     AddMoneyComponent,
     RewardManagementComponent,
     WalletManagementComponent,
-    MyNavComponent,
+    BlankpageComponent,
+    NotificationSheet
   ],
   imports: [
     NgxSpinnerModule,
@@ -66,8 +67,12 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatGridListModule,  
     MatCheckboxModule,  
     MatStepperModule, 
-    MatToolbarModule, LayoutModule
+    MatToolbarModule, 
+    LayoutModule,
+    MatBottomSheetModule
+    
   ],
+  entryComponents: [NotificationSheet],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,123 @@
+.mat-toolbar.mat-primary {
+    background: #f8f8f8;
+    color: #edac43;
+  }
+  .mat-toolbar.mat-toolbar-single-row {
+    display: flex;
+    box-sizing: none;
+    padding: 0px;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+    position: fixed;
+  }
+  .mat-drawer-content {
+    position: relative;
+    z-index: 1;
+    display: block;
+    height: 100%;
+    overflow: auto;
+    
+  }
+  .sidenav-container {
+    height: 100%;
+  }
+  .leftPart{
+    background-color: #464646;
+    width: 50px;
+    color: #f8f8f8;
+    height: 100%;
+  }
+  .leftPart1{
+    background-color: #464646;
+    width: 200px;
+    color: #f8f8f8;
+    height: 100%;
+  }
+  .rightPart{
+    margin-left: 50px;
+    color: #edac43;
+  }
+  .rightPart1{
+    margin-left: 200px;
+    color: #edac43;
+  }
+  .sidenav {
+    background-color: #464646;
+    color: #f8f8f8;
+  }
+  
+  
+  /* Side Navigation Bar Item Container */
+  .sidenavcontainer{
+    padding-top: 65px;
+    height: 100%;
+    flex-direction: column;
+    transition: 0.5s;
+    color: #FFFFFF;
+  }
+  
+  .sidenavcontainer1{
+    padding-top: 65px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    color: #FFFFFF;
+    transition: 0.5s;
+  }
+  .menuitem{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    margin-bottom: 10px;
+  }
+  .navicon{
+    font-size: 30px;
+  }
+  .navitemcontainer{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+  }
+  
+  .navsubitemcontainer{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    margin-left: 25%;
+    width: 100%;
+  }
+  
+  /* Side Navigation Bar Text */
+  .navtext{
+    margin: 0%;
+    padding-top: 0%;
+    padding-bottom: 0%;
+    align-self: center;
+    margin-top: 3px;
+    margin-left: 10px;
+    font-weight: normal;
+    cursor: pointer;
+  }
+  
+  /* Side Navigation Bar Pointer */
+  .selectedpointer{
+    width: 5px;
+   padding-left: 0%;
+    margin-left: 0%;
+  }
+  
+  a:focus, a:hover {
+    color: #edac43;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .example-icon {
+    padding: 0 14px;
+    cursor: pointer;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }

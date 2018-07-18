@@ -17,6 +17,8 @@ import { AddMoneyComponent } from './add-money/add-money.component';
 import { Ng2Webstorage } from '../../node_modules/ngx-webstorage';
 import { RewardManagementComponent } from './adminpages/reward-management/reward-management.component';
 import { WalletManagementComponent } from './wallet-management/wallet-management.component';
+import { MyNavComponent } from './my-nav/my-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 
 @NgModule({
@@ -31,6 +33,7 @@ import { WalletManagementComponent } from './wallet-management/wallet-management
     AddMoneyComponent,
     RewardManagementComponent,
     WalletManagementComponent,
+    MyNavComponent,
   ],
   imports: [
     NgxSpinnerModule,
@@ -63,7 +66,7 @@ import { WalletManagementComponent } from './wallet-management/wallet-management
     MatGridListModule,  
     MatCheckboxModule,  
     MatStepperModule, 
-    MatToolbarModule
+    MatToolbarModule, LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

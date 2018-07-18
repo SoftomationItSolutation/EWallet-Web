@@ -11,6 +11,7 @@ import { ILoginData } from '../models/user.model';
   templateUrl: './nav-header.component.html',
   styleUrls: ['./nav-header.component.css']
 })
+
 export class NavHeaderComponent implements OnInit {
   userName: string; 
   showNavText: boolean = false;

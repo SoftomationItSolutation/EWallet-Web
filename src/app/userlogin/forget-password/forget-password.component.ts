@@ -4,6 +4,7 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { UserLoginService } from '../../services/user-login.service';
 import { ConfirmValidParentMatcher, errorMessages, regExps } from '../../CustomValidation/CustomValidation';
 import { IForgetPassword, UserResponse, otpFormDataIF } from '../../models/user.model';
+import { AuthService } from '../../auth/auth.service';
 
 
 @Component({
@@ -38,13 +39,14 @@ export class ForgetPasswordComponent implements OnInit {
   confirmOTP: boolean = true;
   isEmailEditable: boolean = true;
   passChangeMsg: string = '';
-  constructor(private formBuilder: FormBuilder, private loginService: UserLoginService) 
+  constructor(private formBuilder: FormBuilder, private loginService: UserLoginService, private authService: AuthService) 
   { 
 
   }
 
   ngOnInit() 
   {
+    this.authService.MasterCompDisplay.emit(false);
     this.loginService.LoadComonent='forget'
     this.emailForm = new FormGroup({
       LoginId: new FormControl('', [

@@ -52,7 +52,16 @@
               <mat-icon class="example-icon">settings</mat-icon>
           </mat-toolbar-row>
         </mat-toolbar>
-        <router-outlet></router-outlet>
+        <div id="main-wrapper">
+            <div class="page-wrapper">
+              <router-outlet></router-outlet>
+           </div>
+           <footer class="footer text-center">
+               Version 1.1.2018
+             </footer>
+             <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="line-spin-fade-rotating"></ngx-spinner>
+         </div>
+       
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>

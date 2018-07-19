@@ -1,163 +1,85 @@
-<div id="dashboardpagecontainer" class="container-fliud m-0 p-0">
-  <ngx-spinner size="medium" type="ball-clip-rotate"></ngx-spinner>
-  <div id="dashheader" class="row justify-content-center align-content-start m-0 p-0">
-   <div class="container">
-     <div class="top-buffer"></div>
-     <div class="row">
-        <div class="col-sm-2">
-
-          </div>
-       <div class="col-sm-4">
-        <mat-card class="headercard" style="background-color: #2196F3; ">
-          <mat-card-header>
-            <mat-card-title style="font-size: 20px">Account Balance</mat-card-title>
-            <mat-card-subtitle style="font-size: 12px; color: #FFFFFF;">{{accountbalance | currency :'&#8377;'}}</mat-card-subtitle>
-            <mat-icon>account_balance_wallet</mat-icon>
-          </mat-card-header>
-          <mat-card-actions>
-            <button mat-button><mat-icon>input</mat-icon></button>
-          </mat-card-actions>
-          <mat-error *ngIf="AvailableBalance_flag">{{AvailableBalance_Message}}</mat-error>
-        </mat-card>
-       </div>
-       <div class="col-sm-2" style="height: 10px;">
-
-       </div>
-       <div class="col-sm-4">
-        <mat-card class="headercard" style="background-color: #4CAF50;">
-          <mat-card-header>
-            <mat-card-title style="font-size: 20px">Reward Balance</mat-card-title>
-            <mat-card-subtitle style="font-size: 12px; color: #FFFFFF;">{{rewardbalance | currency :'&#8377;'}}</mat-card-subtitle>
-            <mat-icon>account_balance</mat-icon>
-          </mat-card-header>
-          <mat-card-actions>
-            <button mat-button><mat-icon>filter_list</mat-icon></button>
-          </mat-card-actions>
-          <mat-error *ngIf="RewardBalance_flag">&#8377;{{RewardBalance_Message}}</mat-error>
-        </mat-card>
-       </div>
-     </div>
-   </div>
-  </div>
-  <div id="dashcontent" class="row justify-content-center align-content-center mt-2 ">
-      <mat-tab-group (selectedTabChange)="onLinkClick($event)">
-          <mat-tab label="All Transaction">
-            <mat-table #table [dataSource]="dataSource" aria-label="Elements">
-              <ng-container matColumnDef="PartnerLoginId">
-                  <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                  <mat-cell *matCellDef="let row"><mat-icon>Hemant Pundir</mat-icon></mat-cell>
-                </ng-container>
-              <ng-container matColumnDef="TranscationId">
-                <mat-header-cell *matHeaderCellDef>Transcation Id</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{row.TranscationId}}</mat-cell>
-              </ng-container>
-              <ng-container matColumnDef="TranscationDetail">
-                <mat-header-cell *matHeaderCellDef>Transcation Details</mat-header-cell>
-                <mat-cell *matCellDef="let row">
-                  {{row.TranscationDetail}}   
-                  {{row.PartnerLoginId}}
-                  </mat-cell>
-              </ng-container>
-              <ng-container matColumnDef="Amount">
-                  <mat-header-cell *matHeaderCellDef >Amount</mat-header-cell>
-                  <mat-cell *matCellDef="let row">{{row.Amount | currency :'&#8377;'}}</mat-cell>
-              </ng-container>
-              <ng-container matColumnDef="Ldate">
-                <mat-header-cell *matHeaderCellDef>Transcation Time</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{row.Ldate}} {{row.LTime}}</mat-cell>
-              </ng-container>
-              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            </mat-table>
-           
-          </mat-tab>
-          <mat-tab label="Earning">
-              <mat-table #table [dataSource]="dataSource" aria-label="Elements">
-                  <ng-container matColumnDef="PartnerLoginId">
-                      <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                      <mat-cell *matCellDef="let row"><mat-icon>Hemant Pundir</mat-icon></mat-cell>
-                    </ng-container>
-                  <ng-container matColumnDef="TranscationId">
-                    <mat-header-cell *matHeaderCellDef>Transcation Id</mat-header-cell>
-                    <mat-cell *matCellDef="let row">{{row.TranscationId}}</mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="TranscationDetail">
-                    <mat-header-cell *matHeaderCellDef>Transcation Details</mat-header-cell>
-                    <mat-cell *matCellDef="let row">
-                      {{row.TranscationDetail}}   
-                      {{row.PartnerLoginId}}
-                      </mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="Amount">
-                      <mat-header-cell *matHeaderCellDef >Amount</mat-header-cell>
-                      <mat-cell *matCellDef="let row">{{row.Amount | currency :'&#8377;'}}</mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="Ldate">
-                    <mat-header-cell *matHeaderCellDef>Transcation Time</mat-header-cell>
-                    <mat-cell *matCellDef="let row">{{row.Ldate}} {{row.LTime}}</mat-cell>
-                  </ng-container>
-                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                </mat-table>
-          </mat-tab>
-          <mat-tab label="Expense">
-              <mat-table #table [dataSource]="dataSource" aria-label="Elements">
-                  <ng-container matColumnDef="PartnerLoginId">
-                      <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                      <mat-cell *matCellDef="let row"><mat-icon>Hemant Pundir</mat-icon></mat-cell>
-                    </ng-container>
-                  <ng-container matColumnDef="TranscationId">
-                    <mat-header-cell *matHeaderCellDef>Transcation Id</mat-header-cell>
-                    <mat-cell *matCellDef="let row">{{row.TranscationId}}</mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="TranscationDetail">
-                    <mat-header-cell *matHeaderCellDef>Transcation Details</mat-header-cell>
-                    <mat-cell *matCellDef="let row">
-                      {{row.TranscationDetail}}   
-                      {{row.PartnerLoginId}}
-                      </mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="Amount">
-                      <mat-header-cell *matHeaderCellDef >Amount</mat-header-cell>
-                      <mat-cell *matCellDef="let row">{{row.Amount | currency :'&#8377;'}}</mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="Ldate">
-                    <mat-header-cell *matHeaderCellDef>Transcation Time</mat-header-cell>
-                    <mat-cell *matCellDef="let row">{{row.Ldate}} {{row.LTime}}</mat-cell>
-                  </ng-container>
-                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                </mat-table>
-            </mat-tab>
-            <mat-tab label="Add Money">
-                <mat-table #table [dataSource]="dataSource" aria-label="Elements">
-                    <ng-container matColumnDef="PartnerLoginId">
-                        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                        <mat-cell *matCellDef="let row"><mat-icon>Hemant Pundir</mat-icon></mat-cell>
-                      </ng-container>
-                    <ng-container matColumnDef="TranscationId">
-                      <mat-header-cell *matHeaderCellDef>Transcation Id</mat-header-cell>
-                      <mat-cell *matCellDef="let row">{{row.TranscationId}}</mat-cell>
-                    </ng-container>
-                    <ng-container matColumnDef="TranscationDetail">
-                      <mat-header-cell *matHeaderCellDef>Transcation Details</mat-header-cell>
-                      <mat-cell *matCellDef="let row">
-                        {{row.TranscationDetail}}   
-                        {{row.PartnerLoginId}}
-                        </mat-cell>
-                    </ng-container>
-                    <ng-container matColumnDef="Amount">
-                        <mat-header-cell *matHeaderCellDef >Amount</mat-header-cell>
-                        <mat-cell *matCellDef="let row">{{row.Amount | currency :'&#8377;'}}</mat-cell>
-                    </ng-container>
-                    <ng-container matColumnDef="Ldate">
-                      <mat-header-cell *matHeaderCellDef>Transcation Time</mat-header-cell>
-                      <mat-cell *matCellDef="let row">{{row.Ldate}} {{row.LTime}}</mat-cell>
-                    </ng-container>
-                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                  </mat-table>
-              </mat-tab>
-        </mat-tab-group>
-  </div>
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-5 align-self-center">
+            <h4 class="page-title">Dashboard</h4>
+        </div>
+        <div class="col-7 align-self-center">
+            <div class="d-flex no-block justify-content-end align-items-center">
+                <div class="m-r-10">
+                    <div class="lastmonth"></div>
+                </div>
+                <div class=""><small>LAST MONTH</small>
+                    <h4 class="text-info m-b-0 font-medium">{{lastmonth | currency :'&#8377;'}}</h4></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-md-flex align-items-center">
+                        <div>
+                            <h4 class="card-title">Transaction Summary</h4>
+                            <h5 class="card-subtitle">Overview of Latest Month</h5>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h1 class="m-b-0 m-t-30">{{lastmonthMoney | currency :'&#8377;'}}</h1>
+                            <h6 class="font-light text-muted">Current Month Transaction Amount</h6>
+                            <h3 class="m-t-30 m-b-0">{{currentmonthMoney | currency :'&#8377;'}}</h3>
+                            <h6 class="font-light text-muted">Current Month Transaction</h6>
+                            <a class="btn btn-info m-t-20 p-15 p-l-25 p-r-25 m-b-20" href="javascript:void(0)">Last Month Summary</a>
+                        </div>
+                        <div class="col-lg-8">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body border-top">
+                    <div class="row m-b-0">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="d-flex align-items-center">
+                                <div class="m-r-10"><span class="text-orange display-5"><mat-icon>account_balance_wallet</mat-icon></span></div>
+                                <div><span>Wallet Balance</span>
+                                    <h3 class="font-medium m-b-0">{{accountbalance | currency :'&#8377;'}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="d-flex align-items-center">
+                                <div class="m-r-10"><span class="text-cyan display-5"><mat-icon>stars</mat-icon></span></div>
+                                <div><span>Referral Earnings</span>
+                                    <h3 class="font-medium m-b-0">{{rewardbalance | currency :'&#8377;'}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- col -->
+                        <!-- col -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="d-flex align-items-center">
+                                <div class="m-r-10"><span class="text-info display-5"><mat-icon>transfer_within_a_station</mat-icon></span></div>
+                                <div><span>Transfer Money</span>
+                                    <h3 class="font-medium m-b-0">{{transferMoney | currency :'&#8377;'}}</h3></div>
+                            </div>
+                        </div>
+                        <!-- col -->
+                        <!-- col -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="d-flex align-items-center">
+                                <div class="m-r-10"><span class="text-primary display-5"><mat-icon>money</mat-icon></span></div>
+                                <div><span>Earnings</span>
+                                    <h3 class="font-medium m-b-0">{{reciverMoney | currency :'&#8377;'}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- col -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -15,6 +15,11 @@ import {DataSource} from '@angular/cdk/table';
 export class DashboardComponent implements OnInit {
   accountbalance: number;
   rewardbalance: number;
+  lastmonth: number;
+  transferMoney: number;
+  reciverMoney: number;
+  lastmonthMoney: number;
+  currentmonthMoney: number;
   UserDetails: ILoginData;
   AvailableBalance_flag=false;
   AvailableBalance_Message='';
@@ -48,6 +53,11 @@ export class DashboardComponent implements OnInit {
         {
           this.accountbalance=JSON.parse(data.json()).AvailableBalance;
           this.rewardbalance=JSON.parse(data.json()).RewardBalance;
+          this.lastmonth=5689;
+          this.transferMoney=5689;
+          this.reciverMoney=5689;
+          this.lastmonthMoney=5689;
+          this.currentmonthMoney=5689;
         }
         else
         {

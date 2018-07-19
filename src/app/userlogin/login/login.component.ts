@@ -26,10 +26,11 @@ export class LoginComponent implements OnInit {
     private loginService: UserLoginService,
     private spinner: NgxSpinnerService,
     public dialog: MatDialog) {
-      this.authService.MasterCompDisplay.emit(false);
+     
     }
 
   ngOnInit() {
+    this.authService.MasterCompDisplay.emit(false);
     this.loginService.LoadComonent='login'
     this.LoginForm = this.fb.group({     
       LoginId: ['', Validators.required],

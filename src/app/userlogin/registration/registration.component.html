@@ -1,60 +1,92 @@
 <div class="wrapper">
     <div class="container">
         <div class="row">
-            <div class="col-md-10 offset-md-1 col-sm-12 col-xl-4 offset-xl-4 formmargin">
+            <div class="col-md-10 offset-md-4 col-sm-12 col-xl-5 offset-xl-3 formmargin">
                 <div class="row">
-                <div class="col-md-12 text-center mb-4">
-                    <a [routerLink]="['']"><img src="../../assets/logo-2.PNG" class="logoimg" /></a>
-                </div>
-                <div class="col-md-12 mb-4">
-                <p class="text-white text-center font">Flipprr</p>
-                <p class="text-white text-center font-p">Free sign up flipprr account !</p>
-                    </div>
-                <div class="col-md-12">
-                    <span class="input input--nao">
-                      <input class="input__field input__field--nao" type="text" id="input-1" />
-                      <label class="input__label input__label--nao" for="input-1">
-                        <span class="input__label-content input__label-content--nao">Login id</span>
-                      </label>
-                      <svg class="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
-                        <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
-                      </svg>
-				            </span>
-                </div>
-                    <div class="col-md-12">
-                      <span class="input input--nao">
-                        <input class="input__field input__field--nao" type="text" id="Text1" />
-                        <label class="input__label input__label--nao" for="Text1">
-                          <span class="input__label-content input__label-content--nao">Mobile Number</span>
-                        </label>
-                        <svg class="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
-                          <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
-                        </svg>
-                      </span>
-                    </div>
-                <div class="col-md-12">
-                    <span class="input input--nao">
-					<input class="input__field input__field--nao" type="password" id="password" />
-					<label class="input__label input__label--nao" for="password">
-						<span class="input__label-content input__label-content--nao">Username</span>
-					</label>
-					<svg class="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
-						<path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
-					</svg>
-                    </span>
-                    </div>
-                     
-                <div class="col-md-12">
-                    
-                    <span class="input input--nao">
-                <button class="btn btn-primary btn-block loginbtn border-0"><i class=""></i> Next</button>
-                    </span>
-                    <hr />
+                    <div class="col-md-12 text-center mb-4">
+                        <a [routerLink]="['']"><img src="../../assets/logo-2.PNG" class="logoimg" /></a>
                     </div>
                     <div class="col-md-12">
-                <p class="seperatetxt">flipprr.com <a [routerLink]="['/login']" class="text-white" >Log In</a></p>
-                        </div>
+                        <mat-card>
+                            <mat-horizontal-stepper linear="true" #stepper (selectionChange) = "stepperSelectionChange($event)" >
+                                <mat-step [stepControl]="SignUpForm" [editable]="isLogEditable">
+                                    <ng-template matStepLabel>Your Registration Details</ng-template>
+                                    <form [formGroup]="SignUpForm" (ngSubmit)="SignUp()">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="input input--nao">
+                                                <input matInput formControlName="LoginId" placeholder="Login Id" required class="input__field input__field--nao" type="mytype" id="LoginId">
+                                                <mat-error *ngIf = "SignUpForm.get('LoginId').hasError('required')">
+                                                    Login Id must be entered.
+                                                </mat-error>
+                                                <mat-error *ngIf = "SignUpForm.get('LoginId').hasError('pattern')">
+                                                {{errors.LoginId}}
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <mat-form-field class="input input--nao">
+                                                <input matInput formControlName="MobileNo" placeholder="Mobile Number" required class="input__field input__field--nao" type="mytype" id="MobileNo">
+                                                <mat-error *ngIf = "SignUpForm.get('MobileNo').hasError('required')">
+                                                    Login Id must be entered.
+                                                </mat-error>
+                                                <mat-error *ngIf = "SignUpForm.get('MobileNo').hasError('pattern')">
+                                                    {{errors.MobileNo}}
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <mat-form-field class="input input--nao">
+                                                <input class="input__field input__field--nao" id="password" placeholder="Password" matInput type="password" [type]="hide ? 'password' : 'text'" formControlName="Password" required>
+                                                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                                                <mat-error *ngIf = "SignUpForm.get('Password').hasError('required')">
+                                                    Password must be entered
+                                                </mat-error>
+                                                <mat-error *ngIf = "SignUpForm.get('Password').hasError('pattern')">
+                                                    {{errors.Password}}
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <span class="input input--nao">
+                                                <a>
+                                                    <button mat-raised-button class="btn btn-primary btn-block loginbtn border-0">
+                                                        <i class=""></i> Next
+                                                    </button>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </mat-step>
+                                <mat-step [stepControl]="otpForm" [editable]="true">
+                                    <ng-template matStepLabel>Enter OTP</ng-template>
+                                    <form [formGroup]="otpForm" (ngSubmit)="ValidateOTP()">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="input input--nao">
+                                                <input class="input__field input__field--nao" id="OTP" placeholder="OTP" matInput formControlName="OTP" required>
+                                                <mat-icon matSuffix (click)="ResendOTP()">refresh</mat-icon>
+                                                <mat-error *ngIf = "otpForm.get('OTP').hasError('required')">
+                                                    OTP must be entered
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <span class="input input--nao">
+                                                <a>
+                                                    <button mat-raised-button class="btn btn-primary btn-block loginbtn border-0">
+                                                        <i class=""></i> Finish
+                                                    </button>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </mat-step>
+                            </mat-horizontal-stepper>
+                        </mat-card>
                     </div>
+                    <div class="col-md-12">
+                        <p class="seperatetxt">flipprr.com <a [routerLink]="['/login']" class="text-white" >Log in</a></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

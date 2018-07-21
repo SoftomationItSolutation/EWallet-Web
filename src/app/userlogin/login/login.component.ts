@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.authService.MasterCompDisplay.emit(false);
+    this.authService.ClearData();
     this.loginService.LoadComonent='login'
     this.LoginForm = this.fb.group({     
       LoginId: ['', Validators.required],
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
             }
             else
             {
-              this.openDialog('Error in login!',this.loginReposnse.Message)
+              this.openDialog('Error in login !',this.loginReposnse.Message)
             }
             this.spinner.hide();
           },

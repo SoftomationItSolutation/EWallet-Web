@@ -125,3 +125,4 @@
     outline: 1px dotted;
     /* outline: 5px auto -webkit-focus-ring-color;  */
 }
+.logout{position: absolute;height: 20px;width: 20px;}

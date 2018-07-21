@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component,  Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '../../../node_modules/@angular/material';
 import { DialogData } from '../models/transcation.model';
 
@@ -7,7 +7,7 @@ import { DialogData } from '../models/transcation.model';
   templateUrl: './errorbox.component.html',
   styleUrls: ['./errorbox.component.css']
 })
-export class ErrorboxComponent implements OnInit {
+export class ErrorboxComponent {
 
   constructor(
     public dialogRef: MatDialogRef<ErrorboxComponent>,
@@ -15,9 +15,6 @@ export class ErrorboxComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-  ngOnInit() {
   }
 
 }

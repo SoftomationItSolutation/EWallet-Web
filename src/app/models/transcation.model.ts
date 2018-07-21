@@ -39,6 +39,19 @@ export interface DialogData {
   title: string;
   message: string;
 }
+export interface INotificationCount{
+  NotiCount:Number
+  RequestMoneyNotificationCount:Number;
+}
+export interface IRequestMoneyData {
+  RequestId: Number;
+  Amount: Number;
+  Ldate:string;
+  LTime:string;
+  UserName:string;
+  MobileNo:string;
+  PartnerId:Number;
+}
 export interface ITranscationDetails{
     PartnerUserId : Number;
     UserId : Number;

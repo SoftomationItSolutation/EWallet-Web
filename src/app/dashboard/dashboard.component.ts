@@ -18,8 +18,8 @@ export class DashboardComponent implements OnInit {
   lastmonth: number;
   transferMoney: number;
   reciverMoney: number;
-  lastmonthMoney: number;
-  currentmonthMoney: number;
+  lastmonthCredit: number;
+  lastmonthDebit: number;
   UserDetails: ILoginData;
   AvailableBalance_flag=false;
   AvailableBalance_Message='';
@@ -36,7 +36,12 @@ export class DashboardComponent implements OnInit {
    private spinner: NgxSpinnerService,
    private dbService: DatabaseService,
    private authService: AuthService) { 
-  }
+    this.authService.NotificationMaster.subscribe(
+      (data)  => {
+        this.GetAvailabeBalance();
+      });
+    }
+  
 
   ngOnInit(){
     this.UserDetails= JSON.parse(this.authService.getUserDetails());
@@ -53,11 +58,11 @@ export class DashboardComponent implements OnInit {
         {
           this.accountbalance=JSON.parse(data.json()).AvailableBalance;
           this.rewardbalance=JSON.parse(data.json()).RewardBalance;
-          this.lastmonth=5689;
-          this.transferMoney=5689;
-          this.reciverMoney=5689;
-          this.lastmonthMoney=5689;
-          this.currentmonthMoney=5689;
+          this.lastmonth=JSON.parse(data.json()).lastmonth;
+          this.transferMoney=JSON.parse(data.json()).transferMoney;
+          this.reciverMoney=JSON.parse(data.json()).reciverMoney;
+          this.lastmonthCredit=JSON.parse(data.json()).lastmonthCredit;
+          this.lastmonthDebit=JSON.parse(data.json()).lastmonthDebit;
         }
         else
         {

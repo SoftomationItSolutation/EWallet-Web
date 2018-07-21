@@ -277,6 +277,7 @@ export class WalletManagementComponent implements OnInit {
           RequestToId:this.TransferTo.UserId,
           Amount:this.RequestMoneyForm.value.AddAmount,
           MsgDescription:this.RequestMoneyForm.value.Remark,
+          RequestId:0
         }
         this.dbService.TranscationManagementRequestMoney(obj).subscribe(
           data => {

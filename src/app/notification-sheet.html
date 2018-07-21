@@ -1,22 +1,22 @@
-<mat-nav-list>
-    <a href="https://keep.google.com/" mat-list-item (click)="openLink($event)">
-      <span mat-line>Google Keep</span>
-      <span mat-line>Add to a note</span>
-    </a>
-  
-    <a href="https://docs.google.com/" mat-list-item (click)="openLink($event)">
-      <span mat-line>Google Docs</span>
-      <span mat-line>Embed in a document</span>
-    </a>
-  
-    <a href="https://plus.google.com/" mat-list-item (click)="openLink($event)">
-      <span mat-line>Google Plus</span>
-      <span mat-line>Share with your friends</span>
-    </a>
-  
-    <a href="https://hangouts.google.com/" mat-list-item (click)="openLink($event)">
-      <span mat-line>Google Hangouts</span>
-      <span mat-line>Show to your coworkers</span>
+<mat-nav-list style="height: 100%;">
+    <a mat-list-item  *ngFor="let RMD of RequestMoneyData">
+      <div class="container">
+        <div class="form-group row">
+            <span mat-line class="font-light text-muted">Requested By: {{RMD.UserName}} || {{RMD.MobileNo}} </span>
+        </div>  
+        <div class="form-group row">
+              <div class="col-6 col-form-label">
+                  <span mat-line class="m-t-30 m-b-0">  
+                    <input matInput (input)="Onchange($event.target.value,RMD.RequestId)" value="{{RMD.Amount}}">
+                  </span>
+                  <span mat-line class="m-t-30 m-b-0">{{RMD.Ldate}}</span>
+                  <span mat-line class="m-t-30 m-b-0">{{RMD.LTime}}</span>
+              </div>
+                <span mat-line class="col-2 m-t-30 m-b-0"><mat-icon class="text-success" (click)="AcceptRequest(RMD)">done_outline</mat-icon></span>
+                <span mat-line class="col-2 m-t-30 m-b-0"><mat-icon class="text-danger"  (click)="RejectRequest(RMD)">clear</mat-icon></span>
+            </div>
+      </div>
     </a>
   </mat-nav-list>
+  
   

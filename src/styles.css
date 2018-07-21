@@ -136,7 +136,7 @@ border-radius: 2px;
 
 .wrapper {
 	width: 100wh;
-	height: 95vh;
+	height: 90vh;
 	color: #fff;
 	background: linear-gradient(-45deg, #d67c30,#d7ab54,#EE7752, #E73C7E, #23A6D5, #23D5AB);
 	background-size: 400% 400%;
@@ -207,7 +207,7 @@ border-radius:100px;
     text-shadow: 1px 1px 4px rgba(150, 150, 150, 1);
 }
 .formmargin{
-    margin-top:80px;
+    margin-top:40px;
 }
 .loginbtn{
 background: linear-gradient(to left, #ffffff 20%, #fcfaf7 84%);
@@ -747,4 +747,16 @@ a.text-purple:hover {
 	color: transparent;
 	background-color: transparent;
 	border: 0
+}
+.mat-step-header .mat-step-icon {
+    background-color: #e38b34;
+    color: #fff;
+}
+
+.mat-horizontal-stepper-header {
+    display: flex;
+    height: 30px!important;
+    overflow: hidden;
+    align-items: center;
+    padding: 0 15px !important;
 }

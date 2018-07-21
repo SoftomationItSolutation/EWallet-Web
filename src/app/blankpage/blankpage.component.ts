@@ -11,7 +11,7 @@ export class BlankpageComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.authService.MasterCompDisplay.emit(false);
+    this.authService.ClearData();
   }
 
 }

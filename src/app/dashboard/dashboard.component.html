@@ -8,7 +8,11 @@
                 <div class="m-r-10">
                     <div class="lastmonth"></div>
                 </div>
-                <div class=""><small>LAST MONTH</small>
+                <div class="m-r-10"><span class="text-cyan display-5"><mat-icon>stars</mat-icon></span></div>
+                <div class="">
+                    <small>LAST MONTH
+
+                    </small>
                     <h4 class="text-info m-b-0 font-medium">{{lastmonth | currency :'&#8377;'}}</h4></div>
             </div>
         </div>
@@ -22,16 +26,14 @@
                     <div class="d-md-flex align-items-center">
                         <div>
                             <h4 class="card-title">Transaction Summary</h4>
-                            <h5 class="card-subtitle">Overview of Latest Month</h5>
                         </div>
-                        
                     </div>
                     <div class="row">
                         <div class="col-lg-4">
-                            <h1 class="m-b-0 m-t-30">{{lastmonthMoney | currency :'&#8377;'}}</h1>
-                            <h6 class="font-light text-muted">Current Month Transaction Amount</h6>
-                            <h3 class="m-t-30 m-b-0">{{currentmonthMoney | currency :'&#8377;'}}</h3>
-                            <h6 class="font-light text-muted">Current Month Transaction</h6>
+                            <h1 class="m-b-0 m-t-30">{{lastmonthCredit | currency :'&#8377;'}}</h1>
+                            <h6 class="font-light text-muted">Last Month Credit</h6>
+                            <h3 class="m-t-30 m-b-0">{{lastmonthDebit | currency :'&#8377;'}}</h3>
+                            <h6 class="font-light text-muted">Last Month Debit</h6>
                             <a class="btn btn-info m-t-20 p-15 p-l-25 p-r-25 m-b-20" href="javascript:void(0)">Last Month Summary</a>
                         </div>
                         <div class="col-lg-8">

@@ -1,7 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
-import { User } from './user';
 import { SessionStorageService } from '../../../node_modules/ngx-webstorage';
 
 @Injectable({
@@ -11,7 +9,8 @@ export class AuthService {
   MasterCompDisplay = new EventEmitter<boolean>();
   public loggedInStatus=JSON.parse(localStorage.getItem('loggedIn') || 'false')
   public NotificationCount:number;
-  
+  public NotificationMaster = new EventEmitter<{}>();
+  public RequestMoneyMaster = new EventEmitter<{}>();
   setLoggedIn(value:boolean){
     this.loggedInStatus=value;
     if(value)
@@ -43,7 +42,8 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
   ClearData() {
+    this.MasterCompDisplay.emit(false);
     this.sessionData.clear("userdetsils");
-    this.setLoggedIn(false);                           
+    this.setLoggedIn(false);                                 
   }
 }

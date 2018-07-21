@@ -5,6 +5,8 @@ import { UserLoginService } from '../../services/user-login.service';
 import { ConfirmValidParentMatcher, errorMessages, regExps } from '../../CustomValidation/CustomValidation';
 import { IForgetPassword, UserResponse, otpFormDataIF } from '../../models/user.model';
 import { AuthService } from '../../auth/auth.service';
+import { ErrorboxComponent } from '../../errorbox/errorbox.component';
+import { MatDialog } from '../../../../node_modules/@angular/material';
 
 
 @Component({
@@ -13,134 +15,121 @@ import { AuthService } from '../../auth/auth.service';
   styleUrls: ['./forget-password.component.css']
 })
 export class ForgetPasswordComponent implements OnInit {
-
   @ViewChild('stepper') stepper;
   hide = true;
+  btnResendOTP=false;
+  isLogEditable: boolean = true;
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
   errors = errorMessages;
- 
-  
+
+  LogForm: FormGroup;
   otpForm: FormGroup;
-  passForm: FormGroup;
-  
-  emailForm: FormGroup;
-  SendForgetRequest: IForgetPassword;
   UserData: UserResponse;
-
-  otpFormData: otpFormDataIF;
-  //UserError:IUserError
-
-  UserError_flag=false;
-  UserError_Message='';
-
-  apiOTP: string = '';
-  confirmEmailTrue: boolean = true;
-  confirmPassTrue: boolean = true;
-  confirmOTP: boolean = true;
-  isEmailEditable: boolean = true;
-  passChangeMsg: string = '';
-  constructor(private formBuilder: FormBuilder, private loginService: UserLoginService, private authService: AuthService) 
+  constructor(private formBuilder: FormBuilder, private loginService: UserLoginService,
+    private authService: AuthService,public dialog: MatDialog) 
   { 
 
   }
-
-  ngOnInit() 
-  {
-    this.authService.MasterCompDisplay.emit(false);
+  stepperSelectionChange($event: StepperSelectionEvent){
+    console.log($event.selectedIndex);
+    if($event.selectedIndex == 1)
+    {
+      this.isLogEditable = false;
+    }
+  }
+  
+  ngOnInit(){
+    this.authService.ClearData();
     this.loginService.LoadComonent='forget'
-    this.emailForm = new FormGroup({
+    this.LogForm = new FormGroup({
       LoginId: new FormControl('', [
         Validators.required,
       ]),
     });
 
     this.otpForm = this.formBuilder.group({
-      userOTP: new FormControl('', [
+      OTP: new FormControl('', [
         Validators.required,
       ]),
-      userPass: new FormControl('', [
+      Password: new FormControl('', [
         Validators.required,
         Validators.pattern(regExps.password)
       ])
-      }
-    );
+      });
+  }
 
+  openDialog(title,message): void {
+    const dialogRef = this.dialog.open(ErrorboxComponent, {
+      width: '250px',
+      data: {title: title, message: message}
+    });
     
   }
   
-  ForgotPasswordmaster(){
-    this.SendForgetRequest = this.emailForm.value;
-    if(this.emailForm.status=="VALID"){
-    this.loginService.ForgotPasswordmaster({ LoginId: this.SendForgetRequest.LoginId}).subscribe(
+  ResendOTP(){
+    this.loginService.ResendOTP({ OTPId:this.UserData.OTPId}).subscribe(
       data =>{
         this.UserData= JSON.parse(data.json());
         if(this.UserData.flag.toLowerCase()=='true')
         {
-          this.UserError_flag=false;
+          this.btnResendOTP=false;
           this.stepper.selectedIndex=1;
         }
         else
         {
-          this.UserError_flag=true;
-          this.UserError_Message=this.UserData.Message;
+          //this.UserError_Message=this.UserData.Message;
         }
       },
-    (error) => 
-    {
-      this.UserError_flag=true;
-      this.UserError_Message="This user name is not register with us";
-      }
-    );
-  }
+    (error) => {
+      //this.UserError_Message="This user name is not register with us";
+    });
   }
 
-  
+  ForgotPasswordmaster(){
+    if(this.LogForm.status=="VALID"){
+      this.loginService.ForgotPasswordmaster({ LoginId: this.LogForm.value.LoginId}).subscribe(
+      data =>{
+        this.UserData= JSON.parse(data.json());
+        if(this.UserData.flag.toLowerCase()=='true'){
+          this.stepper.selectedIndex=1;
+        }
+        else{
+          this.openDialog('Error in forget password !',this.UserData.Message);
+        }
+      },
+    (error) =>{
+      this.openDialog('Error in forget password !','This user name is not register with us');
+      });
+    }
+  }
 
   ChnagePassword(){
-    this.otpFormData = this.otpForm.value;
-    if(this.emailForm.status=="VALID"){
-      if (this.otpFormData.userOTP != this.UserData.OTP){
+    if(this.LogForm.status=="VALID"){
+      if (this.LogForm.value.OTP != this.UserData.OTP){
         alert("OTP does not match");
       }
       else{
-      const obj = 
-       {
-        UserId:this.UserData.UserId,OTPId:this.UserData.OTPId,OTP:this.otpFormData.userOTP,Password: this.otpFormData.userPass
-       }
-       this.loginService.ChnagePasswordmaster(obj).subscribe(
-        data =>{
-          this.UserData= JSON.parse(data.json());
-          if(this.UserData.flag.toLowerCase()=='true')
-          {
-            this.UserError_flag=false;
-            this.stepper.selectedIndex=2;
-          }
-          else
-          {
-            this.UserError_flag=true;
-            this.UserError_Message=this.UserData.Message;
-          }
-        },
-      (error) => 
-      {
-        this.UserError_flag=true;
-        this.UserError_Message="This user name is not register with us";
+        const obj = 
+        {
+          UserId:this.UserData.UserId,OTPId:this.UserData.OTPId,OTP:this.LogForm.value.OTP,Password: this.LogForm.value.Password
+        }
+        this.loginService.ChnagePasswordmaster(obj).subscribe(
+          data =>{
+            this.UserData= JSON.parse(data.json());
+            if(this.UserData.flag.toLowerCase()=='true')
+            {
+              this.stepper.selectedIndex=2;
+            }
+            else
+            {
+              this.openDialog('Error on updating password !',this.UserData.Message);
+            }
+          },
+        (error) =>{
+          this.openDialog('Error on updating password !','This user name is not register with us');
+        });
       }
-      );
     }
-  }
-  }
-
-  stepperSelectionChange($event: StepperSelectionEvent){
-    console.log($event.selectedIndex);
-    if($event.selectedIndex == 1)
-    {
-      this.isEmailEditable = false;
-    }
-  }
-
-  onOTPChange($event){
-    
   }
 
 }

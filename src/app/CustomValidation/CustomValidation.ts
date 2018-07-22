@@ -10,7 +10,7 @@ export const regExps: { [key: string]: RegExp } = {
     RewardCode: /^([a-zA-Z0-9_-]){8,8}$/,
     RewardAmount:/^(\d{1,5}|\d{1,5}\.\d{0,2})$/,
     RewardDays:/^(\d{1,2}|\d{1,2})$/,
-    AddAmount:/^(\d{1,5}|\d{1,5}\.\d{0,2})$/,
+    Amount:/^(\d{1,5}|\d{1,5}\.\d{0,2})$/,
     PromoCode: /^([a-zA-Z0-9_-]){8,8}$/,
  };
 
@@ -32,6 +32,6 @@ export const errorMessages: { [key: string]: string } = {
     RewardCode: 'Enter a valid code.',
     RewardAmount:'Enter a valid amount.',
     RewardDays:'Enter a valid days.',
-    AddAmount:'Enter a valid amount.',
+    Amount:'Enter a valid amount.',
     PromoCode: 'Enter a valid promo code.',
 };

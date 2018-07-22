@@ -11,6 +11,8 @@ export class AuthService {
   public NotificationCount:number;
   public NotificationMaster = new EventEmitter<{}>();
   public RequestMoneyMaster = new EventEmitter<{}>();
+  public PaymentRequest = new EventEmitter<{}>();
+  
   setLoggedIn(value:boolean){
     this.loggedInStatus=value;
     if(value)

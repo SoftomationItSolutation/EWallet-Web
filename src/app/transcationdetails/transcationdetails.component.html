@@ -1,0 +1,93 @@
+<div class="row m-b-0">
+    <div class="col-lg-12 col-md-6">
+        <div class="row">
+            <mat-tab-group style="width: 100%" (selectedTabChange)="onLinkClick($event)" color="accent">
+                <mat-tab label="All Transaction">
+                  <mat-table #table [dataSource]="dataSource" aria-label="Elements">
+                      <ng-container matColumnDef="TranscationId" class="col-lg-7 col-md-6">
+                          <mat-header-cell *matHeaderCellDef class="col-lg-7 col-md-6">Transcation Detail</mat-header-cell>
+                          <mat-cell *matCellDef="let row" class="col-lg-7 col-md-6">
+                              <div class="row">
+                                <div class="col-lg-12 col-md-6">
+                                    <h5 class="font-light text-info">{{row.TranscationId}}</h5>
+                                    <h6 class="font-light text-muted"> {{row.TranscationDetail}}  {{row.PartnerLoginId}}</h6>
+                                    <span class="font-light text-muted"> {{row.Ldate}}  {{row.LTime}}</span>
+                                </div>
+                              </div>
+                          </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="Amount" class="col-lg-3 col-md-6">
+                          <mat-header-cell *matHeaderCellDef class="col-lg-3 col-md-6">Amount</mat-header-cell>
+                          <mat-cell *matCellDef="let row" class="col-lg-3 col-md-6">
+                              <div class="row">
+                                <div class="col-lg-12 col-md-6">
+                                    <h5 class="font-light text-info">{{row.Amount | currency :'&#8377;'}}</h5>
+                                </div>
+                              </div>
+                          </mat-cell>
+                      </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                  </mat-table>
+                </mat-tab>
+                <mat-tab label="Earning">
+                    <mat-table #table [dataSource]="dataSource" aria-label="Elements">
+                        <ng-container matColumnDef="TranscationId" class="col-lg-7 col-md-6">
+                            <mat-header-cell *matHeaderCellDef class="col-lg-7 col-md-6">Transcation Detail</mat-header-cell>
+                            <mat-cell *matCellDef="let row" class="col-lg-7 col-md-6">
+                                <div class="row">
+                                  <div class="col-lg-12 col-md-6">
+                                      <h5 class="font-light text-info">{{row.TranscationId}}</h5>
+                                      <h6 class="font-light text-muted"> {{row.TranscationDetail}}  {{row.PartnerLoginId}}</h6>
+                                      <span class="font-light text-muted"> {{row.Ldate}}  {{row.LTime}}</span>
+                                  </div>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="Amount" class="col-lg-3 col-md-6">
+                            <mat-header-cell *matHeaderCellDef class="col-lg-3 col-md-6">Amount</mat-header-cell>
+                            <mat-cell *matCellDef="let row" class="col-lg-3 col-md-6">
+                                <div class="row">
+                                  <div class="col-lg-12 col-md-6">
+                                      <h5 class="font-light text-info">{{row.Amount | currency :'&#8377;'}}</h5>
+                                  </div>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                </mat-tab>
+                <mat-tab label="Expense">
+                    <mat-table #table [dataSource]="dataSource" aria-label="Elements">
+                        <ng-container matColumnDef="TranscationId" class="col-lg-7 col-md-6">
+                            <mat-header-cell *matHeaderCellDef class="col-lg-7 col-md-6">Transcation Detail</mat-header-cell>
+                            <mat-cell *matCellDef="let row" class="col-lg-7 col-md-6">
+                                <div class="row">
+                                  <div class="col-lg-12 col-md-6">
+                                      <h5 class="font-light text-info">{{row.TranscationId}}</h5>
+                                      <h6 class="font-light text-muted"> {{row.TranscationDetail}}  {{row.PartnerLoginId}}</h6>
+                                      <span class="font-light text-muted"> {{row.Ldate}}  {{row.LTime}}</span>
+                                  </div>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="Amount" class="col-lg-3 col-md-6">
+                            <mat-header-cell *matHeaderCellDef class="col-lg-3 col-md-6">Amount</mat-header-cell>
+                            <mat-cell *matCellDef="let row" class="col-lg-3 col-md-6">
+                                <div class="row">
+                                  <div class="col-lg-12 col-md-6">
+                                      <h5 class="font-light text-info">{{row.Amount | currency :'&#8377;'}}</h5>
+                                  </div>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="line-spin-fade-rotating"></ngx-spinner>
+  </div>

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import {MatBottomSheet, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA, MatDialog} from '@angular/material';
 import { ILoginData } from './models/user.model';
@@ -14,7 +14,7 @@ import { ErrorboxComponent } from './errorbox/errorbox.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent  {
+export class AppComponent implements OnInit  {
   loginstatus: boolean = false;
   showNavText: boolean = false;
   title = 'Flipper Wallet';
@@ -28,7 +28,10 @@ export class AppComponent  {
   RequestMoneyData: IRequestMoneyData
   dNotificationCount:any;
  
-
+  ngOnInit(){
+    this.NotificationDetails();
+  }
+  
   constructor(private spinner: NgxSpinnerService,private authService: AuthService,private bottomSheet: MatBottomSheet,location: Location, router: Router,private dbService: DatabaseService) {
     this.UserDetails= JSON.parse(this.authService.getUserDetails());
     
@@ -39,23 +42,18 @@ export class AppComponent  {
     this.authService.MasterCompDisplay.subscribe(
       (visibility: boolean)  => {
         this.loginstatus = visibility;
-        this.NotificationDetails();
-      }
-    );
+      });
    
     this.authService.NotificationMaster.subscribe(
       (data)  => {
         this.notiCount = data.NotificationCount;
         this.RequestMoneyNotificationCount=data.RequestMoneyNotificationCount;
         this.RequestMoneyData=data.lstMoneyRequestNotificationDetails;
-      }
-    );
+      });
 
-    this.authService.RequestMoneyMaster.subscribe(
-      (data)  => {
+    this.authService.RequestMoneyMaster.subscribe((data)  => {
         this.RequestMoneyData=data;
-      }
-    );
+      });
 
     router.events.subscribe((val) => {
       if(location.path() != ''){
@@ -64,7 +62,7 @@ export class AppComponent  {
         this.route = 'login'
       }
     });
-    this.NotificationDetails();
+    
   }
 
   onMenuBtnClick(){
@@ -84,6 +82,10 @@ export class AppComponent  {
     }
   }
 
+  logoutUser(){
+    this.authService.logout();
+  }
+
   NotificationDetails(){
     if(this.UserDetails==null)
       return;
@@ -100,10 +102,6 @@ export class AppComponent  {
       () => {
       });
     }
-  }
-
-  logoutUser(){
-    this.authService.logout();
   }
 }
 

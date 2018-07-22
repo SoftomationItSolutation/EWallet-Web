@@ -1,0 +1,36 @@
+<div class="row m-b-0">
+    <div class="col-lg-3 col-md-6">
+        <div class="d-flex align-items-center">
+            <div class="m-r-10"><span class="text-orange display-5"><mat-icon>account_balance_wallet</mat-icon></span></div>
+            <div><span>Wallet Balance</span>
+                <h3 class="font-medium m-b-0">{{accountbalance | currency :'&#8377;'}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="d-flex align-items-center">
+            <div class="m-r-10"><span class="text-cyan display-5"><mat-icon>stars</mat-icon></span></div>
+            <div><span>Referral Earnings</span>
+                <h3 class="font-medium m-b-0">{{rewardbalance | currency :'&#8377;'}}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="d-flex align-items-center">
+            <div class="m-r-10"><span class="text-info display-5"><mat-icon>transfer_within_a_station</mat-icon></span></div>
+            <div><span>Transfer Money</span>
+                <h3 class="font-medium m-b-0">{{transferMoney | currency :'&#8377;'}}</h3></div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6">
+        <div class="d-flex align-items-center">
+            <div class="m-r-10"><span class="text-primary display-5"><mat-icon>money</mat-icon></span></div>
+            <div><span>Earnings</span>
+                <h3 class="font-medium m-b-0">{{reciverMoney | currency :'&#8377;'}}</h3>
+            </div>
+        </div>
+    </div>
+    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="line-spin-fade-rotating"></ngx-spinner>
+</div>

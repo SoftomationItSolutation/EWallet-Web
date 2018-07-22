@@ -39,5 +39,9 @@ export class DatabaseService {
     return this.objHttp.post(this.apiurl+'RequestMoney', objTranscation);
   }
   
+  GetAllProfileDetails(objUserId: {}) {
+    return this.objHttp.post(this.apiurl+'GetAllProfileDetails',objUserId);
+  }
+  
   
 }

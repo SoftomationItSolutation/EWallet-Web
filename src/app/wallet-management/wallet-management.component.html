@@ -1,117 +1,24 @@
-<div id="dashcontent" class="row justify-content-center align-content-center mt-2 ">
-    <ngx-spinner size="medium" type="ball-clip-rotate"></ngx-spinner>
-    <mat-tab-group (selectedTabChange)="onLinkClick($event)">
-        <mat-tab label="Add Money">
-            <mat-card id="addrewardcard" class=".mat-elevation-z0">
-                <mat-card-content>
-                  <form [formGroup]="AddMoneyForm" id="AddMoneyForm" style="display: contents">
-                    <mat-form-field>
-                      <input matInput placeholder="Amount" formControlName="AddAmount" required name='AddAmount' [(ngModel)]="AddAmount">
-                      <mat-error *ngIf = "AddMoneyForm.get('AddAmount').hasError('required')">
-                         Amount must be entered
-                        </mat-error>
-                        <mat-error *ngIf = "AddMoneyForm.get('AddAmount').hasError('pattern')">
-                            {{errors.AddAmount}}
-                        </mat-error>
-                        
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput placeholder="Have a promo code ?"  [(ngModel)]="PromoCode" name='PromoCode' formControlName="PromoCode" (input)="ValidatePromoCode($event)">
-                        <mat-error *ngIf = "AddMoneyForm.get('PromoCode').hasError('pattern')">
-                            {{errors.PromoCode}}
-                        </mat-error>
-                    </mat-form-field>
-                  </form>
-                </mat-card-content>
-                <mat-error *ngIf = "ValidateCode">
-                 {{UserError_Message}}
-                </mat-error>
-                <mat-card-actions>
-                  <button mat-raised-button form="AddMoneyForm" *ngIf="AddMoneyForm.valid" style="background-color: #1f38d9; color: #FFFFFF;" (click)="AddMoneyReward();">ADD</button>
-                  <button mat-raised-button disabled *ngIf="!AddMoneyForm.valid">ADD</button>
-                </mat-card-actions>
-                <mat-error *ngIf="UserError_flag">
-                    {{UserError_Message}}
-                  </mat-error>
-            </mat-card>
-        </mat-tab>
-        <mat-tab label="Send Money">
-            <mat-card id="addrewardcard" class=".mat-elevation-z0">
-                <mat-card-content>
-                    <form [formGroup]="SendMoneyForm" id="SendMoneyForm" style="display: contents">
-                        <mat-form-field>
-                            <input matInput placeholder="Amount" formControlName="AddAmount" required name='AddAmount' [(ngModel)]="AddAmount">
-                            <mat-error *ngIf = "SendMoneyForm.get('AddAmount').hasError('required')">
-                                Amount must be entered
-                            </mat-error>
-                            <mat-error *ngIf = "SendMoneyForm.get('AddAmount').hasError('pattern')">
-                                {{errors.AddAmount}}
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field>
-                            <input matInput placeholder="Contact No ?"  [(ngModel)]="MobileNo" name='mobile' formControlName="mobile" (input)="ValidateMobileno($event)">
-                            <mat-error *ngIf = "SendMoneyForm.get('mobile').hasError('required')">
-                            Mobile No must be entered
-                            </mat-error>
-                            <mat-error *ngIf = "SendMoneyForm.get('mobile').hasError('pattern')">
-                                {{errors.PromoCode}}
-                            </mat-error>
-                        </mat-form-field>
-                    </form>
-                </mat-card-content>
-                <mat-error *ngIf = "SendValidateCode">
-                    {{SendUserError_Message}}
-                </mat-error>
-                <mat-card-actions>
-                    <button mat-raised-button form="SendMoneyForm" *ngIf="SendMoneyForm.valid" style="background-color: #1f38d9; color: #FFFFFF;" (click)="SendMoneyReward();">Send</button>
-                    <button mat-raised-button disabled *ngIf="!SendMoneyForm.valid">Send</button>
-                </mat-card-actions>
-                <mat-error *ngIf="SendUserError_flag">
-                    {{SendUserError_Message}}
-                </mat-error>
-            </mat-card>
-        </mat-tab>
-        <mat-tab label="Money Request">
-            <mat-card id="addrewardcard" class=".mat-elevation-z0">
-                <mat-card-content>
-                    <form [formGroup]="RequestMoneyForm" id="RequestMoneyForm" style="display: contents">
-                        <mat-form-field>
-                            <input matInput placeholder="Amount" formControlName="AddAmount" required name='AddAmount' [(ngModel)]="AddAmount">
-                            <mat-error *ngIf = "RequestMoneyForm.get('AddAmount').hasError('required')">
-                                Amount must be entered
-                            </mat-error>
-                            <mat-error *ngIf = "RequestMoneyForm.get('AddAmount').hasError('pattern')">
-                                {{errors.AddAmount}}
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field>
-                            <input matInput placeholder="Contact No ?"  [(ngModel)]="MobileNo" name='mobile' formControlName="mobile" (input)="ValidateMobilenoRequest($event)">
-                            <mat-error *ngIf = "RequestMoneyForm.get('mobile').hasError('required')">
-                                Mobile No must be entered
-                            </mat-error>
-                            <mat-error *ngIf = "RequestMoneyForm.get('mobile').hasError('pattern')">
-                                {{errors.PromoCode}}
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field>
-                            <input matInput placeholder="Remark" formControlName="Remark" required name='Remark' [(ngModel)]="Remark">
-                            <mat-error *ngIf = "RequestMoneyForm.get('Remark').hasError('required')">
-                                Amount must be entered
-                            </mat-error>
-                        </mat-form-field>
-                    </form>
-                </mat-card-content>
-                <mat-error *ngIf = "RequestValidateCode">
-                    {{RequestUserError_Message}}
-                </mat-error>
-                <mat-card-actions>
-                    <button mat-raised-button form="RequestMoneyForm" *ngIf="RequestMoneyForm.valid" style="background-color: #1f38d9; color: #FFFFFF;" (click)="RequestMoneyReward();">Request</button>
-                    <button mat-raised-button disabled *ngIf="!RequestMoneyForm.valid">Request</button>
-                </mat-card-actions>
-                <mat-error *ngIf="RequestUserError_flag">
-                    {{RequestUserError_Message}}
-                </mat-error>
-            </mat-card>
-        </mat-tab>
-    </mat-tab-group>
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-5 align-self-center">
+            <h4 class="page-title">Process Transaction</h4>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                   <app-balance></app-balance>
+                </div>
+                <div class="card-body border-top">
+                    <app-transcationemanagement></app-transcationemanagement>
+                </div>
+                <div class="card-body border-top">
+                    <app-transcationdetails></app-transcationdetails>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

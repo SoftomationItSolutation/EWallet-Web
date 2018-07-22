@@ -9,7 +9,7 @@
                               <div class="row m-b-0">
                                   <div class="col-lg-3 col-md-6">
                                       <mat-form-field> 
-                                          <input matInput placeholder="Enter amount to add in wallet" formControlName="Amount" required name='Amount' [(ngModel)]="Amount">
+                                          <input matInput placeholder="Enter amount to add in wallet" formControlName="Amount" required name='Amount'>
                                           <mat-error *ngIf = "AddMoneyForm.get('Amount').hasError('required')">
                                               Amount must be entered
                                           </mat-error>
@@ -22,7 +22,7 @@
                                   <div class="col-lg-1"></div>
                                   <div class="col-lg-3 col-md-6">
                                       <mat-form-field>
-                                          <input  matInput placeholder="Have a promo code ?"  [(ngModel)]="PromoCode" name='PromoCode' formControlName="PromoCode" (input)="ValidatePromoCode($event)">
+                                          <input  matInput placeholder="Have a promo code ?"  name='PromoCode' formControlName="PromoCode" (input)="ValidatePromoCode($event)">
                                           <mat-error *ngIf = "AddMoneyForm.get('PromoCode').hasError('pattern')">
                                               {{errors.PromoCode}}
                                           </mat-error>

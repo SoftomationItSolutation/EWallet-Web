@@ -48,7 +48,7 @@
                               <div class="row m-b-0">
                                   <div class="col-lg-3 col-md-6">
                                       <mat-form-field> 
-                                          <input matInput placeholder="Enter amount to send" formControlName="Amount" required name='Amount' [(ngModel)]="Amount">
+                                          <input matInput placeholder="Enter amount to send" formControlName="Amount" required name='Amount'>
                                           <mat-error *ngIf = "SendMoneyForm.get('Amount').hasError('required')">
                                               Amount must be entered
                                           </mat-error>
@@ -95,7 +95,7 @@
                               <div class="row m-b-0">
                                   <div class="col-lg-3 col-md-6">
                                       <mat-form-field> 
-                                          <input matInput placeholder="Enter amount for request" formControlName="Amount" required name='Amount' [(ngModel)]="Amount">
+                                          <input matInput placeholder="Enter amount for request" formControlName="Amount" required name='Amount'>
                                           <mat-error *ngIf = "RequestMoneyForm.get('Amount').hasError('required')">
                                               Amount must be entered
                                           </mat-error>

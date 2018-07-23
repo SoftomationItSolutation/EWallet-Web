@@ -6,7 +6,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './userlogin/login/login.component';
 import { ForgetPasswordComponent } from './userlogin/forget-password/forget-password.component';
 import { RegistrationComponent } from './userlogin/registration/registration.component';
-import { AddMoneyComponent } from './add-money/add-money.component';
 import { RewardManagementComponent } from './adminpages/reward-management/reward-management.component';
 import { WalletManagementComponent } from './wallet-management/wallet-management.component';
 import { BlankpageComponent } from './blankpage/blankpage.component';
@@ -19,7 +18,6 @@ const appRoutes: Routes = [
   { path: 'forget', component: ForgetPasswordComponent}, 
   { path: 'registration', component: RegistrationComponent}, 
   { path: 'login', component: LoginComponent }, 
-  { path: 'AddMoney', component:  AddMoneyComponent},
   { path: 'reward', component:  RewardManagementComponent},
   { path: 'wallet', component:  WalletManagementComponent},
   { path: 'ProcessTranscation?TID', component:  MywalletTranscationComponent},

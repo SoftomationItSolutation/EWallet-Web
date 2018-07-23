@@ -1,0 +1,13 @@
+<div class="d-flex align-items-center">
+    <div class="m-r-10">
+      <span class="text-success display-5" *ngIf="data.success==true">
+          <mat-icon>check_circle_outline</mat-icon>
+      </span>
+      <span class="text-danger display-5" *ngIf="data.success==false">
+          <mat-icon >cancel_presentation</mat-icon>
+      </span>
+    </div>
+    <div>
+        <h5 class="font-medium m-b-0">{{data.message}}</h5>
+    </div>
+</div>

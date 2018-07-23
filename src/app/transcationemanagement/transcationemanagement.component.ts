@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '../../../node_modules/@angular/forms';
 import { regExps, errorMessages, ConfirmValidParentMatcher } from '../CustomValidation/CustomValidation';
 import { NgxSpinnerService } from '../../../node_modules/ngx-spinner';
@@ -9,7 +9,8 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { UserLoginService } from '../services/user-login.service';
 import { IRewardsValidate } from '../models/transcation.model';
-import { MatTabChangeEvent } from '../../../node_modules/@angular/material';
+import { MatTabChangeEvent, MatSnackBar } from '../../../node_modules/@angular/material';
+import { ErrorbarComponent } from '../errorbar/errorbar.component';
 
 
 export interface ProfileListData {
@@ -43,10 +44,11 @@ export class TranscationemanagementComponent implements OnInit {
   ProfileList:ProfileListData[];
   filteredProfile: Observable<ProfileListData[]>;
 
-  constructor(private formBuilder: FormBuilder,private spinner: NgxSpinnerService,
+  constructor(private formBuilder: FormBuilder,private spinner: NgxSpinnerService,public snackBar: MatSnackBar,
     private dbService: DatabaseService,private authService: AuthService,private userService: UserLoginService) { 
       this.UserDetails= JSON.parse(this.authService.getUserDetails());
       this.GetProfile();
+     
   }
 
   private _filteredProfile(value: string): ProfileListData[] {
@@ -106,15 +108,15 @@ export class TranscationemanagementComponent implements OnInit {
         this.spinner.hide();
     });
   }
-
-  ValidateMobileno(event){
-    if((event.target.value.length)==10){
+  
+  ValidateMobileno(MobileNo){
+    if((MobileNo.length)==10){
       this.spinner.show();
         this.userService.ValidateProfile({LoginId:this.SendMoneyForm.value.mobile}).subscribe(
           data => {
             this.TransferTo=JSON.parse(data.json());
             if(this.TransferTo.flag.toLowerCase() != 'true'){
-              this.SendValidateCode=true;
+              this.openSnackBar(this.TransferTo.Message,false);
             }
             this.spinner.hide();
           },
@@ -136,10 +138,10 @@ export class TranscationemanagementComponent implements OnInit {
           data => {
             this.RewardsValidate=JSON.parse(data.json());
             if(this.RewardsValidate.flag.toLowerCase() != 'true'){
-              //this.UserError_Message= this.RewardsValidate.Message;
+              this.openSnackBar(this.RewardsValidate.Message,false);
             }
             else{
-              //this.UserError_Message= "You will get "+this.RewardsValidate.RewardAmount+" reward." 
+              this.openSnackBar("You will get "+this.RewardsValidate.RewardAmount+" reward.",true);
             }
             this.spinner.hide();
           },
@@ -165,13 +167,11 @@ export class TranscationemanagementComponent implements OnInit {
         }
         this.dbService.TranscationManagement(obj).subscribe(
           data => {
-            if(JSON.parse(data.json()).flag.toLowerCase() =='true')
-            {
-             
-              //this.UserError_Message= "Money added successfully";
+            if(JSON.parse(data.json()).flag.toLowerCase() =='true'){
+              this.openSnackBar("Money added successfully",true);
             }
             else{
-              //this.UserError_Message= JSON.parse(data.json()).Message 
+              this.openSnackBar(JSON.parse(data.json()).Message,false);
             }
             this.spinner.hide();
           },
@@ -198,12 +198,11 @@ export class TranscationemanagementComponent implements OnInit {
         }
         this.dbService.TranscationManagement(obj).subscribe(
           data => {
-            if(JSON.parse(data.json()).flag.toLowerCase() =='true')
-            {
-              //this.SendUserError_Message= "Money send successfully";
+            if(JSON.parse(data.json()).flag.toLowerCase() =='true'){
+              this.openSnackBar("Money send successfully",true);
             }
             else{
-              //this.SendUserError_Message= JSON.parse(data.json()).Message 
+              this.openSnackBar(JSON.parse(data.json()).Message,false);
             }
             this.spinner.hide();
           },
@@ -219,26 +218,6 @@ export class TranscationemanagementComponent implements OnInit {
     }
   }
 
-  ValidateMobilenoRequest(event){
-    if((event.target.value.length)==10){
-      this.spinner.show();
-        this.userService.ValidateProfile({LoginId:this.RequestMoneyForm.value.mobile}).subscribe(
-          data => {
-            this.TransferTo=JSON.parse(data.json());
-            if(this.TransferTo.flag.toLowerCase() != 'true')
-            {
-              //this.RequestUserError_Message= this.TransferTo.Message;
-            }
-            this.spinner.hide();
-          },
-          err => console.error(err.message),
-          () => {
-            this.spinner.hide();
-        }
-        );
-    }
-  }
-
   RequestMoneyReward(){
     if((this.TransferTo.UserId || 0)!=0){
       if(this.RequestMoneyForm.valid){
@@ -251,12 +230,11 @@ export class TranscationemanagementComponent implements OnInit {
         }
         this.dbService.TranscationManagementRequestMoney(obj).subscribe(
           data => {
-            if(JSON.parse(data.json()).flag.toLowerCase() =='true')
-            {
-              //this.RequestUserError_Message= "Request generated successfully";
+            if(JSON.parse(data.json()).flag.toLowerCase() =='true'){
+              this.openSnackBar("Request generated successfully",true);
             }
             else{
-              //this.RequestUserError_Message= JSON.parse(data.json()).Message 
+              this.openSnackBar(JSON.parse(data.json()).Message,false);
             }
             this.spinner.hide();
           },
@@ -264,11 +242,10 @@ export class TranscationemanagementComponent implements OnInit {
           () => {
             this.spinner.hide();
         }
-        );
-    }
+        );}
     }
     else{
-      //this.RequestUserError_Message= "Patner user not validate." 
+      this.openSnackBar("Request mobile not not exists",false);
     }
   }
 
@@ -280,8 +257,15 @@ export class TranscationemanagementComponent implements OnInit {
     else if(event.index==1){
       this.SendMoneyForm.reset();
     }
-    else if(event.index==1){
+    else if(event.index==2){
       this.RequestMoneyForm.reset();
     }
+  }
+
+  openSnackBar(message:string,success:boolean) {
+    this.snackBar.openFromComponent(ErrorbarComponent, {
+      duration: 3000,
+      data: {success: success, message: message}
+    });
   }
 }

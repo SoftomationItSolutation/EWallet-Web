@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent, NotificationSheet } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {  MatIconModule, MatRippleModule,MatSidenavModule,  MatMenuModule,   MatButtonModule,    MatCardModule,  MatFormFieldModule,  MatInputModule,  MatTabsModule,  MatTableModule,  MatPaginatorModule,   MatSortModule,  MatSelectModule,  MatDialogModule,  MatTreeModule,  MatProgressSpinnerModule,  MatListModule,  MatTooltipModule,  MatGridListModule,  MatCheckboxModule,MatStepperModule, MatToolbarModule, MatBadgeModule, MatAutocompleteModule} from '@angular/material';
+import {  MatIconModule, MatRippleModule,MatSidenavModule,  MatMenuModule,   MatButtonModule,    MatCardModule,  MatFormFieldModule,  MatInputModule,  MatTabsModule,  MatTableModule,  MatPaginatorModule,   MatSortModule,  MatSelectModule,  MatDialogModule,  MatTreeModule,  MatProgressSpinnerModule,  MatListModule,  MatTooltipModule,  MatGridListModule,  MatCheckboxModule,MatStepperModule, MatToolbarModule, MatBadgeModule, MatAutocompleteModule, MatSnackBarModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './userlogin/login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -13,7 +13,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpModule } from '@angular/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
-import { AddMoneyComponent } from './add-money/add-money.component';
 import { Ng2Webstorage } from '../../node_modules/ngx-webstorage';
 import { RewardManagementComponent } from './adminpages/reward-management/reward-management.component';
 import { WalletManagementComponent } from './wallet-management/wallet-management.component';
@@ -25,6 +24,7 @@ import { MywalletTranscationComponent } from './mywallet-transcation/mywallet-tr
 import { BalanceComponent } from './balance/balance.component';
 import { TranscationemanagementComponent } from './transcationemanagement/transcationemanagement.component';
 import { TranscationdetailsComponent } from './transcationdetails/transcationdetails.component';
+import { ErrorbarComponent } from './errorbar/errorbar.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,6 @@ import { TranscationdetailsComponent } from './transcationdetails/transcationdet
     ForgetPasswordComponent,
     DashboardComponent,
     NavHeaderComponent,
-    AddMoneyComponent,
     RewardManagementComponent,
     WalletManagementComponent,
     BlankpageComponent,
@@ -44,7 +43,8 @@ import { TranscationdetailsComponent } from './transcationdetails/transcationdet
     MywalletTranscationComponent,
     BalanceComponent,
     TranscationemanagementComponent,
-    TranscationdetailsComponent
+    TranscationdetailsComponent,
+    ErrorbarComponent
   ],
   imports: [
     NgxSpinnerModule,
@@ -55,6 +55,7 @@ import { TranscationdetailsComponent } from './transcationdetails/transcationdet
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatSnackBarModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatIconModule, 
@@ -83,7 +84,7 @@ import { TranscationdetailsComponent } from './transcationdetails/transcationdet
     MatBottomSheetModule
     
   ],
-  entryComponents: [NotificationSheet,ErrorboxComponent],
+  entryComponents: [NotificationSheet,ErrorboxComponent,ErrorbarComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

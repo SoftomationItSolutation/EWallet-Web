@@ -38,7 +38,7 @@ export class TranscationemanagementComponent implements OnInit {
   UserDetails: ILoginData;
   TransferTo: IPatnerData;
   RewardsValidate: IRewardsValidate;
-
+  RewardId:Number;
   SendValidateCode=false;
   profileCtrl = new FormControl();
   ProfileList:ProfileListData[];
@@ -57,6 +57,7 @@ export class TranscationemanagementComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.RewardId=0;
     this.AddMoneyForm = this.formBuilder.group({
       Amount: new FormControl('', [
         Validators.required,
@@ -112,7 +113,7 @@ export class TranscationemanagementComponent implements OnInit {
   ValidateMobileno(MobileNo){
     if((MobileNo.length)==10){
       this.spinner.show();
-        this.userService.ValidateProfile({LoginId:this.SendMoneyForm.value.mobile}).subscribe(
+        this.userService.ValidateProfile({LoginId:MobileNo}).subscribe(
           data => {
             this.TransferTo=JSON.parse(data.json());
             if(this.TransferTo.flag.toLowerCase() != 'true'){
@@ -134,10 +135,11 @@ export class TranscationemanagementComponent implements OnInit {
   ValidatePromoCode(event){
     if((event.target.value.length)==8){
       this.spinner.show();
-        this.dbService.ValidateRewardCode({UserId:this.UserDetails.UserId,RewardCode:this.AddMoneyForm.value.PromoCode}).subscribe(
+        this.dbService.ValidateRewardCode({UserId:this.UserDetails.UserId,RewardCode:event.target.value}).subscribe(
           data => {
             this.RewardsValidate=JSON.parse(data.json());
             if(this.RewardsValidate.flag.toLowerCase() != 'true'){
+              this.RewardId=this.RewardsValidate.RewardId;
               this.openSnackBar(this.RewardsValidate.Message,false);
             }
             else{
@@ -156,30 +158,33 @@ export class TranscationemanagementComponent implements OnInit {
   AddMoneyReward(){
     if(this.AddMoneyForm.valid){
         this.spinner.show();
+       
         const obj={
           UserId:this.UserDetails.UserId,
           TranscationSourceId:1,
-          Amount:this.AddMoneyForm.value.AddAmount,
+          Amount:this.AddMoneyForm.value.Amount,
           PatnerUserId:0,
           MsgDescription:'',
           RequestId:0,
-          RewardId:this.RewardsValidate.RewardId||0,
+          RewardId:this.RewardId,
         }
         this.dbService.TranscationManagement(obj).subscribe(
           data => {
             if(JSON.parse(data.json()).flag.toLowerCase() =='true'){
-              this.openSnackBar("Money added successfully",true);
+              // this.openSnackBar("Money added successfully",true);
+              window.location.href="http://secure.softomation.in/#/ProcessTranscation?TID="+JSON.parse(data.json()).TranscationId;
             }
             else{
               this.openSnackBar(JSON.parse(data.json()).Message,false);
             }
+            this.RewardId=0;
             this.spinner.hide();
           },
           err => console.error(err.message),
           () => {
+            this.RewardId=0;
             this.spinner.hide();
-        }
-        );
+        });
     }
   }
 
@@ -190,7 +195,7 @@ export class TranscationemanagementComponent implements OnInit {
         const obj={
           UserId:this.UserDetails.UserId,
           TranscationSourceId:2,
-          Amount:this.SendMoneyForm.value.AddAmount,
+          Amount:this.SendMoneyForm.value.Amount,
           PatnerUserId:this.TransferTo.UserId,
           MsgDescription:'',
           RequestId:0,
@@ -225,7 +230,7 @@ export class TranscationemanagementComponent implements OnInit {
         const obj={
           RequesterId:this.UserDetails.UserId,
           RequestToId:this.TransferTo.UserId,
-          Amount:this.RequestMoneyForm.value.AddAmount,
+          Amount:this.RequestMoneyForm.value.Amount,
           MsgDescription:this.RequestMoneyForm.value.Remark,
         }
         this.dbService.TranscationManagementRequestMoney(obj).subscribe(

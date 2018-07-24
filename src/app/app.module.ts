@@ -82,7 +82,6 @@ import { ErrorbarComponent } from './errorbar/errorbar.component';
     MatToolbarModule, 
     LayoutModule,
     MatBottomSheetModule
-    
   ],
   entryComponents: [NotificationSheet,ErrorboxComponent,ErrorbarComponent],
   providers: [],

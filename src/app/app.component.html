@@ -47,13 +47,12 @@
                 <mat-icon >menu</mat-icon>
               </button>
               <span class="example-spacer"></span>
-              <mat-icon [matBadge]="RequestMoneyNotificationCount"  matBadgeColor="accent" matBadgeSize="medium" matBadgeOverlap="false" matBadgePosition="above after" class="example-icon" mat-raised-button (click)="MoneyRequestNotification()">event_note</mat-icon>
-              <mat-icon [matBadge]="notiCount" matBadgeColor="warn" matBadgeSize="medium" matBadgeOverlap="false" matBadgePosition="above after" class="example-icon" mat-raised-button (click)="MoneyRequestNotification()">notifications</mat-icon>
+              <mat-icon [matBadge]="RequestMoneyNotificationCount" matBadgeColor="warn" matBadgeSize="medium" matBadgeOverlap="false" matBadgePosition="above after" class="example-icon" mat-raised-button (click)="MoneyRequestNotification()">notifications</mat-icon>
               <button mat-icon-button [matMenuTriggerFor]="menu" overlapTrigger="false" MenuPositionX="before">
                   <mat-icon>settings</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                  <button mat-menu-item>
+                  <button mat-menu-item [routerLink]="['/profile']">
                     <mat-icon>perm_identity</mat-icon>
                     <span>Profile</span>
                   </button>

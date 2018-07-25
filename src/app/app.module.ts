@@ -20,11 +20,11 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { BlankpageComponent } from './blankpage/blankpage.component';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { ErrorboxComponent } from './errorbox/errorbox.component';
-import { MywalletTranscationComponent } from './mywallet-transcation/mywallet-transcation.component';
 import { BalanceComponent } from './balance/balance.component';
 import { TranscationemanagementComponent } from './transcationemanagement/transcationemanagement.component';
 import { TranscationdetailsComponent } from './transcationdetails/transcationdetails.component';
 import { ErrorbarComponent } from './errorbar/errorbar.component';
+import { MyProfileComponent } from './userlogin/my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -40,11 +40,11 @@ import { ErrorbarComponent } from './errorbar/errorbar.component';
     BlankpageComponent,
     NotificationSheet,
     ErrorboxComponent,
-    MywalletTranscationComponent,
     BalanceComponent,
     TranscationemanagementComponent,
     TranscationdetailsComponent,
-    ErrorbarComponent
+    ErrorbarComponent,
+    MyProfileComponent
   ],
   imports: [
     NgxSpinnerModule,

@@ -9,8 +9,7 @@ import { RegistrationComponent } from './userlogin/registration/registration.com
 import { RewardManagementComponent } from './adminpages/reward-management/reward-management.component';
 import { WalletManagementComponent } from './wallet-management/wallet-management.component';
 import { BlankpageComponent } from './blankpage/blankpage.component';
-import { MywalletTranscationComponent } from './mywallet-transcation/mywallet-transcation.component';
-
+import { MyProfileComponent } from './userlogin/my-profile/my-profile.component';
 
 const appRoutes: Routes = [ 
   { path: 'dashborad', component: DashboardComponent }, 
@@ -20,7 +19,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent }, 
   { path: 'reward', component:  RewardManagementComponent},
   { path: 'wallet', component:  WalletManagementComponent},
-  { path: 'ProcessTranscation?TID', component:  MywalletTranscationComponent},
+  { path: 'profile', component:  MyProfileComponent},
   { path: '**', component: PageNotFoundComponent } ];
  
   export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes ,{useHash: true});

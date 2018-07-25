@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-page-not-found',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
+    this.RedirecttoWallet();
   }
 
+  RedirecttoWallet(){
+    var seconds = 10;
+      var dvCountDown = document.getElementById("dvCountDown");
+      dvCountDown.style.display = "block";
+      var lblCount = document.getElementById("lblCount");
+      dvCountDown.style.display = "block";
+      lblCount.innerHTML = seconds.toString();
+      setInterval(function () {
+          seconds--;
+          lblCount.innerHTML = seconds.toString();
+          if (seconds == 0) {
+              dvCountDown.style.display = "none";
+              this.auth.logout();
+          }
+      }, 1000);
+  }
 }

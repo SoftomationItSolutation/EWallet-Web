@@ -25,6 +25,10 @@ import { TranscationemanagementComponent } from './transcationemanagement/transc
 import { TranscationdetailsComponent } from './transcationdetails/transcationdetails.component';
 import { ErrorbarComponent } from './errorbar/errorbar.component';
 import { MyProfileComponent } from './userlogin/my-profile/my-profile.component';
+import { PersonalInformationComponent } from './userlogin/personal-information/personal-information.component';
+import { ProfessionalInformationComponent } from './userlogin/professional-information/professional-information.component';
+import { SettingComponent } from './userlogin/setting/setting.component';
+import { KycInformationComponent } from './userlogin/kyc-information/kyc-information.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,11 @@ import { MyProfileComponent } from './userlogin/my-profile/my-profile.component'
     TranscationemanagementComponent,
     TranscationdetailsComponent,
     ErrorbarComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    PersonalInformationComponent,
+    ProfessionalInformationComponent,
+    SettingComponent,
+    KycInformationComponent
   ],
   imports: [
     NgxSpinnerModule,

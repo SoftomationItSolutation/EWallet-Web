@@ -1,4 +1,4 @@
-    /* .view-account{
+.view-account{
     background:#FFFFFF; 
     margin-top:20px;
     }
@@ -41,7 +41,8 @@
     }
     
     .view-account .side-bar .user-info .meta li a {
-    color: #616670
+    color: #616670;
+    cursor: pointer;
     }
     
     .view-account .side-bar .user-info .meta li.activity {
@@ -80,29 +81,34 @@
     
     .view-account .side-bar .side-menu .nav>li>a:hover {
     color: #616670;
-    background: none
+    background: none;
+    cursor: pointer;
     }
     
     .view-account .side-bar .side-menu .nav>li.active a {
     color: #40babd;
     border-bottom: 2px solid #40babd;
     background: none;
-    border-right: none
+    border-right: none;
+    cursor: pointer;
     }
     
     .theme-2 .view-account .side-bar .side-menu .nav>li.active a {
     color: #6dbd63;
-    border-bottom-color: #6dbd63
+    border-bottom-color: #6dbd63;
+    cursor: pointer;
     }
     
     .theme-3 .view-account .side-bar .side-menu .nav>li.active a {
     color: #497cb1;
-    border-bottom-color: #497cb1
+    border-bottom-color: #497cb1;
+    cursor: pointer;
     }
     
     .theme-4 .view-account .side-bar .side-menu .nav>li.active a {
     color: #ec6952;
-    border-bottom-color: #ec6952
+    border-bottom-color: #ec6952;
+    cursor: pointer;
     }
     
     .view-account .side-bar .side-menu .nav>li .icon {
@@ -130,8 +136,10 @@
     }
     
     .view-account .content-panel .avatar .figure img {
-    float: right;
-    width: 64px
+        float: right;
+        width: 64px;
+        max-width: 150px;
+        max-height: 150px;
     }
     
     .view-account .content-panel .content-header-wrapper {
@@ -474,7 +482,9 @@
     }
     .view-account .content-panel .avatar .figure img {
         float: none;
-        margin-bottom: 15px
+        margin-bottom: 15px;
+        max-width: 150px;
+        max-height: 150px;
     }
     .view-account .file-uploader {
         margin-bottom: 15px
@@ -577,4 +587,4 @@
         width: 40px;
         display: inline-block
     }
-    } */
+    }

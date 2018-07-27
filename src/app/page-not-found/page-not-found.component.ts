@@ -8,14 +8,14 @@ import { AuthService } from '../auth/auth.service';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  constructor(private auth: AuthService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.RedirecttoWallet();
+    //this.RedirecttoWallet();
   }
 
   RedirecttoWallet(){
-    var seconds = 10;
+    var seconds = 5;
       var dvCountDown = document.getElementById("dvCountDown");
       dvCountDown.style.display = "block";
       var lblCount = document.getElementById("lblCount");
@@ -25,9 +25,13 @@ export class PageNotFoundComponent implements OnInit {
           seconds--;
           lblCount.innerHTML = seconds.toString();
           if (seconds == 0) {
-              dvCountDown.style.display = "none";
-              this.auth.logout();
+            dvCountDown.style.display = "none";
+            this.endpage();
           }
       }, 1000);
+  }
+
+  endpage(){
+    this.authService.logout();
   }
 }

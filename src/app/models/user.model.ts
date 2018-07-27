@@ -23,6 +23,9 @@ export interface ILoginData{
   Name:string;
   UserName:string;
   UserId:string;
+  FirstName:string;
+  LastName:string;
+  ProfilePicPath:string;
 }
 
 export interface IPatnerData{

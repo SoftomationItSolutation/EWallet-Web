@@ -119,7 +119,7 @@ export class NotificationSheet {
     private dbService: DatabaseService,@Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
    this.RequestMoneyData=this.data.MyDate;
    this.UserDetails= JSON.parse(this.authService.getUserDetails());
-   
+
    this.authService.NotificationMaster.subscribe(
     (data)  => {
       this.RequestMoneyData=data.lstMoneyRequestNotificationDetails;

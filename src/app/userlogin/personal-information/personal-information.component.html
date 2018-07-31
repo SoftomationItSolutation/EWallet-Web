@@ -1,6 +1,6 @@
-<form class="form-horizontal">
+<form [formGroup]="ProfileForm" (ngSubmit)="UpdateProfile()" class="form-horizontal">   
     <fieldset class="fieldset">
-        <h3 class="fieldset-title">Personal Info</h3>
+        <h3 class="fieldset-title">Personal Information</h3>
         <div class="form-group avatar">
             <figure class="figure col-md-2 col-sm-3 col-xs-12">
                 <img class="img-rounded img-responsive" [src]="profileImage" alt="" id="output_image" style="max-width: 150px; max-height: 150px;">
@@ -9,47 +9,57 @@
                 <input type="file" class="file-uploader pull-left" accept="image/*" (change)="readURL($event)">
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-2 col-sm-3 col-xs-12 control-label">User Name</label>
-            <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" value="Rebecca" readonly>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-md-2 col-sm-3 col-xs-12 control-label">First Name</label>
-            <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" value="Rebecca">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Last Name</label>
-            <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" value="Sanders">
-            </div>
-        </div>
+        <mat-form-field class="input input--nao">
+            
+            <input matInput formControlName="LoginId" placeholder="Login Id" required type="text" id="LoginId" [readonly]="!ProfileForm.get('LoginId').hasError('pattern')">
+            <mat-error *ngIf = "ProfileForm.get('LoginId').hasError('required')">
+                Login Id must be entered.
+            </mat-error>
+            <mat-error *ngIf = "ProfileForm.get('LoginId').hasError('pattern')">
+                {{errors.LoginId}}
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="input input--nao">
+            <input matInput formControlName="FirstName" placeholder="First Name" required type="text" id="FirstName">
+            <mat-error *ngIf = "ProfileForm.get('FirstName').hasError('required')">
+                First Name must be entered.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="input input--nao">
+            <input matInput formControlName="LastName" placeholder="Last Name" required type="text" id="LastName">
+            <mat-error *ngIf = "ProfileForm.get('LastName').hasError('required')">
+                Last Name must be entered.
+            </mat-error>
+        </mat-form-field>
     </fieldset>
     <fieldset class="fieldset">
         <h3 class="fieldset-title">Contact Info</h3>
-        <div class="form-group">
-            <label class="col-md-2  col-sm-3 col-xs-12 control-label">Mobile No</label>
-            <div class="col-md-10 col-sm-9 col-xs-12">
-                <input type="text" class="form-control" readonly>
-                <p class="help-block">This is the email </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2  col-sm-3 col-xs-12 control-label">Email</label>
-            <div class="col-md-10 col-sm-9 col-xs-12">
-                <input  type="email"  class="form-control">
-                <p class="help-block">Your twitter username</p>
-            </div>
-        </div>
+        <mat-form-field class="input input--nao">
+            <input matInput formControlName="MobileNo" placeholder="Mobile Number" required class="input__field input__field--nao" type="text" id="MobileNo" readonly>
+            <mat-error *ngIf = "ProfileForm.get('MobileNo').hasError('required')">
+                Mobile Number must be entered.
+            </mat-error>
+            <mat-error *ngIf = "ProfileForm.get('MobileNo').hasError('pattern')">
+                {{errors.MobileNo}}
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="input input--nao">
+            <input matInput formControlName="EmailId" placeholder="Email Id" required class="input__field input__field--nao" type="email" id="EmailId">
+            <mat-error *ngIf = "ProfileForm.get('EmailId').hasError('required')">
+                Email id must be entered.
+            </mat-error>
+            <mat-error *ngIf = "ProfileForm.get('EmailId').hasError('pattern')">
+                {{errors.EmailId}}
+            </mat-error>
+        </mat-form-field>
     </fieldset>
     <hr>
     <div class="form-group">
         <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
-            <input class="btn btn-primary" type="submit" value="Update Profile">
+            <button class="btn btn-primary" type="submit">
+                    <i class=""></i> Update Profile
+                </button>
         </div>
     </div>
+    <ngx-spinner bdColor="rgba(51,51,51,0.5)" size="medium" color="#fff" type="line-spin-fade-rotating"></ngx-spinner>
 </form>

@@ -39,4 +39,8 @@ export class UserLoginService {
   ValidateProfile(objValidateProfile: {}) {
     return this.objHttp.post(this.apiurl+'GetProfileByLogin', objValidateProfile);
   }
+
+  UpdateProfile(objUpdateProfile: {}) {
+    return this.objHttp.post(this.apiurl+'UpdatePersonalDetails', objUpdateProfile);
+  }
 }

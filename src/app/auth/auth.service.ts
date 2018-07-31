@@ -27,6 +27,10 @@ export class AuthService {
   getUserDetails(){
     return this.sessionData.retrieve("userdetsils");
   } 
+
+  setUserDetails(data){
+    this.sessionData.store("userdetsils", data)
+  } 
   removeUserDetails(){
     this.sessionData.clear("userdetsils");
   }

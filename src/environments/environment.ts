@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  api_Url: 'http://api.softomation.in/api/user/'
-  //api_Url: 'http://localhost:63720/api/user/'
+  api_Url: 'http://api.softomation.in/api/user/',
+  api_ImageUrl: 'http://api.softomation.in'
+  //api_Url: 'http://localhost:63720/api/user/',
+  //api_ImageUrl: 'http://localhost:63720'
 };
 
 /*

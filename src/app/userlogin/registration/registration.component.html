@@ -27,7 +27,7 @@
                                             <mat-form-field class="input input--nao">
                                                 <input matInput formControlName="MobileNo" placeholder="Mobile Number" required class="input__field input__field--nao" type="mytype" id="MobileNo">
                                                 <mat-error *ngIf = "SignUpForm.get('MobileNo').hasError('required')">
-                                                    Login Id must be entered.
+                                                    Mobile Number must be entered.
                                                 </mat-error>
                                                 <mat-error *ngIf = "SignUpForm.get('MobileNo').hasError('pattern')">
                                                     {{errors.MobileNo}}

@@ -6,7 +6,7 @@ export const regExps: { [key: string]: RegExp } = {
     LoginId: /^([a-zA-Z0-9_-]){6,}$/,
     MobileNo: /^([0|\+[0-9]{1,5})?([7-9][0-9]{9})$/,
     OTP:/^[0-9]{6,}$/,
-    email: /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
+    EmailId: /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
     RewardCode: /^([a-zA-Z0-9_-]){8,8}$/,
     RewardAmount:/^(\d{1,5}|\d{1,5}\.\d{0,2})$/,
     RewardDays:/^(\d{1,2}|\d{1,2})$/,
@@ -22,7 +22,7 @@ export const regExps: { [key: string]: RegExp } = {
 
 export const errorMessages: { [key: string]: string } = {
     fullName: 'Full name must be between 1 and 128 characters',
-    email: 'Email must be a valid email address (username@domain)',
+    EmailId: 'Email must be a valid email address (username@domain)',
     confirmEmail: 'Email addresses must match',
     Password: 'Password must be must be 6 characters or longer, contain at least 1 special 1 lowercase  1 uppercase & 1 numeric.',
     confirmPassword: 'Passwords must match',

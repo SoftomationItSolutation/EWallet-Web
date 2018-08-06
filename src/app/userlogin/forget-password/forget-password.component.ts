@@ -3,10 +3,11 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { UserLoginService } from '../../services/user-login.service';
 import { ConfirmValidParentMatcher, errorMessages, regExps } from '../../CustomValidation/CustomValidation';
-import { IForgetPassword, UserResponse, otpFormDataIF } from '../../models/user.model';
+import {  UserResponse } from '../../models/user.model';
 import { AuthService } from '../../auth/auth.service';
-import { ErrorboxComponent } from '../../errorbox/errorbox.component';
-import { MatDialog } from '../../../../node_modules/@angular/material';
+import { MatDialog, MatSnackBar } from '../../../../node_modules/@angular/material';
+import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
+import { ErrorbarComponent } from '../../errorbar/errorbar.component';
 
 
 @Component({
@@ -26,6 +27,8 @@ export class ForgetPasswordComponent implements OnInit {
   otpForm: FormGroup;
   UserData: UserResponse;
   constructor(private formBuilder: FormBuilder, private loginService: UserLoginService,
+    private spinner: NgxSpinnerService,
+    public snackBar: MatSnackBar,
     private authService: AuthService,public dialog: MatDialog) 
   { 
 
@@ -58,15 +61,10 @@ export class ForgetPasswordComponent implements OnInit {
       });
   }
 
-  openDialog(title,message): void {
-    const dialogRef = this.dialog.open(ErrorboxComponent, {
-      width: '250px',
-      data: {title: title, message: message}
-    });
-    
-  }
+ 
   
   ResendOTP(){
+    this.spinner.show();
     this.loginService.ResendOTP({ OTPId:this.UserData.OTPId}).subscribe(
       data =>{
         this.UserData= JSON.parse(data.json());
@@ -79,14 +77,17 @@ export class ForgetPasswordComponent implements OnInit {
         {
           //this.UserError_Message=this.UserData.Message;
         }
+        this.spinner.hide();
       },
     (error) => {
+      this.spinner.hide();
       //this.UserError_Message="This user name is not register with us";
     });
   }
 
   ForgotPasswordmaster(){
     if(this.LogForm.status=="VALID"){
+      this.spinner.show();
       this.loginService.ForgotPasswordmaster({ LoginId: this.LogForm.value.LoginId}).subscribe(
       data =>{
         this.UserData= JSON.parse(data.json());
@@ -94,11 +95,13 @@ export class ForgetPasswordComponent implements OnInit {
           this.stepper.selectedIndex=1;
         }
         else{
-          this.openDialog('Error in forget password !',this.UserData.Message);
+          this.openSnackBar(this.UserData.Message,false);
         }
+        this.spinner.hide();
       },
     (error) =>{
-      this.openDialog('Error in forget password !','This user name is not register with us');
+      this.spinner.hide();
+      this.openSnackBar("This user name is not register with us",false);
       });
     }
   }
@@ -109,6 +112,7 @@ export class ForgetPasswordComponent implements OnInit {
         alert("OTP does not match");
       }
       else{
+        this.spinner.show();
         const obj = 
         {
           UserId:this.UserData.UserId,OTPId:this.UserData.OTPId,OTP:this.LogForm.value.OTP,Password: this.LogForm.value.Password
@@ -122,14 +126,23 @@ export class ForgetPasswordComponent implements OnInit {
             }
             else
             {
-              this.openDialog('Error on updating password !',this.UserData.Message);
+              this.openSnackBar(this.UserData.Message,false);
             }
+            this.spinner.hide();
           },
         (error) =>{
-          this.openDialog('Error on updating password !','This user name is not register with us');
+          this.spinner.hide();
+          this.openSnackBar("This user name is not register with us",false);
         });
       }
     }
+  }
+
+  openSnackBar(message:string,success:boolean) {
+    this.snackBar.openFromComponent(ErrorbarComponent, {
+      duration: 3000,
+      data: {success: success, message: message}
+    });
   }
 
 }

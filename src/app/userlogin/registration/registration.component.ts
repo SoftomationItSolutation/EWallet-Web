@@ -5,9 +5,10 @@ import { UserLoginService } from '../../services/user-login.service';
 import { ConfirmValidParentMatcher, errorMessages, regExps } from '../../CustomValidation/CustomValidation';
 import { UserResponse } from '../../models/user.model';
 import { AuthService } from '../../auth/auth.service';
-import { ErrorboxComponent } from '../../errorbox/errorbox.component';
-import { MatDialog } from '../../../../node_modules/@angular/material';
+import { MatDialog, MatSnackBar } from '../../../../node_modules/@angular/material';
 import { Router } from '../../../../node_modules/@angular/router';
+import { NgxSpinnerService } from '../../../../node_modules/ngx-spinner';
+import { ErrorbarComponent } from '../../errorbar/errorbar.component';
 
 @Component({
   selector: 'app-registration',
@@ -28,6 +29,8 @@ export class RegistrationComponent implements OnInit {
   constructor(private authService: AuthService, 
     private formBuilder: FormBuilder, 
     private loginService: UserLoginService,
+    private spinner: NgxSpinnerService,
+    public snackBar: MatSnackBar,
     public dialog: MatDialog,private router: Router) { 
 
   }
@@ -64,26 +67,31 @@ export class RegistrationComponent implements OnInit {
   }
 
   ResendOTP(){
+    this.spinner.show();
     this.loginService.ResendOTP({ OTPId:this.UserData.OTPId}).subscribe(
       data =>{
         this.UserData= JSON.parse(data.json());
         if(this.UserData.flag.toLowerCase()=='true')
         {
+          this.openSnackBar("OTP send successfully.",true);
           this.btnResendOTP=false;
           this.stepper.selectedIndex=1;
         }
         else
         {
-          this.openDialog('Error in registration !',this.UserData.Message);
+          this.openSnackBar(this.UserData.Message,false);
         }
+        this.spinner.hide();
       },
     (error) => {
-      this.openDialog('Error in registration !',"This user name is not register with us")
+      this.spinner.hide();
+      this.openSnackBar("This user name is not register with us",false);
     });
   }
 
   SignUp(){
     if(this.SignUpForm.status=="VALID"){
+      this.spinner.show();
       const Obj={
          Name:'',
          Email:'',
@@ -100,13 +108,15 @@ export class RegistrationComponent implements OnInit {
         }
         else
         {
-          this.openDialog('Error in registration !',this.UserData.Message)
+          this.openSnackBar(this.UserData.Message,false);
           if(this.UserData.Message=='Your Mobile no verification is pending.')
               this.stepper.selectedIndex=1;
         }
+        this.spinner.hide();
       },
     (error) => {
-      this.openDialog('Error in registration !',"This user name is not register with us.");
+      this.spinner.hide();
+      this.openSnackBar("This user name is not register with us.",false);
       }
     );
   }
@@ -114,10 +124,11 @@ export class RegistrationComponent implements OnInit {
   
   ValidateOTP(){
     if(this.otpForm.status=="VALID"){
+      this.spinner.show();
         this.btnResendOTP=false;
       if (this.otpForm.value.OTP != this.UserData.OTP){
         this.btnResendOTP=true;
-        this.openDialog('Error in registration !',"OTP is not matched.");
+        this.openSnackBar("OTP is not matched.",false);
       }
       else{
       const obj = 
@@ -133,11 +144,13 @@ export class RegistrationComponent implements OnInit {
           else
           {
             this.btnResendOTP=true;
-            this.openDialog('Error in registration !',this.UserData.Message)
+            this.openSnackBar(this.UserData.Message,false);
           }
+          this.spinner.hide();
         },
       (error) =>{
-        this.openDialog('Error in registration !',"OTP is not matched.");
+        this.spinner.hide();
+        this.openSnackBar("OTP is not matched.",false);
       }
       );
     }
@@ -145,19 +158,19 @@ export class RegistrationComponent implements OnInit {
   }
 
   stepperSelectionChange($event: StepperSelectionEvent){
-    console.log($event.selectedIndex);
+    //console.log($event.selectedIndex);
     if($event.selectedIndex == 1)
     {
       this.isLogEditable = false;
     }
   }
 
-  openDialog(title,message): void {
-    const dialogRef = this.dialog.open(ErrorboxComponent, {
-      width: '350px',
-      data: {title: title, message: message}
-    });
-    
-  }
+ 
 
+  openSnackBar(message:string,success:boolean) {
+    this.snackBar.openFromComponent(ErrorbarComponent, {
+      duration: 3000,
+      data: {success: success, message: message}
+    });
+  }
 }

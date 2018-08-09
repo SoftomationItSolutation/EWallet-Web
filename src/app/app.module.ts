@@ -95,4 +95,5 @@ import { KycInformationComponent } from './userlogin/kyc-information/kyc-informa
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

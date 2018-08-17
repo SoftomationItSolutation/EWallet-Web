@@ -139,10 +139,10 @@ export class TranscationemanagementComponent implements OnInit {
           data => {
             this.RewardsValidate=JSON.parse(data.json());
             if(this.RewardsValidate.flag.toLowerCase() != 'true'){
-              this.RewardId=this.RewardsValidate.RewardId;
               this.openSnackBar(this.RewardsValidate.Message,false);
             }
             else{
+              this.RewardId=this.RewardsValidate.RewardId;
               this.openSnackBar("You will get "+this.RewardsValidate.RewardAmount+" reward.",true);
             }
             this.spinner.hide();

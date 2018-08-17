@@ -31,6 +31,7 @@ export interface ProfileListData {
 
 export class TranscationemanagementComponent implements OnInit {
   AddMoneyForm:FormGroup;
+  AddRewardForm:FormGroup;
   SendMoneyForm:FormGroup;
   RequestMoneyForm:FormGroup;
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
@@ -89,6 +90,13 @@ export class TranscationemanagementComponent implements OnInit {
       Remark: new FormControl('', [
         Validators.required
       ]),
+    });
+
+    this.AddRewardForm = this.formBuilder.group({
+      PromoCode: new FormControl('', [
+        Validators.required,
+        Validators.pattern(regExps.PromoCode)
+      ])
     });
   }
 
@@ -204,6 +212,7 @@ export class TranscationemanagementComponent implements OnInit {
         this.dbService.TranscationManagement(obj).subscribe(
           data => {
             if(JSON.parse(data.json()).flag.toLowerCase() =='true'){
+              this.SendMoneyForm.reset();
               this.openSnackBar("Money send successfully",true);
             }
             else{
@@ -236,6 +245,7 @@ export class TranscationemanagementComponent implements OnInit {
         this.dbService.TranscationManagementRequestMoney(obj).subscribe(
           data => {
             if(JSON.parse(data.json()).flag.toLowerCase() =='true'){
+              this.RequestMoneyForm.reset();
               this.openSnackBar("Request generated successfully",true);
             }
             else{
@@ -254,6 +264,33 @@ export class TranscationemanagementComponent implements OnInit {
     }
   }
 
+  AddReward(){
+    if(this.AddRewardForm.valid){
+        this.spinner.show();
+        const obj={
+          UserId:this.UserDetails.UserId,
+          RewardId:this.RewardId,
+        }
+        this.dbService.AddRewardMoney(obj).subscribe(
+          data => {
+            if(JSON.parse(data.json()).flag.toLowerCase() =='true'){
+              this.AddRewardForm.reset();
+              this.openSnackBar("Reward money added successfully",true);
+            }
+            else{
+              this.openSnackBar(JSON.parse(data.json()).Message,false);
+            }
+            this.RewardId=0;
+            this.spinner.hide();
+          },
+          err => console.error(err.message),
+          () => {
+            this.RewardId=0;
+            this.spinner.hide();
+        });
+    }
+  }
+
   onLinkClick(event: MatTabChangeEvent) {
     if(event.index==0){
       this.AddMoneyForm.reset();
@@ -264,6 +301,9 @@ export class TranscationemanagementComponent implements OnInit {
     }
     else if(event.index==2){
       this.RequestMoneyForm.reset();
+    }
+    else if(event.index==3){
+      this.AddRewardForm.reset();
     }
   }
 

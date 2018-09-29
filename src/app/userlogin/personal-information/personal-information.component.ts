@@ -115,7 +115,7 @@ export class PersonalInformationComponent implements OnInit {
 
   openSnackBar(message:string,success:boolean) {
     this.snackBar.openFromComponent(ErrorbarComponent, {
-      duration: 1000,
+      duration: 3000,
       data: {success: success, message: message}
     });
   }

@@ -269,7 +269,7 @@ export class TranscationemanagementComponent implements OnInit {
 
   openSnackBar(message:string,success:boolean) {
     this.snackBar.openFromComponent(ErrorbarComponent, {
-      duration: 3000,
+      duration: 1000,
       data: {success: success, message: message}
     });
   }

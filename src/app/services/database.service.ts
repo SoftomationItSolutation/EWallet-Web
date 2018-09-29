@@ -35,11 +35,6 @@ export class DatabaseService {
   TranscationManagement(objTranscation: {}) {
     return this.objHttp.post(this.apiurl+'TranscationManagement', objTranscation);
   }
-
-  AddRewardMoney(objTranscation: {}) {
-    return this.objHttp.post(this.apiurl+'AddRewardMoney', objTranscation);
-  }
-
   TranscationManagementRequestMoney(objTranscation: {}) {
     return this.objHttp.post(this.apiurl+'RequestMoney', objTranscation);
   }

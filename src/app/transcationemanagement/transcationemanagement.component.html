@@ -143,32 +143,6 @@
                       </mat-card-content>
                   </mat-card>
               </mat-tab>
-              <mat-tab label="Add Reward">
-                <mat-card id="addRewardcard" class=".mat-elevation-z0">
-                    <mat-card-content>
-                        <form [formGroup]="AddRewardForm" id="AddRewardForm" style="display: contents">
-                            <div class="row m-b-0">
-                                <div class="col-lg-3 col-md-6">
-                                    <mat-form-field>
-                                        <input  matInput placeholder="Have a promo code ?"  name='PromoCode' formControlName="PromoCode" (input)="ValidatePromoCode($event)">
-                                        <mat-error *ngIf = "AddRewardForm.get('PromoCode').hasError('pattern')">
-                                            {{errors.PromoCode}}
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-lg-1"></div>
-                                <div class="col-lg-3 col-md-6">
-                                    <mat-card-actions>
-                                        <button mat-raised-button form="AddRewardForm" *ngIf="AddRewardForm.valid" style="background-color: #1f38d9; color: #FFFFFF;" (click)="AddReward();">ADD Reward</button>
-                                        <button mat-raised-button disabled *ngIf="!AddRewardForm.valid">ADD Money</button>
-                                    </mat-card-actions>
-                                </div>
-                            </div>
-                          
-                        </form>
-                    </mat-card-content>
-                </mat-card>
-            </mat-tab>
               <ngx-spinner bdColor="rgba(51,51,51,0.5)" size="medium" color="#fff" type="line-spin-fade-rotating"></ngx-spinner>
           </mat-tab-group>
       </div>
